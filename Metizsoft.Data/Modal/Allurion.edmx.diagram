@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f59a8bb6c7a423a874e2f370fcafd9f" Name="Diagram1" ZoomLevel="58">
+        <EntityTypeShape EntityType="AllurionModel.Area_Mst" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllurionModel.AssignedLeave" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="AllurionModel.AuthorizeMaster" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllurionModel.DCR_Mst" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AllurionModel.Doctor_Mst" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllurionModel.DoctorProductReport_Mst" Width="1.5" PointX="5.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AllurionModel.DoctorReport_Mst" Width="1.5" PointX="7.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AllurionModel.DynamicMenuMaster" Width="1.5" PointX="9.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AllurionModel.Event_Mst" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AllurionModel.EventType_Mst" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AllurionModel.Expenser_Mst" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllurionModel.ExpenserReport_Mst" Width="1.5" PointX="11.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AllurionModel.Group_Mst" Width="1.5" PointX="11.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AllurionModel.GroupAllocation_Mst" Width="1.5" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AllurionModel.GroupToFieldUser_Mst" Width="1.5" PointX="11.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AllurionModel.GroupType_Mst" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllurionModel.LeaveMaster" Width="1.5" PointX="13.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AllurionModel.LeaveType_Mst" Width="1.5" PointX="13.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AllurionModel.ManageBalloon" Width="1.5" PointX="13.75" PointY="13.75" />
+        <EntityTypeShape EntityType="AllurionModel.MeetingType_mst" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AllurionModel.MultipleGroupAllocation" Width="1.5" PointX="2.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AllurionModel.NotificationManageMaster" Width="1.5" PointX="4.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AllurionModel.NotificationMaster" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllurionModel.Product_Mst" Width="1.5" PointX="15.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AllurionModel.Productallocation" Width="1.5" PointX="6.75" PointY="15.75" />
+        <EntityTypeShape EntityType="AllurionModel.ProductCase_Mst" Width="1.5" PointX="15.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AllurionModel.ProductType_Mst" Width="1.5" PointX="15.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AllurionModel.Promotional_Mst" Width="1.5" PointX="8.75" PointY="16.75" />
+        <EntityTypeShape EntityType="AllurionModel.PromotionalReport_Mst" Width="1.5" PointX="10.75" PointY="16.75" />
+        <EntityTypeShape EntityType="AllurionModel.Retailer_mst" Width="1.5" PointX="17.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllurionModel.RetailerReport_Mst" Width="1.5" PointX="17.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AllurionModel.RxType_mst" Width="1.5" PointX="12.75" PointY="17.75" />
+        <EntityTypeShape EntityType="AllurionModel.SubUserMaster" Width="1.5" PointX="17.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AllurionModel.TourAreaProgram_Mst" Width="1.5" PointX="0.75" PointY="18.75" />
+        <EntityTypeShape EntityType="AllurionModel.TourProgram_Mst" Width="1.5" PointX="2.75" PointY="18.75" />
+        <EntityTypeShape EntityType="AllurionModel.Tracker_Mst" Width="1.5" PointX="14.75" PointY="18.75" />
+        <EntityTypeShape EntityType="AllurionModel.User_Info" Width="1.5" PointX="16.75" PointY="18.75" />
+        <EntityTypeShape EntityType="AllurionModel.UserMaster" Width="1.5" PointX="18.75" PointY="18.75" />
+        <EntityTypeShape EntityType="AllurionModel.webpages_Membership" Width="1.5" PointX="19.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllurionModel.webpages_OAuthMembership" Width="1.5" PointX="19.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AllurionModel.WorkType_mst" Width="1.5" PointX="19.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AllurionModel.User" Width="1.5" PointX="7.625" PointY="22.25" />
+        <EntityTypeShape EntityType="AllurionModel.webpages_Roles" Width="1.5" PointX="5.375" PointY="25.625" />
+        <AssociationConnector Association="AllurionModel.webpages_UsersInRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

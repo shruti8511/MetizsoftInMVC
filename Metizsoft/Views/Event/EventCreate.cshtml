@@ -1,0 +1,110 @@
+﻿@model Metizsoft.Data.Modal.Event_Mst
+@{
+    ViewBag.Title = "EventCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Manage Event</h3>
+    </div>
+
+    <form id="frmEvents" class="form-horizontal">
+        <div class="box-body">
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Events Type</label>
+                        <div class="col-sm-8">
+                            <input name="EventID" id="EventID" type="hidden" value="" />
+                            @Html.DropDownListFor(m => m.EventTypeID, new SelectList(ViewBag.Event, "EventTypeID", "EventName"), "Select Event", new { @class = "form-control", @required = "true" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Description</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="Description" id="Description" placeholder="Description" required>
+                        </div>
+
+                    </div>
+
+                </div>
+           </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="CancelEvent" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnsavecase" class="btn btn-info">Add</button>
+            </div>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+
+    <div id="lstEvents">
+
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        loadhtml();
+    });
+
+    function loadhtml() {
+        $.ajax({
+            url: '@Url.Action("EventList")',
+            type: 'GET',
+            cache: false,
+        }).done(function (result) {
+            $('#lstEvents').html(result);
+        });
+    }
+
+    $("#btnsavecase").click(function () {
+        if (!($('#frmEvents').parsley().validate())) {
+
+            return;
+        }
+        var datareq = new Object();
+        debugger;
+        datareq.EventID = $("#EventID").val();
+        datareq.EventTypeID = $("#EventTypeID").val();
+        datareq.EventName = $("#EventTypeID").find("option:selected").text();
+        datareq.Description = $("#Description").val();
+        $.ajax({
+            url: '@Url.Action("EventCreate")',
+            type: 'POST',
+            data: { 'objevents': datareq },
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                if ($("#EventID").val() == "") {
+                    $('div#sucessalert').html("Event Created successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Event updated successfully.");
+                }
+                $("#btnsavecase").text("Add");
+                showhidealert();
+                loadhtml();
+                clearform();
+            }
+        });
+    });
+
+    $("#CancelEvent").click(function () {
+        clearform();
+    });
+
+    function clearform() {
+        $("#frmEvents").find("input").val("");
+        $("#EventTypeID").val("").trigger("change");
+    }
+
+
+</script>

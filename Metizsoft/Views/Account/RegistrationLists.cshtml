@@ -1,0 +1,321 @@
+﻿@model List<Metizsoft.Model.Register>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#activeUsers" data-toggle="tab">Active Users</a></li>
+                    <li><a href="#inactiveUsers" data-toggle="tab">InActive Users</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="activeUsers">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                               
+                            </div>
+
+                            <div class="box-body table-scrollable1 lstofcategory lstcategory">
+                                <table id="ListofuserDatatable" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td colspan="8" align="right">
+                                                <button type="button" id="btnupdateDCRBlocking" class="btn btn-info">Update DCR Blocking</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="">First</th>
+                                            <th class="nosort">Last</th>
+                                            <th class="nosort">Username</th>
+                                            <th class="nosort">Current Status</th>
+                                            <th class="nosort">DCR Blocking</th>
+                                            <th class="nosort">Select</th>
+                                            <th class="nosort">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            if (item.IsActive == true)
+                                            {
+                                                <tr>
+                                                    <td class="txtlocation" @item.UserID>
+                                                        @item.FirstName
+                                                    </td>
+
+                                                    <td class="txtlocation">
+                                                        @item.LastName
+                                                    </td>
+
+                                                    <td class="txtlocation">
+                                                        @item.username
+                                                    </td>
+
+                                                    @if (item.IsActive == true)
+                                                    {
+                                                        <td class="txtlocation">
+                                                            Activated
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>Deactivated</td>
+                                                    }
+
+                                                    <td>
+                                                        <input name="Id" class="hdnId" type="hidden" value="@item.UserID" />
+                                                        @Html.DropDownList("DCRBlocking", (ViewBag.DCRBlocking as SelectList), "Select DCR Blocking", new { @class = "form-control DCRBlocking1"})
+                                                        
+                                                        @*<select name="DCRBlocking" id="DCRBlocking" class="form-control DCRBlocking1" style="width:100px">
+                                                            <option value="" selected>Select</option>
+                                                            <option value="0">0</option>
+                                                            <option value="3">3</option>
+                                                            <option value="5">5</option>
+                                                            <option value="9">9</option>
+                                                        </select>*@                                                        
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="checkbox" id="chkselect" />
+                                                    </td>
+
+                                                    @if (item.IsActive == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fa fa-times fa-x deactiveuser" aria-hidden="true" style="color:green;cursor:pointer" data-userid="@item.UserID"></i> |<a style="cursor:pointer"> <span class="edit" data-userid="@item.UserID">Edit</span></a>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fa fa-check fa-x Activeuser" aria-hidden="true" style="color:green;cursor:pointer" data-userid="@item.UserID"></i> | <a style="cursor:pointer"> <span class="edit" data-userid="@item.UserID">Edit</span></a>
+                                                        </td>
+                                                    }
+
+
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Notfound" style="text-align:center; display:none;"><p>No Record Found</p></div>
+                    </div>
+
+                    <div class="tab-pane" id="inactiveUsers">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                            </div>
+                            <div class="box-body table-scrollable1 lstofcategory">
+                                <table id="ListofuserDatatableIN" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="nosort">First</th>
+                                            <th class="nosort">Last</th>
+                                            <th class="nosort">Username</th>
+                                            <th class="nosort">Current Status</th>
+                                            <th class="nosort">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            if (item.IsActive == false)
+                                            {
+                                                <tr>
+                                                    <td class="txtlocation" @item.Id>
+                                                        @item.FirstName
+                                                    </td>
+
+                                                    <td class="txtlocation">
+                                                        @item.LastName
+                                                    </td>
+
+                                                    <td class="txtlocation">
+                                                        @item.username
+                                                    </td>
+
+
+                                                    @if (item.IsActive == true)
+                                                    {
+                                                        <td class="txtlocation">
+                                                            Activated
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>Deactivated</td>
+                                                    }
+
+                                                    @if (item.IsActive == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fa fa-times fa-x deactiveuser" aria-hidden="true" style="color:green;cursor:pointer" data-userid="@item.UserID"></i> |<a style="cursor:pointer"> <span class="edit" data-userid="@item.UserID">Edit</span></a>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fa fa-check fa-x Activeuser" aria-hidden="true" style="color:green;cursor:pointer" data-userid="@item.UserID"></i> | <a style="cursor:pointer"> <span class="edit" data-userid="@item.UserID">Edit</span></a>
+                                                        </td>
+                                                    }
+
+                                                </tr>
+                                            }
+
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Notfound" style="text-align:center; display:none;"><p>No Record Found</p></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+
+<script>
+  
+    
+    $(document).ready(function () {
+        $("#ListofuserDatatable").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': ['nosort']
+
+            }]
+        });
+
+        $("#ListofuserDatatableIN").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': ['nosort']
+
+            }]
+        });
+    });
+
+    $('#btncancel').click(function () {
+        ClearForm();
+    });
+
+    function ClearForm() {
+        $("#hdnCategoryid").val('0');
+        $("#txtlocation").val('');
+    }
+
+    $(".Activeuser").click(function () {
+        if (confirm('Are you sure you wish to active this user?')) {
+            debugger;
+            var data = new Object();
+            var UserID = $(this).attr("data-userid");
+            var flage = 1;
+            data.UserID = $(this).attr("data-userid");
+            data.flage = true;
+            $.ajax({
+                url: '@Url.Action("ActiveDeactiveUser")',
+                type: 'POST',
+                cache: false,
+                data: data,
+            }).done(function (result) {
+                if (result == true) {
+                    alert("User Actived successfully.");
+                    location.reload();
+                }
+                location.reload();
+            });
+        }
+    });
+
+    $(".deactiveuser").click(function () {
+        if (confirm('Are you sure you wish to Deactive this user?')) {
+            debugger;
+            var data = new Object();
+            var UserId = $(this).attr("data-userid");
+            var flage = 0;
+            data.UserID = $(this).attr("data-userid");
+            data.flage = false;
+            $.ajax({
+                url: '@Url.Action("ActiveDeactiveUser")',
+                type: 'POST',
+                cache: false,
+                data: data,
+            }).done(function (result) {
+                if (result == true) {
+                    alert("User Deactived successfully.");
+                    location.reload();
+                }
+                location.reload();
+            });
+        }
+    });
+
+    $(".edit").click(function () {
+        debugger;
+        var Id = $(this).attr("data-userid");
+        var url = "/Account/Register?Identity=" + Id;
+        window.location.href = url;
+    });
+
+
+    $("#btnupdateDCRBlocking").click(function () {        
+        var lstDCRBlocking = [];               
+        $("#ListofuserDatatable").children('tbody').children('tr:visible').each(function (index, row) {
+            //debugger;
+            var IsCheck = $(row).find("input[type=checkbox]")[0];
+            if ($(IsCheck).is(':checked')) {
+                var dataDCRBlocking = new Object();
+                dataDCRBlocking.Id = $(row).find("input[type=hidden]")[0].value;
+                dataDCRBlocking.DCRBlocking = $(".DCRBlocking1 option:selected").val();
+                lstDCRBlocking.push(dataDCRBlocking);
+            }            
+        });
+
+        $.ajax({
+            url: '@Url.Action("UpadateDCRBlockng")',
+            type: 'POST',
+            data: { 'data': lstDCRBlocking },
+            cache: false,
+        }).done(function (result) {
+            if (result == "True") {
+
+                $('div#sucessalert').html("DCR bloking updated successfully.");
+            }
+
+            else {
+                $('div#sucessalert').html("Something Went Wrong");
+            }
+            showhidealert();
+            clearform();
+
+        });
+    });
+
+    
+    function clearform() {
+        debugger;
+        $('input[type=checkbox]').prop('checked', false);
+        //$('#DCRBlocking').find('option').remove().end().append('<option value=" " selected> Select</option>');
+       // $('#DCRBlocking option').remove();
+        //$("#DCRBlocking").val("").trigger("change");
+    }
+
+</script>
+
+

@@ -1,0 +1,100 @@
+﻿@model List<Metizsoft.Data.ViewModal.DoctorProductResponse>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">Doctor Product Report List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Doctor Code</th>
+                    <th>Doctor Name</th>
+                    <th>CategoryName</th>
+                    <th>GradeName</th>
+                    <th>Head Quater</th>
+                    <th>Area </th>
+                    <th>Product Name</th>
+                    <th>GroupName</th>
+                    <th>GroupCode</th>
+                    <th>ProductType</th>
+                    <th>Division</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td id="row" @item.DoctorReportId>
+                            @item.DoctorCode
+                        </td>
+                        <td>
+                            @item.DoctorName
+                        </td>
+                        <td>
+                            @item.CategoryName
+                        </td>
+                        @if (item.GradeName == 1)
+                        {
+                            <td> VP </td>
+                        }
+                        else if (item.GradeName == 2)
+                        {
+                            <td> VIP </td>
+                        }
+                        else
+                        {
+                            <td> VVIP </td>
+                        }
+                        <td>
+                            @item.Add1
+                        </td>
+                        <td>
+                            @item.SubAreaName
+                        </td>
+                        <td>
+                            @item.ProductName
+                        </td>
+                        <td>
+                            @item.GroupName
+                        </td>
+                        <td>
+                            @item.GroupCode
+                        </td>
+                        <td>
+                            @item.ProductType
+                        </td>
+                        @if (item.CaseName == 1)
+                        {
+                            <td>Blaze</td>
+                        }
+                        else if (item.CaseName == 2)
+                        {
+                            <td>Magnar</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+<script>
+
+    $("#ListDataTable").DataTable({
+        "scrollX": true
+    });
+
+</script>

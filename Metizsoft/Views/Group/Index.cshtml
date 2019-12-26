@@ -1,0 +1,133 @@
+﻿@model Metizsoft.Data.Modal.Group_Mst
+
+@{
+    ViewBag.Title = "GroupCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Manage Group</h3>
+    </div>
+    <form class="form-horizontal" id="frmGroup">
+        <div class="box-body">
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Group Type</label>
+                        <div class="col-sm-8">
+                            @Html.DropDownList("ddlGroupType", new SelectList(@ViewBag.ddlGroupType, "GrouptypeID", "GroupTypeName"), "Select", new { @class = "form-control", @tabindex = "27", @required = "true" })
+                        </div>
+                        <input type="hidden" id="GroupId" name="GroupId" value="" />
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Group Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="GroupName" id="GroupName" placeholder="Group Name" required>
+                        </div>
+                        <input type="hidden" id="GroupId" name="GroupId" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                @*<div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Group Code</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="GroupCode" id="GroupCode" placeholder="GroupCode">
+                        </div>
+                    </div>
+                </div>*@
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">Active</label>
+                        <div class="col-sm-8">
+                            <input type="checkbox" class="" name="Active" id="chkActive">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="GroupCode" name="GroupCode" value="" />
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btncancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnsaveGroup" class="btn btn-info">Save</button>
+                @*<input type="button" value="save" id="btnsaveGroup" class="btn btn-info" />*@
+            </div>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+
+    <div id="lstGroup">
+
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        loadhtml();
+    });
+
+    function loadhtml() {
+        $.ajax({
+            url: '@Url.Action("GroupList")',
+            type: 'GET',
+            cache: false,
+        }).done(function (result) {
+            $('#lstGroup').html(result);
+        });
+    }
+
+    $("#btnsaveGroup").click(function () {
+        if (!($('#frmGroup').parsley().validate())) {
+
+            return;
+        }
+        debugger;
+        var datareq = new Object();
+        datareq.GroupID = $("#GroupId").val();
+        datareq.GroupName = $("#GroupName").val();
+        datareq.IsActive = $('#chkActive').is(":checked");
+        datareq.GroupTypeID = $("#ddlGroupType").val();
+        datareq.GroupCode = $("#GroupCode").val();
+        debugger;
+        $.ajax({
+            url: '@Url.Action("GroupCreate")',
+            type: 'POST',
+            data: { 'ObjGroup': datareq },
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                debugger;
+                if ($("#GroupId").val() == "") {
+                    $('div#sucessalert').html("Group created successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Group updated successfully.");
+                }
+                $("btnsaveGroup").val("Add")
+
+                showhidealert();
+                loadhtml();
+                clearform();
+            }
+        });
+    });
+
+    $("#btncancel").click(function () {
+        //debugger;
+        clearform();
+    });
+    function clearform() {
+        $("#frmGroup").find("input").val("");
+        $("#ddlGroupType").val("").trigger("change");
+        $("#chkActive").prop('checked', false);
+    }
+</script>
+

@@ -1,0 +1,154 @@
+﻿@model Metizsoft.Data.ViewModal.TourPlanResponse
+@{
+    ViewBag.Title = "TourPlanVarianceHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Tour Plan Variance History</h3>
+    </div>
+
+    <form class="form-horizontal" id="frmtourplan">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">From</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="txtfrom">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">To</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="txtTo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="User" class="col-sm-4 control-label">User Name</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.UserId, new SelectList(ViewBag.User, "Id", "FullName"), "Select User", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="User" class="col-sm-4 control-label">Variance Area</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.AreaId, new SelectList(ViewBag.Area, "AreaID", "AreaName"), "Select Area", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="SubArea" class="col-sm-4 control-label">Variance SubArea</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.SubAreaId, new SelectList(ViewBag.SubArea, "AreaID", "SubAreaName"), "Select SubArea", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">Variance Date</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="Date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btncancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnsearch" class="btn btn-info">Search</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="lsttour">
+
+    </div>
+
+</div>
+
+<script src="~/scripts/jquery-1.10.2.js"></script>
+<script>
+    function loadhtml() {
+
+        debugger;
+        var model = new Object();
+        model.StartDate = $("#txtfrom").val();
+        model.EndDate = $("#txtTo").val();
+        model.UserId = $("#UserId").val();
+        model.AreaId = $("#AreaId").val();
+        model.SubAreaId = $("#SubAreaId").val();
+        model.Date = $("#Date").val();
+        $.ajax({
+            url: '@Url.Action("TourPlanVarianceHistoryList")',
+            type: 'POST',
+            data: { 'model': model },
+            cache: false,
+        }).done(function (result) {
+            $('#lsttour').html(result);
+        });
+    }
+
+    $("#btnsearch").click(function () {
+        loadhtml();
+    });
+    $("#btncancel").click(function () {
+        clearform();
+    });
+
+    function clearform() {
+        $("#frmtourplan").find("input").val("");
+        $("#UserId").val("").trigger("change");
+        $("#AreaId").val("").trigger("change");
+        $("#SubAreaId").val("").trigger("change");
+    }
+    @*$("#btnexport").click(function () {
+        debugger;
+        var model = new object();
+        model.startdate = $("#txtfrom").val();
+        model.enddate = $("#txtto").val();
+        model.pouchid = $("#pouchid").val();
+
+        var url = '@url.action("exportexcelpouchwisereportlist", "report", new { startdate = "__startdate__", enddate = "__enddate__", pouchid = "__pouchid__" })';
+        url = url.replace(/amp;/g, '');
+        window.location.href = url.replace('__startdate__', model.startdate).replace('__enddate__', model.enddate).replace('__pouchid__', model.pouchid);
+
+    });*@
+
+</script>
+
+

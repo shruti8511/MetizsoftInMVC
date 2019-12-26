@@ -1,0 +1,105 @@
+﻿@model List<Metizsoft.Model.ExpenseLimit>
+
+<div class="box-body table-scrollable1 lstofcategory">
+    <table id="ListDataTable" class="table table-bordered table-bordered" >
+
+        <thead>
+            <tr>
+                <td colspan="6" align="right">
+                    <button type="button" id="btnupdateExpenseLimit" class="btn btn-info">Update Expense Limit</button>
+                </td>
+            </tr>
+            <tr>
+                <th class="">FirstName</th>
+                <th class="nosort">LastName</th>
+                <th class="nosort">City</th>
+                <th class="nosort">State</th>
+                <th class="nosort">ExpensesLimit</th>
+                <th class="nosort">Check</th>              
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+                {
+            <tr>
+                <td id="row" @item.Id>
+                    @item.FirstName
+                </td>
+                <td>
+                    @item.LastName
+                </td>
+                <td>
+                    @item.City
+                </td>
+                <td>
+                    @item.State
+                </td>
+                <td>
+                    <input name="Id" class="hdnId" type="hidden" value="@item.Id" />
+                    <input id="ExpensesLimit" type="text" class="form-control" name="ExpensesLimit" style="width:100px" value="@item.ExpensesLimit" />
+                </td>
+
+                  <td>
+                    <input type="checkbox" id="chkselect" />
+                </td>
+
+
+            </tr>
+                }
+        </tbody>
+
+    </table>
+</div>
+
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+</script>
+<script>
+    
+    $("#btnupdateExpenseLimit").click(function () {
+        debugger;
+        var lstExpense = [];        
+        $('#ListDataTable').children('tbody').children('tr:visible').each(function (index, row) {
+
+            debugger;
+            var IsCheck = $(row).find("input[type=checkbox]")[0];
+            if ($(IsCheck).is(':checked')) {
+                var dataExpenses = new Object();
+                dataExpenses.Id = $(row).find("input[type=hidden]")[0].value;
+                dataExpenses.ExpensesLimit = $(row).find("input")[1].value;
+                lstExpense.push(dataExpenses);
+            }
+        });
+        debugger;
+        $.ajax({
+            url: '@Url.Action("UpadateExpenseLimit")',
+            type: 'POST',
+            data: { 'data': lstExpense },
+            cache: false,
+        }).done(function (result) {
+            if (result == "True") {
+
+                $('div#sucessalert').html("Expense Limit updated successfully.");
+            }
+
+            else {
+                $('div#sucessalert').html("Something Went Wrong");
+            }
+            showhidealert();
+            //loadhtml();
+            clearform();
+
+        });
+
+    });
+
+    function clearform() {
+        $('input[type=checkbox]').prop('checked', false);
+    }
+</script>

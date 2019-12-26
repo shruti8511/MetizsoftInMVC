@@ -1,0 +1,150 @@
+﻿@model Metizsoft.Data.ViewModal.LeaveResponse
+@{
+    ViewBag.Title = "LeaveReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Leave Report</h3>
+    </div>
+    <form class="form-horizontal" id="frmleave">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">From</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="txtfrom" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">To</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="txtTo" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="User" class="col-sm-4 control-label">User Name</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.UserId, new SelectList(ViewBag.User, "Id", "FullName"), "Select User", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="User" class="col-sm-4 control-label">Leave Type</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.LeaveId, new SelectList(ViewBag.Leave, "LeaveTypeId", "LeaveType"), "Select Leave", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">DaysOfLeave</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="DaysOfLeave" id="DaysOfLeave" placeholder="DaysOfLeave">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Reason</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Reason" id="Reason" placeholder="Reason">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="User" class="col-sm-4 control-label">Manager</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.manager, new SelectList(ViewBag.Manager, "Id", "FullName"), "Select Manager", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btncancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnsearch" class="btn btn-info">Search</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="lstleave">
+
+    </div>
+
+</div>
+
+<script src="~/scripts/jquery-1.10.2.js"></script>
+<script>
+    function loadhtml() {
+
+        debugger;
+        var model = new Object();
+        model.StartDate = $("#txtfrom").val();
+        model.EndDate = $("#txtTo").val();
+        model.UserId = $("#UserId").val();
+        model.LeaveId = $("#LeaveId").val();
+        model.DaysOfLeave = $("#DaysOfLeave").val();
+        model.Reason = $("#Reason").val();
+        model.manager = $("#manager").val();
+        model.managerName = $("#manager :selected").text(); // do not delete
+        $.ajax({
+            url: '@Url.Action("LeaveReportList")',
+            type: 'POST',
+            data: { 'model': model },
+            cache: false,
+        }).done(function (result) {
+            $('#lstleave').html(result);
+        });
+    }
+
+    $("#btnsearch").click(function () {
+        loadhtml();
+    });
+    $("#btncancel").click(function () {
+        clearform();
+    });
+
+    function clearform() {
+        $("#frmleave").find("input").val("");
+        $("#UserId").val("").trigger("change");
+        $("#LeaveId").val("").trigger("change");
+        $("#manager").val("").trigger("change");        
+    }
+</script>
+
+

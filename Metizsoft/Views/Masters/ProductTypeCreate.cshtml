@@ -1,0 +1,115 @@
+﻿@model Metizsoft.Data.Modal.ProductType_Mst
+@{
+    ViewBag.Title = "ProductTypeCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Product Type</h3>
+    </div>
+
+
+    @*<div class="box box-default" id="frmretailer">*@
+    <form class="form-horizontal" id="frmproducttype">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+
+                
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Product Type</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="ProductType" id="ProductType" placeholder="Product Type" required>
+                            </div>
+                            <input type="hidden" id="ProductTypeId" name="ProductTypeId" value="" />
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+               
+            </div>
+
+        </div>
+
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnAdd" class="btn btn-info">Add</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="lstProductType">
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+        $(document).ready(function () {
+            loadhtml();
+        });
+
+        function loadhtml() {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("ProductTypeList")',
+                type: 'GET',
+                cache: false,
+            }).done(function (result) {
+                $('#lstProductType').html(result);
+            });
+        }
+
+    $("#btnAdd").click(function () {
+        if (!($('#frmproducttype').parsley().validate())) {
+
+            return;
+        }
+        debugger;
+            var datareq = new Object();
+            datareq.ProductTypeId = $("#ProductTypeId").val();
+            datareq.ProductType = $("#ProductType").val();
+          
+           
+            $.ajax({
+                url: '@Url.Action("ProductTypeCreate")',
+                type: 'POST',
+                data: { 'objproducttype': datareq },
+                cache: false,
+            }).done(function (result) {
+                if (result == true) {
+                    debugger
+                    if ($("#ProductTypeId").val() == "") {
+                        $('div#sucessalert').html("Product Type created successfully.");
+                    }
+                    else {
+                        $('div#sucessalert').html("Product Type updated successfully.");
+                    }
+                    $("#btnAdd").text("Add");
+                    showhidealert();
+                    loadhtml();
+                    clearform();
+                }
+            });
+    });
+
+    $("#btnCancel").click(function () {
+        debugger;
+        clearform();
+    });
+        function clearform() {
+            $("#frmproducttype").find("input").val("");
+
+        }
+
+
+</script>

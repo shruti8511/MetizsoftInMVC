@@ -1,0 +1,64 @@
+﻿@model List<Metizsoft.Data.ViewModal.DCRResponse>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">DCR Report List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Field User</th>
+                    <th>Work Type</th>
+                    <th>Work With</th>
+                    <th>Head Quater</th>
+                    <th>Area</th>                   
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td id="row" @item.DCRId>
+                            @item.Date.ToString("dd-MM-yyyy")
+                        </td>
+                        <td>
+                            @item.CreatedBy
+                        </td>
+                        <td>
+                            @item.WorkType
+                        </td>
+                        <td>
+                            @item.RoleName
+                        </td>
+                        <td>
+                            @item.AreaName
+                        </td>
+                        <td>
+                            @item.SubAreaName
+                        </td>                       
+                    </tr>
+                }
+
+               
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+</script>

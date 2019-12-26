@@ -1,0 +1,988 @@
+﻿@model Metizsoft.Data.Modal.User
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Create User</h3>
+    </div>
+
+    <form class="form-horizontal" id="frmUser">
+        <div class="box-body">
+            <div class="col-md-5">
+
+               @* <input type="hidden" id="EmployeeCode" name="EmployeeCode" value=" " />*@
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">Employee Code</label>
+                    <div class="col-sm-8">                        
+                        <input type="text" class="form-control" name="EmployeeCode" id="EmployeeCode" placeholder="EmployeeCode" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">Manual Employee Code</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="ManualEmployeeCode" id="ManualEmployeeCode" placeholder="Manual EmployeeCode" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" id="Id" name="Id" value="0" />
+                    <label for="inputEmail3" class="col-sm-4 control-label">First Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="FirstName" id="FirstName" placeholder="First Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">Last Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="LastName" id="LastName" placeholder="Last Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">ContactNo</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="MobileNumber" id="MobileNumber" placeholder="ContactNo" required data-parsley-type="number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" name="EmailID" id="EmailID" placeholder="EmailID" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">Address </label>
+                    <div class="col-sm-8">
+                        <textarea rows="3" class="form-control" name="Address" id="Address" placeholder="Address" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="AreaName" class="col-sm-4 control-label">Head Quater</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.AreaID, new SelectList(ViewBag.Area, "AreaID", "AreaName"), "Select Head Quater", new { @class = "form-control", @required = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="AreaName" class="col-sm-4 control-label">Area Name</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.SubAreaID, new SelectList(ViewBag.SubArea, "AreaID", "SubAreaName"), "Select Area", new { @class = "form-control", @required = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">PostCode </label>
+                    <div class="col-sm-8">
+                        <input type="number" maxlength="6" class="form-control" name="PostCode" id="PostCode" placeholder="PostCode" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="AssignedDate" class="col-sm-4 control-label">DOB</label>
+                    <div class="col-sm-8">
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right datepicker" id="DOB" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="AssignedDate" class="col-sm-4 control-label">DOW</label>
+                    <div class="col-sm-8">
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right datepicker" id="DOW" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="AssignedDate" class="col-sm-4 control-label">DOJ</label>
+                    <div class="col-sm-8">
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right datepicker" id="DOJ" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Division" class="col-sm-4 control-label">Division</label>
+                    <div class="col-sm-8">
+                        <select name="CaseName" id="CaseName" class="form-control" required>
+                            <option value="" selected>Select</option>
+                            <option value="1">Blaze</option>
+                            <option value="2">Magnar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="DCRBlocking" class="col-sm-4 control-label">DCR Blocking</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownList("DCRBlocking", (ViewBag.DCRBlocking as SelectList),"Select DCR Blocking", new { @class = "form-control", @required = "true" })                                               
+                        @*<select name="DCRBlocking" id="DCRBlocking" class="form-control" required>
+                            <option value="" selected>Select</option>
+                            <option value="0">0</option>
+                            <option value="3">3</option>
+                            <option value="5">5</option>
+                            <option value="9">9</option>
+                        </select>*@
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">User Position<span class="red">*</span></label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.UserPosition, new SelectList(ViewBag.Position, "Value", "Text"), "Select Position", new { @class = "form-control", @required = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="divdirctor">
+                    <label for="inputPassword3" class="col-sm-4 control-label">Director</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.DirectorID, new SelectList(ViewBag.UserByRole, "UserID", "UserFullName"), "Select Director", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="divho">
+                    <label for="inputPassword3" class="col-sm-4 control-label">Head Office</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.HOID, new SelectList(string.Empty, "Value", "Text"), "Select HO", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="divvp">
+                    <label for="inputPassword3" class="col-sm-4 control-label">VP</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.VPID, new SelectList(string.Empty, "Value", "Text"), "Select VP", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="divnsm">
+                    <label for="inputPassword3" class="col-sm-4 control-label">NSM</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.NSMID, new SelectList(string.Empty, "Value", "Text"), "Select NSM", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="divzsm">
+                    <label for="inputPassword3" class="col-sm-4 control-label">ZSM</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.ZSMID, new SelectList(string.Empty, "Value", "Text"), "Select ZSM", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="divrsm">
+                    <label for="inputPassword3" class="col-sm-4 control-label">RSM</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.RSMID, new SelectList(string.Empty, "Value", "Text"), "Sales RSM", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="divasm">
+                    <label for="inputPassword3" class="col-sm-4 control-label">ASM</label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(m => m.ASMID, new SelectList(string.Empty, "Value", "Text"), "Select ASM", new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">User Image</label>
+                    <div class="col-sm-8">
+                        <input type="file" class="btn btn-info" id="UserImage" name="UserImage" onchange="showimagepreview(this)">
+                        <br />
+                        <img id="imgprvw" alt="uploaded image preview" src="../Image/User_Avatar.jpg" style="height:100px; width:100px" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">User Name<span class="red">*</span></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="UserName" id="UserName" placeholder="Username" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">Password<span class="red">*</span></label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" name="Password" id="Password" placeholder="Password" required>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnSave" class="btn btn-info">Register</button>
+            </div>
+        </div>
+        <div class="box-footer ">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Download Template</label>
+                            <div class="col-sm-8">
+                                <button type="button" class="btn btn-default Download" data-clickfrom="Download" data-id="18">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Import Excel</label>
+                            <div class="col-sm-8">
+                                <input type="file" class="form-control dataFile " name="upload" style="display:block" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="pull-right">
+                            <button type="button" id="btnCancelFile" class="btn btn-default">Cancel</button>
+                            @* <button type="button" id="btnUpload" class="btn btn-info">Upload</button>*@
+                            <button type="button" class="btn btn-info" id="btnUpload" data-clickfrom="Download" data-id="18">Import</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+    <input type="hidden" id="hdnDirector" name="hdnDirector" value="0" />
+    <input type="hidden" id="hdnHO" name="hdnHO" value="" />
+    <input type="hidden" id="hdnVP" name="hdnVP" value="" />
+    <input type="hidden" id="hdnNSM" name="hdnNSM" value="" />
+    <input type="hidden" id="hdnZSM" name="hdnZSM" value="" />
+    <input type="hidden" id="hdnRSM" name="hdnRSM" value="" />
+    <input type="hidden" id="hdnASM" name="hdnASM" value="" />
+
+</div>
+<script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#divdirctor").hide();
+        $("#divho").hide();
+        $("#divvp").hide();
+        $("#divnsm").hide();
+        $("#divzsm").hide();
+        $("#divrsm").hide();
+        $("#divasm").hide();
+        $("#divmr").hide();
+
+        
+        debugger;
+        $.ajax({            
+            url: '@Url.Action("GetLastEmployeeCode")',
+            type: 'POST',
+            data: {},
+            cache: false,
+        }).done(function (result) {
+            debugger;
+            $('#EmployeeCode').val(result);
+            $('#UserName').val(result);            
+        });
+
+        FillAll();
+
+        function FillAll() {
+
+            $.ajax({
+                url: '@Url.Action("RegistrationList")',
+                type: 'GET',
+                cache: false,
+                data: {},
+            }).done(function (result) {
+                $('#RegistrationList').html(result);
+            });
+        }
+
+        $("#UserPosition").change(function () {
+            debugger;
+            var UserPositionID = this.value;
+            if (UserPositionID == 1) {
+                $("#divdirctor").hide();
+                $("#divho").hide();
+                $("#divvp").hide();
+                $("#divnsm").hide();
+                $("#divzsm").hide();
+                $("#divrsm").hide();
+                $("#divasm").hide();
+                // $("#divmr").hide();
+            }
+
+            else if (UserPositionID == 2) {
+                $("#divdirctor").show();
+                $("#divho").hide();
+                $("#divvp").hide();
+                $("#divnsm").hide();
+                $("#divzsm").hide();
+                $("#divrsm").hide();
+                $("#divasm").hide();
+                // $("#divmr").hide();
+            }
+
+            else if (UserPositionID == 3) {
+                $("#divdirctor").show();
+                $("#divho").show();
+                $("#divvp").hide();
+                $("#divzsm").hide();
+                $("#divnsm").hide();
+                $("#divrsm").hide();
+                $("#divasm").hide();
+                //   $("#divmr").hide();
+
+            }
+
+            else if (UserPositionID == 4) {
+                $("#divdirctor").show();
+                $("#divho").show();
+                $("#divvp").show();
+                $("#divnsm").hide();
+                $("#divzsm").hide();
+                $("#divrsm").hide();
+                $("#divasm").hide();
+                // $("#divmr").hide();
+            }
+
+            else if (UserPositionID == 5) {
+                $("#divdirctor").show();
+                $("#divho").show();
+                $("#divvp").show();
+                $("#divnsm").show();
+                $("#divzsm").hide();
+                $("#divrsm").hide();
+                $("#divasm").hide();
+                // $("#divmr").hide();
+            }
+
+            else if (UserPositionID == 6) {
+                $("#divdirctor").show();
+                $("#divho").show();
+                $("#divvp").show();
+                $("#divnsm").show();
+                $("#divzsm").show();
+                $("#divrsm").hide();
+                $("#divasm").hide();
+                //$("#divmr").show();
+            }
+
+            else if (UserPositionID == 7) {
+                $("#divdirctor").show();
+                $("#divho").show();
+                $("#divvp").show();
+                $("#divnsm").show();
+                $("#divzsm").show();
+                $("#divrsm").show();
+                $("#divasm").hide();
+                //$("#divmr").show();
+            }
+
+            else if (UserPositionID == 8) {
+                $("#divdirctor").show();
+                $("#divho").show();
+                $("#divvp").show();
+                $("#divnsm").show();
+                $("#divzsm").show();
+                $("#divrsm").show();
+                $("#divasm").show();
+                //$("#divmr").show();
+            }
+
+            else {
+                $("#divdirctor").hide();
+                $("#divho").hide();
+                $("#divvp").hide();
+                $("#divnsm").hide();
+                $("#divzsm").hide();
+                $("#divrsm").hide();
+                $("#divasm").hide();
+                // $("#divmr").hide();
+            }
+        });
+
+        $("#DirectorID").change(function () {
+            debugger;
+            var DirectorID = $("#DirectorID").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetHOByDirectorID")',
+                dataType: 'json',
+                data: { DirectorID: DirectorID },
+                success: function (data) {
+                    var district = "<select id='HOID'>";
+                    district = district + '<option value="">Select HO</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].UserID + '>' + data[i].UserFullName + '</option>';
+                    }
+                    district = district + '</select>';
+                    debugger;
+                    $('#HOID').val($('#hdnHO').val() == null ? 0 : $('#hdnHO').val());
+                    $('#HOID').html(district);
+                    $('#HOID').val($('#hdnHO').val());
+                    if ($('#HOID').val($('#HOID').val()) == null) {
+                        $('#HOID').html(district);
+                    }
+                }
+            });
+        });
+
+        $("#HOID").change(function () {
+            debugger;
+            var DirectorID = $("#DirectorID").val();
+            var HOID = $("#HOID").val();
+            if (HOID == null) {
+                var HOID = $("#hdnHO").val();
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetVPByHOID")',
+                dataType: 'json',
+                data: { DirectorID: DirectorID, HOID: HOID },
+                success: function (data) {
+                    debugger;
+                    var district = "<select id='VPID'>";
+                    district = district + '<option value="">Select VP</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].UserID + '>' + data[i].UserFullName + '</option>';
+                    }
+                    district = district + '</select>';
+                    debugger;
+                    $('#VPID').val($('#hdnVP').val() == null ? 0 : $('#hdnVP').val());
+                    $('#VPID').html(district);
+                    $('#VPID').val($('#hdnVP').val());
+                    if ($('#VPID').val($('#VPID').val()) == null) {
+                        $('#VPID').html(district);
+                    }
+                }
+            });
+        });
+
+        $("#VPID").change(function () {
+            debugger;
+            var DirectorID = $("#DirectorID").val();
+            var HOID = $("#HOID").val();
+            var VPID = $("#VPID").val();
+            if (HOID == null && VPID == null) {
+                var HOID = $("#hdnHO").val();
+                var VPID = $("#hdnVP").val();
+            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetNSMByVPID")',
+                dataType: 'json',
+                data: { DirectorID: DirectorID, HOID: HOID, VPID: VPID },
+                success: function (data) {
+                    var district = "<select id='NSMID'>";
+                    district = district + '<option value="">Select NSM</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].UserID + '>' + data[i].UserFullName + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#NSMID').val($('#hdnNSM').val() == null ? 0 : $('#hdnNSM').val());
+                    $('#NSMID').html(district);
+                    $('#NSMID').val($('#hdnNSM').val());
+                    if ($('#NSMID').val($('#NSMID').val()) == null) {
+                        $('#NSMID').html(district);
+                    }
+                }
+            });
+        });
+
+        $("#NSMID").change(function () {
+            var DirectorID = $("#DirectorID").val();
+            var HOID = $("#HOID").val();
+            var VPID = $("#VPID").val();
+            var NSMID = $("#NSMID").val();
+            if (HOID == null && VPID == null && NSMID == null) {
+                var HOID = $("#hdnHO").val();
+                var VPID = $("#hdnVP").val();
+                var NSMID = $("#hdnNSM").val();
+            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetZSMByNSMID")',
+                dataType: 'json',
+                data: { DirectorID: DirectorID, HOID: HOID, VPID: VPID, NSMID: NSMID },
+                success: function (data) {
+                    var district = "<select id='ZSMID'>";
+                    district = district + '<option value="">Select ZSM</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].UserID + '>' + data[i].UserFullName + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#ZSMID').val($('#hdnZSM').val() == null ? 0 : $('#hdnZSM').val());
+                    $('#ZSMID').html(district);
+                    $('#ZSMID').val($('#hdnZSM').val());
+                    if ($('#ZSMID').val($('#ZSMID').val()) == null) {
+                        $('#ZSMID').html(district);
+                    }
+                }
+            });
+        });
+
+        $("#ZSMID").change(function () {
+            var DirectorID = $("#DirectorID").val();
+            var HOID = $("#HOID").val();
+            var VPID = $("#VPID").val();
+            var NSMID = $("#NSMID").val();
+            var ZSMID = $("#ZSMID").val();
+            if (HOID == null && VPID == null && NSMID == null && ZSMID == null) {
+                var HOID = $("#hdnHO").val();
+                var VPID = $("#hdnVP").val();
+                var NSMID = $("#hdnNSM").val();
+                var ZSMID = $("#hdnZSM").val();
+            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetRSMByZSMID")',
+                dataType: 'json',
+                data: { DirectorID: DirectorID, HOID: HOID, VPID: VPID, NSMID: NSMID, ZSMID: ZSMID },
+                success: function (data) {
+                    var district = "<select id='RSMID'>";
+                    district = district + '<option value="">Select RSM</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].UserID + '>' + data[i].UserFullName + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#RSMID').val($('#hdnRSM').val() == null ? 0 : $('#hdnRSM').val());
+                    $('#RSMID').html(district);
+                    $('#RSMID').val($('#hdnRSM').val());
+                    if ($('#RSMID').val($('#RSMID').val()) == null) {
+                        $('#RSMID').html(district);
+                    }
+                }
+            });
+        });
+
+
+        $("#RSMID").change(function () {
+            debugger;
+            var DirectorID = $("#DirectorID").val();
+            var HOID = $("#HOID").val();
+            var VPID = $("#VPID").val();
+            var NSMID = $("#NSMID").val();
+            var ZSMID = $("#ZSMID").val();
+            var RSMID = $("#RSMID").val();
+            if (HOID == null && VPID == null && NSMID == null && ZSMID == null && RSMID == null) {
+                var HOID = $("#hdnHO").val();
+                var VPID = $("#hdnVP").val();
+                var NSMID = $("#hdnNSM").val();
+                var ZSMID = $("#hdnZSM").val();
+                var RSMID = $("#hdnRSM").val();
+            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetASMByRSMID")',
+                dataType: 'json',
+                data: { DirectorID: DirectorID, HOID: HOID, VPID: VPID, NSMID: NSMID, ZSMID: ZSMID, RSMID: RSMID },
+                success: function (data) {
+                    var district = "<select id='ASMID'>";
+                    district = district + '<option value="">Select ASM</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].UserID + '>' + data[i].UserFullName + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#ASMID').val($('#hdnASM').val() == null ? 0 : $('#hdnASM').val());
+                    $('#ASMID').html(district);
+                    $('#ASMID').val($('#hdnASM').val());
+                    if ($('#ASMID').val($('#ASMID').val()) == null) {
+                        $('#ASMID').html(district);
+                    }
+                }
+            });
+        });
+
+
+        @*$("#ASMID").change(function () {
+        debugger;
+        var DirectorID = $("#DirectorID").val();
+        var HOID = $("#HOID").val();
+        var VPID = $("#VPID").val();
+        var NSMID = $("#NSMID").val();
+        var ZSMID = $("#ZSMID").val();
+        var RSMID = $("#RSMID").val();
+        var ASMID = $("#ASMID").val();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetMRByASMID")',
+            dataType: 'json',
+            data: { DirectorID: DirectorID, HOID: HOID, VPID: VPID, NSMID: NSMID, ZSMID: ZSMID, RSMID: RSMID, ASMID: ASMID },
+            success: function (data) {
+                var district = "<select id='MRID'>";
+                district = district + '<option value="">Select MR</option>';
+                for (var i = 0; i < data.length; i++) {
+                    district = district + '<option value=' + data[i].UserID + '>' + data[i].UserFullName + '</option>';
+                }
+                district = district + '</select>';
+                $('#MRID').html(district);
+            }
+        });
+    });*@
+
+
+        var Id = window.location.search.split('=')[1];
+        if (Id != null) {
+            $.ajax({
+                url: '@Url.Action("EditRegister")',
+                type: 'POST',
+                cache: false,
+                data: { 'Id': Id },
+            }).done(function (result) {
+                debugger;
+                $("#Id").val(result.Id);
+                $("#FirstName").val(result.FirstName);
+                $("#LastName").val(result.LastName);
+                $("#MobileNumber").val(result.MobileNumber);
+                $("#EmailID").val(result.EmailID);
+                $("#Address").val(result.Address);
+                $("#AreaID").val(result.AreaID).trigger('change');
+                $("#SubAreaID").val(result.SubAreaID).trigger('change');
+                $('#CaseName').val(result.CaseName).trigger('change');
+                $('#DCRBlocking').val(result.DCRBlocking).trigger('change');
+                $("#UserName").val(result.UserName);
+                $("#Password").val(result.Password);
+                $("#PostCode").val(result.PostCode);
+                $('#hdnDirector').val(result.DirectorID);
+                $('#hdnHO').val(result.HOID);
+                $('#hdnVP').val(result.VPID);
+                $('#hdnNSM').val(result.NSMID);
+                $('#hdnZSM').val(result.ZSMID);
+                $('#hdnRSM').val(result.RSMID);
+                $('#hdnASM').val(result.ASMID);
+                $('#DirectorID').val(result.DirectorID).trigger('change');
+                $('#HOID').val(result.HOID).trigger('change');
+                $('#VPID').val(result.HOID).trigger('change');
+                $('#NSMID').val(result.HOID).trigger('change');
+                $('#ZSMID').val(result.HOID).trigger('change');
+                $('#RSMID').val(result.HOID).trigger('change');
+                //$('#ASMID').val(result.HOID).trigger('change');
+                //var UserRoleID = $("#UserPosition").val(result.UserPosition);
+                $("#UserPosition").val(result.UserPosition).trigger('change');
+                $('#DOB').val(result.DOBdt);
+                $('#DOW').val(result.DOWdt);
+                $('#DOJ').val(result.DOJdt);
+                $('#EmployeeCode').val(result.EmployeeCode);
+                $('#ManualEmployeeCode').val(result.ManualEmployeeCode);
+
+            });
+        }
+
+    });
+
+
+    $("#btnSave").click(function () {
+        if (!($('#frmUser').parsley().validate())) {
+
+            return;
+        }
+        var datareq = new Object();
+
+        debugger;
+        var data = new FormData();
+        var UserRoleID = $("#UserPosition").val()
+        data.append("UserRoleID", $("#UserPosition").val());
+        data.append("Id", $("#Id").val());
+
+        data.append("RoleName", $("#UserPosition").find("option:selected").text());
+        //  datareq.RoleName = $("#RoleID").find("option:selected").text();
+
+        data.append("FirstName", $("#FirstName").val());
+        data.append("LastName", $("#LastName").val());
+        data.append("UserName", $("#UserName").val());
+        data.append("Password", $("#Password").val());
+        data.append("MobileNumber", $("#MobileNumber").val());
+        data.append("EmailID", $("#EmailID").val());
+        data.append("Address", $("#Address").val());
+        data.append("AreaID", $("#AreaID").val());
+        data.append("SubAreaID", $("#SubAreaID").val());
+        //data.append("State", $("#State").val());
+        //data.append("City", $("#City").val());
+        data.append("PostCode", $("#PostCode").val());
+        data.append("UserPosition", $("#UserPosition").val());
+        data.append("DOB", $("#DOB").val());
+        data.append("DOW", $("#DOW").val());
+        data.append("DOJ", $("#DOJ").val());
+        data.append("CaseName", $("#CaseName").val());
+        data.append("DCRBlocking", $("#DCRBlocking").val());
+        data.append("ManualEmployeeCode", $("#ManualEmployeeCode").val());
+        data.append("EmployeeCode", $("#EmployeeCode").val());
+
+        var files = "";
+        if ($("#UserImage").val().length > 0) {
+            files = $("#UserImage").get(0).files;
+        }
+
+        if (files != "") {
+            data.append("UserImage", files[0]);
+        }
+        else {
+            data.append("UserImage", files);
+        }
+
+        if (UserRoleID == 1) {
+
+            data.append("DirectorID", 0);
+            data.append("HOID", 0);
+            data.append("VPID", 0);
+            data.append("NSMID", 0);
+            data.append("ZSMID", 0);
+            data.append("RSMID", 0);
+            data.append("ASMID", 0);
+            data.append("MRID", 0);
+        }
+
+        else if (UserRoleID == 2) {
+            data.append("DirectorID", $("#DirectorID").val());
+            data.append("HOID", 0);
+            data.append("VPID", 0);
+            data.append("NSMID", 0);
+            data.append("ZSMID", 0);
+            data.append("RSMID", 0);
+            data.append("ASMID", 0);
+            data.append("MRID", 0);
+        }
+
+
+        else if (UserRoleID == 3) {
+            data.append("DirectorID", $("#DirectorID").val());
+            data.append("HOID", $("#HOID").val());
+            data.append("VPID", 0);
+            data.append("NSMID", 0);
+            data.append("ZSMID", 0);
+            data.append("RSMID", 0);
+            data.append("ASMID", 0);
+            data.append("MRID", 0);
+        }
+
+        else if (UserRoleID == 4) {
+            data.append("DirectorID", $("#DirectorID").val());
+            data.append("HOID", $("#HOID").val());
+            data.append("VPID", $("#VPID").val());
+            data.append("NSMID", 0);
+            data.append("ZSMID", 0);
+            data.append("RSMID", 0);
+            data.append("ASMID", 0);
+            data.append("MRID", 0);
+        }
+
+        else if (UserRoleID == 5) {
+            data.append("DirectorID", $("#DirectorID").val());
+            data.append("HOID", $("#HOID").val());
+            data.append("VPID", $("#VPID").val());
+            data.append("NSMID", $("#NSMID").val());
+            data.append("ZSMID", 0);
+            data.append("RSMID", 0);
+            data.append("ASMID", 0);
+            data.append("MRID", 0);
+        }
+
+        else if (UserRoleID == 6) {
+            data.append("DirectorID", $("#DirectorID").val());
+            data.append("HOID", $("#HOID").val());
+            data.append("VPID", $("#VPID").val());
+            data.append("NSMID", $("#NSMID").val());
+            data.append("ZSMID", $("#ZSMID").val());
+            data.append("RSMID", 0);
+            data.append("ASMID", 0);
+            data.append("MRID", 0);
+        }
+
+        else if (UserRoleID == 7) {
+            data.append("DirectorID", $("#DirectorID").val());
+            data.append("HOID", $("#HOID").val());
+            data.append("VPID", $("#VPID").val());
+            data.append("NSMID", $("#NSMID").val());
+            data.append("ZSMID", $("#ZSMID").val());
+            data.append("RSMID", $("#RSMID").val());
+            data.append("ASMID", 0);
+            data.append("MRID", 0);
+        }
+
+        else if (UserRoleID == 8) {
+            data.append("DirectorID", $("#DirectorID").val());
+            data.append("HOID", $("#HOID").val());
+            data.append("VPID", $("#VPID").val());
+            data.append("NSMID", $("#NSMID").val());
+            data.append("ZSMID", $("#ZSMID").val());
+            data.append("RSMID", $("#RSMID").val());
+            data.append("ASMID", $("#ASMID").val());
+            data.append("MRID", 0);
+        }
+
+        else {
+            data.append("DirectorID", 0);
+            data.append("HOID", 0);
+            data.append("VPID", 0);
+            data.append("NSMID", 0);
+            data.append("ZSMID", 0);
+            data.append("RSMID", 0);
+            data.append("ASMID", 0);
+            data.append("MRID", 0);
+        }
+
+        $.ajax({
+            url: '/Account/Register',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: data,
+            dataType: "json",
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                debugger;
+                if ($("#Id").val() == "0") {
+                    //$('div#sucessalert').html("User added successfully.");
+                    alert("User Created successfully.");
+                    Clearform();
+                    //showhidealert();
+                    location.reload();
+                }
+                else {
+                    //$('div#sucessalert').html("User Updated successfully");
+                    //showhidealert();
+                    Clearform();
+                    alert("User Updated successfully.");
+                    var url = "/Account/RegistrationList";
+                    window.location.href = url;
+                }
+            }
+        });
+
+    });
+
+    $('#btnCancel').click(function () {
+        Clearform();
+
+    });
+
+    function Clearform() {
+        $("#frmUser").find("input").val("");
+        $('#Address').val('');
+        $("#UserPosition").val('');
+        $("#DirectorID").val('');
+        $("#HOID").val('');
+        $("#VPID").val('');
+        $("#NSMID").val('');
+        $("#ZSMID").val('');
+        $("#RSMID").val('');
+        $("#ASMID").val('');
+        $("#MRID").val('');
+        $("#AreaID").val('');
+        $("#SubAreaID").val('');
+        $("#CaseName").val('').trigger('change');
+        $("#DCRBlocking").val('').trigger('change');
+        
+    }
+
+    //$('#btnAdd').click(function () {
+
+    //    var register = new Object();
+    //    register.FirstName = $("#FirstName").val();
+    //    register.LastName = $("#LastName").val();
+    //    register.username = $("#username").val();
+    //    register.password = $("#password").val();
+    //    register.EmailID = $("#EmailID").val();
+    //    register.MobileNumber = $("#MobileNumber").val();
+    //    register.RoleName = $("#RoleId option:selected").text();
+
+    //    $.ajax({
+
+    //        url: '/Account/Register',
+    //        type: "post",
+    //        datatype: "json",
+    //        data: { register: register },
+    //        datatype: "json",
+    //        async: false,
+    //        success: function (data) {
+    //            debugger;
+    //            if (data == true) {
+    //                $('div#sucessalert').html("Registration saved successfully.");
+
+    //                showhidealert();
+    //                ClearForm();
+    //            }
+    //            else {
+    //                $('div#erroralert').html("this username already exist try another.");
+    //                showhideerroralert();
+    //            }
+    //        },
+    //        error: function (response) {
+    //            $('div#erroralert').html("Registration saved failed.");
+    //            showhideerroralert();
+    //        }
+
+    //    });
+    //});
+
+    $(document).on('click', ".Download", function () {
+        // var Rxtype = $("#ddlRxtype").val();
+        var url = '@Url.Action("UserDownloadExcelTarget", "Account")';
+        window.location.href = url.replace();
+    });
+
+    $("#btnUpload").click(function () {
+        debugger;
+
+        if ($(this).closest('div').find(".dataFile").val() != "") {
+            var data = new FormData();
+            var uploadordownload = "Upload";
+            if (uploadordownload == "Upload") {
+                var files = "";
+                //if ($(this).closest('div').find(".dataFile").val() != "") {
+                files = $(".dataFile").get(0).files;
+                //files = $(this).find(".dataFile").get(0).files;
+                data.append("File", files[0]);
+                //}
+                debugger;
+                $.ajax({
+                    url: '@Url.Action("UserUploadExcelTarget","Account")',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    async: true,
+                    dataType: "Json",
+                }).done(function (result) {
+                    //location.reloa{}d();
+                    //alert(result);
+                    if (result) {
+                        alert(result);
+
+                    }
+                    else { alert(result); }
+
+                });
+                $(this).closest('td').find(".dataFile").val("");
+            }
+        }
+    });
+
+    $("#btnCancelFile").click(function () {
+        //debugger;
+        $(".dataFile").val("");
+    });
+</script>

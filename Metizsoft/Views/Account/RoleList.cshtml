@@ -1,0 +1,63 @@
+﻿@model List<Metizsoft.Model.Role>
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Role List</h3>
+    </div>
+    <div class="box-body">
+        <table id="ListDataTablewithsearchpaging" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    @*<th class="nosort">Action</th>*@
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.RoleName
+                        </td>
+
+                        @*<td>
+                            <a style="cursor:pointer;" class="btnedit" data-id="@item.RoleId">Edit</a>
+
+                        </td>*@
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $('#ListDataTablewithsearchpaging').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': false,
+            'info': true,
+            'autoWidth': false
+        });
+    });
+
+   
+    $('#ListDataTablewithsearchpaging').on('click', '.btnedit', function () {
+
+        var RoleId = $(this).attr('data-id');
+        $("#RoleId").val(RoleId);
+        $("#RoleName").val($(this).parent().parent().children()[0].innerHTML.trim());
+
+    });
+   
+</script>
+
+

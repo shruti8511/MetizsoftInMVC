@@ -1,0 +1,91 @@
+﻿@model List<Metizsoft.Data.ViewModal.GroupDetailsResponse>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">Group Details Report List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>GroupName</th>
+                    <th>GroupCode</th>
+                    <th>DivisionName</th>
+                    <th>ProductName</th>
+                    <th>RxType</th>
+                    <th>StrangthIn</th>
+                    <th>MeasureIn</th>
+                    <th>UserName</th>
+                    <th>FieldStaffName</th>
+                    <th>Manager</th>
+                    <th>Contribute To Pool</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td id="row" @item.DoctorId>
+                            @item.GroupName
+                        </td>
+                        <td>
+                            @item.GroupCode
+                        </td>
+                        @if (item.CaseName == 1)
+                        {
+                            <td>Blaze</td>
+                        }
+                        else if (item.CaseName == 2)
+                        {
+                            <td>Magnar</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td>
+                            @item.ProductName
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.StrangthIn
+                        </td>
+                        <td>
+                            @item.MeasureIn
+                        </td>
+                        <td>
+                            @item.FieldUser
+                        </td>
+                        <td>
+                            @item.FieldStaffName
+                        </td>
+                        <td>
+                            @item.managerName
+                        </td>
+                        <td>
+                            @item.ContributeToPool
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+<script>
+
+    $("#ListDataTable").DataTable({
+        "scrollX": true        
+    });
+
+</script>

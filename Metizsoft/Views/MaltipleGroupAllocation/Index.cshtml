@@ -1,0 +1,395 @@
+﻿@model Metizsoft.Service.MultipleAllocation
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>       
+        Multiple Group Allocation
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#" tabindex="0"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Multiple Group Allocation</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Multiple Group Allocation</h3>
+                </div>
+                <form id="form1">
+                    <div class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group formmargin">
+                                <div class="col-md-12">
+                                    <input type="hidden" id="ID" name="ID" value="" />
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Group Type<span class="red">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="hidden" id="hdnGrupId" value="ViewBag.GruopId" />
+                                        @*@Html.DropDownList("ddlGroupType", new SelectList(@ViewBag.UserGroup, "GrouptypeID", "GroupTypeName"), "Select", new { @class = "form-control select2", @tabindex = "27", @required = "true" })*@
+                                        <select id="ddlGroupType" class="form-control select2">
+                                            <option value="0">Select Join Group</option>
+                                            <option value="1" data-usertype="1">Doctor - Product Group</option>
+                                            <option value="2" data-usertype="2">Retailer - Product Group</option>
+                                        </select>
+                                        <span id="" style="color:Red;visibility:hidden;">Select User.</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group formmargin">
+                            <div class="col-md-12">
+                                <label for="inputPassword3" class="col-sm-2 control-label">Doctor/Retailer<span class="red">*</span></label>
+                                <div class="col-sm-4">
+                                    <input type="hidden" id="hdnGrupdcId" value="ViewBag.GruopId" />
+                                    <select id="ddlUser" class="form-control select2" >
+                                        <option selected value="0">Select Doctor</option>
+                                    </select>
+                                    <span id="" style="color:Red;visibility:hidden;">Select User.</span>
+                                </div>
+                                <input type="hidden" id="hdnuser" />
+
+
+                                <label for="inputPassword3" class="col-sm-2 control-label">Product Group<span class="red">*</span></label>
+                                <div class="col-sm-4">
+                                    <input type="hidden" id="hdnGroupId" value="0" />
+                                    @Html.DropDownList("ddlGroup", new SelectList(@ViewBag.ProductGroup, "GroupID", "GroupName"), "Select Group", new { @class = "form-control select2" })
+                                    @*<select id="ddlGroups" class="select2 form-control">
+                                        <option value="0">Select Group</option>
+                                    </select>*@
+                                    <span id="" style="color:Red;visibility:hidden;">Select Group.</span>
+                                </div>
+                                <input type="hidden" value="hdngrntype" />
+                            </div>
+                            </div>
+
+                            <div class="form-group formmargin" style="display:none  ">
+                                <label for="inputPassword3" class="col-sm-2 control-label">Group Facility</label>
+                                <div class="col-sm-4" style="display:none">
+                                    <select size="4" multiple="multiple" id="lstrecordsLestside" tabindex="2" class="form-control" style="width: 100%;" required></select>
+                                    <span id="ctl00_ContentPlaceHolder1_lbltxt" style="color:Red;"></span>
+                                </div>
+                                <label for="inputPassword3" class="col-sm-2">
+                                    <input type="button" name="ctl00$ContentPlaceHolder1$btn1" value=">" id="selectOne" class="btn btn-info">
+                                    <input type="button" name="ctl00$ContentPlaceHolder1$btn2" value=">>" id="selectAll" class="btn btn-info">
+                                    <br>
+                                    <br>
+                                    <input type="button" name="ctl00$ContentPlaceHolder1$btn3" value="<" id="removeOne" class="btn btn-info">
+                                    <input type="button" name="ctl00$ContentPlaceHolder1$btn4" value="<<" id="removeAll" class="btn btn-info">
+                                </label>
+                                <div class="col-sm-4">
+                                    <select size="4" name="ctl00$ContentPlaceHolder1$lstallocate" multiple="multiple" id="lstrecordsrightside" tabindex="2" title="Allocate Facility" class="form-control" style="width: 100%;" required></select>
+                                    <span id="ctl00_ContentPlaceHolder1_lbltxt1" style="color:Red;"></span>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <input type="submit" name="" id="btnCancel" value="Cancel" tabindex="4" class="btn btn-default">
+                                <input type="submit" name="" id="btnSave" value="Save" tabindex="3" class="btn btn-info pull-right">
+                            </div>
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box-body table-scrollable1">
+                                <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+                                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                                            <div class="col-sm-12">
+                                                <div id="lstUserAllocateFacility">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        loadhtml(0);
+        debugger;
+        $("#ddlGroupType").on('change', function () {
+            debugger;
+            var grouptype = $("#ddlGroupType").val();            
+            $('#ddlUser option').remove();
+            $('#lstrecordsLestside option').remove();
+           
+            $.ajax({
+                url: '@Url.Action("GroupNameByTypeID")',
+                type: 'POST',
+                data: { 'GroupID': grouptype },
+                cache: false,
+            }).done(function (result) {
+                debugger;
+                if (result != null) {
+                    //$('#ddlGroups').append($("<option></option>")
+                    //  .attr("value", 0)
+                    //  .text("Select Group Name")
+                    //  .attr("data-ddlGroups", 0));
+                    //$(result.lstGroup).each(function (i, value) {
+                    //    $('#ddlGroups').append($("<option></option>")
+                    //    .attr("value", value.GroupID)
+                    //    .text(value.GroupName)
+                    //    .attr("data-lstrecordsLestside", value.GroupID));
+
+                    //})
+
+                    if (grouptype == 1) {
+
+                        $(result.ObjDoctor).each(function (i, value) {
+                            $('#lstrecordsLestside').append($("<option></option>")
+                            .attr("value", value.DoctorId)
+                            .text(value.DoctorName)
+                            .attr("data-lstrecordsLestside", value.DoctorId));
+                        })
+                        $('#ddlUser').append($("<option></option>")
+                            .attr("value", 0)
+                            .text("Select Doctor")
+                            .attr("data-lstrecordsLestside", 0));
+
+                        $(result.ObjDoctor).each(function (i, value) {
+                            $('#ddlUser').append($("<option></option>")
+                            .attr("value", value.DoctorId)
+                            .text(value.DoctorName)
+                            .attr("data-lstrecordsLestside", value.DoctorId));
+                        })
+                    }
+                    else if (grouptype == 2) {
+                        $(result.objRetail).each(function (i, value) {
+                            $('#lstrecordsLestside').append($("<option></option>")
+                            .attr("value", value.ReatailerId)
+                            .text(value.FirstName + "" + value.LastName)
+                            .attr("data-lstrecordsLestside", value.ReatailerId));
+                        })
+                        $('#ddlUser').append($("<option></option>")
+                           .attr("value", 0)
+                           .text("Select Retailer")
+                           .attr("data-lstrecordsLestside", 0));
+                        $(result.objRetail).each(function (i, value) {
+                            $('#ddlUser').append($("<option></option>")
+                            .attr("value", value.ReatailerId)
+                            .text(value.FirstName + "" + value.LastName)
+                            .attr("data-lstrecordsLestside", value.ReatailerId));
+                        })
+
+
+
+                    }
+                    else if (grouptype == 3) {
+                        $(result.ObjProduct).each(function (i, value) {
+                            $('#lstrecordsLestside').append($("<option></option>")
+                            .attr("value", value.ProductId)
+                            .text(value.ProductName)
+                            .attr("data-lstrecordsLestside", value.ProductId));
+                        })
+                        $(result.ObjProduct).each(function (i, value) {
+                            $('#ddlUser').append($("<option></option>")
+                           .attr("value", value.ProductId)
+                            .text(value.ProductName)
+                            .attr("data-lstrecordsLestside", value.ProductId));
+                        })
+                    }                    
+                }
+                $('#ddlUser').val($("#hdnGrupdcId").val());
+                $('#ddlGroups').val($("#hdnGrupId").val());
+                loadhtml(grouptype);
+
+            });
+        });
+
+        $("#ddlGroups").on('change', function () {
+            debugger;
+            $('#lstrecordsrightside').empty();
+            $('#lstrecordsLestside').empty();
+
+            var GroupType = $("#ddlGroupType").val();
+            var GoupID = $("#ddlGroups").val();
+            if ($("#ddlGroups").val() != "Select") {
+                var regId = $("#ddlGroups").val();
+                if (regId > 0) {
+                    $.ajax({
+                        url: '@Url.Action("BindListGroupWise")',
+                        method: 'POST',
+                        //dataType: "json",
+                        //contentType: "application/json; charset=utf-8",
+                        cache: false,
+                        data: { 'GroupID': GoupID, 'GroupTypeID': GroupType },
+                        success: function (data) {
+                            debugger;
+                            var d = JSON.stringify(data.otherfacility);
+                            if (GroupType == 1) {
+                                $(data.otherfacility).each(function (i, value) {
+                                    $("#lstrecordsLestside")
+                                        .append($("<option></option>").val(this['DoctorId']).html(this['DoctorName']));
+                                })
+
+                                $(data.allocated).each(function (i, value) {
+                                    $("#lstrecordsrightside")
+                                        .append($("<option></option>").val(this['DoctorId']).html(this['DoctorName']));
+                                })
+                            }
+                            else if (GroupType == 2) {
+                                $(data.otherfacility).each(function (i, value) {
+                                    $("#lstrecordsLestside")
+                                        .append($("<option></option>").val(this['ReatailerId']).html(this['FirstName'] + ' ' + this['LastName']));
+                                })
+
+                                $(data.allocated).each(function (i, value) {
+                                    $("#lstrecordsrightside")
+                                        .append($("<option></option>").val(this['ReatailerId']).html(this['FirstName']));
+                                })
+                            }
+                            else if (GroupType == 3) {
+
+                                $(data.otherfacility).each(function (i, value) {
+                                    $("#lstrecordsLestside")
+                                        .append($("<option></option>").val(this['ProductId']).html(this['ProductName']));
+                                })
+
+                                $(data.allocated).each(function (i, value) {
+                                    $("#lstrecordsrightside")
+                                        .append($("<option></option>").val(this['ProductId']).html(this['ProductName']));
+                                })
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
+    })
+
+
+
+    $("#selectOne").on('click', function () {
+        debugger;
+        if ($('#lstrecordsLestside option:selected').text() != "") {
+            $('#lstrecordsrightside')
+                .append($("<option></option>").attr("value", $('#lstrecordsLestside option:selected').val()).text($('#lstrecordsLestside option:selected').text()).attr("data-lstrecordsrightside", $('#lstrecordsLestside option:selected').val()));
+            $('#lstrecordsLestside option:selected').remove();
+        }
+    })
+
+    $("#selectAll").on('click', function () {
+        debugger;
+        $('#lstrecordsLestside option').each(function (i, value) {
+            $('#lstrecordsrightside')
+            .append($("<option></option>")
+                       .attr("value", value.value)
+                       .text(value.text)
+                       .attr("data-lstrecordsrightside", value.value));
+            $('#lstrecordsLestside option').remove();
+        })
+    });
+
+    $('#removeOne').on('click', function () {
+        debugger;
+        if ($('#lstrecordsrightside option:selected').text() != "") {
+            $('#lstrecordsLestside')
+                .append($("<option></option>").attr("value", $('#lstrecordsrightside option:selected').val()).text($('#lstrecordsrightside option:selected').text()).attr("data-lstrecordsrightside", $('#lstrecordsrightside option:selected').val()));
+            $('#lstrecordsrightside option:selected').remove();
+        }
+    })
+
+    $("#removeAll").on('click', function () {
+        debugger;
+        $('#lstrecordsrightside option').each(function (i, value) {
+            $('#lstrecordsLestside')
+            .append($("<option></option>")
+                       .attr("value", value.value)
+                       .text(value.text)
+                       .attr("data-lstrecordsLestside", value.value));
+            $('#lstrecordsrightside option').remove();
+        })
+    });
+
+    $("#btnSave").on('click', function () {
+
+        debugger;
+        //var rightvalue = getFacilitiesIDrightside();
+        //var leftvalue = getFacilitiesIDfromleftside();
+        var ID = $("#ID").val();
+        var GroupID = $("#ddlGroup").val();
+        var ToAllocateID = $("#ddlUser").val();
+        var GroupTypeID = $("#ddlGroupType").val();
+
+        $.ajax({
+            url: '@Url.Action("SaveAllocatedGroup")',
+            type: 'POST',
+            data: { 'GroupID': GroupID, 'GroupTypeID': GroupTypeID, 'ToAllocateID': ToAllocateID , 'ID':ID},
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                if ($("#ID").val() == "") {
+                    $('div#sucessalert').html("Save Allocation successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Upadate Allocation successfully.");
+                }
+                showhidealert();
+                location.reload();
+                Clearform();
+            }          
+        });
+    });
+    function getFacilitiesIDrightside() {
+        debugger;
+        var data = new Array();
+        $('#lstrecordsrightside option').each(function (i, value) {
+            data.push(value.value);
+        })
+        return data;
+    }
+
+    function getFacilitiesIDfromleftside() {
+        debugger;
+        var data = new Array();
+        $('#lstrecordsLestside option').each(function (i, value) {
+            data.push(value.value);
+        })
+        return data;
+    }
+
+
+    function loadhtml(GroupType) {
+        debugger;
+        $.ajax({
+            url: '@Url.Action("MultipleGroupAlloctionlist")',
+            type: 'GET',
+            contentType: 'html',
+            data: { 'GroupType': GroupType },
+            cache: false,
+        }).done(function (result) {
+            debugger;
+            $('#lstUserAllocateFacility').html(result);
+        });
+    }
+    $("#btnCancel").click(function () {
+        Clearform();
+    });
+    function Clearform() {
+        debugger;
+       // $("#ddlGroupType").val(0).trigger("change");
+        $("#ddlUser").val(0).trigger("change");
+        $("#ddlGroup").val("").trigger("change");
+
+    }
+</script>

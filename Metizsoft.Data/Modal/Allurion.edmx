@@ -1,0 +1,2383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AllurionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Area_Mst">
+          <Key>
+            <PropertyRef Name="AreaID" />
+          </Key>
+          <Property Name="AreaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="SubAreaName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="AssignedLeave">
+          <Key>
+            <PropertyRef Name="AssignedLeaveId" />
+          </Key>
+          <Property Name="AssignedLeaveId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="bigint" />
+          <Property Name="NoOfLeaves" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="IsActive" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="AuthorizeMaster">
+          <Key>
+            <PropertyRef Name="AuthorizeID" />
+          </Key>
+          <Property Name="AuthorizeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="MenuID" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="DCR_Mst">
+          <Key>
+            <PropertyRef Name="DCRId" />
+          </Key>
+          <Property Name="DCRId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkTypeId" Type="int" />
+          <Property Name="WorkWithIds" Type="nvarchar" MaxLength="50" />
+          <Property Name="TourId" Type="bigint" />
+          <Property Name="AreaId" Type="int" />
+          <Property Name="SubAreaId" Type="int" />
+          <Property Name="AreaNote" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tourvariance" Type="bit" />
+          <Property Name="varianceAreaID" Type="int" />
+          <Property Name="varianceSubAreaID" Type="int" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="TourPlanVariation" Type="nvarchar" MaxLength="100" />
+          <Property Name="SubmissionDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="WorkWithUserId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Doctor_Mst">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="DoctorName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="GradeName" Type="int" Nullable="false" />
+          <Property Name="Qualification" Type="nvarchar" MaxLength="50" />
+          <Property Name="Add1" Type="nvarchar" MaxLength="500" />
+          <Property Name="Add2" Type="nvarchar" MaxLength="500" />
+          <Property Name="Add3" Type="nvarchar" MaxLength="500" />
+          <Property Name="Add4" Type="nvarchar" MaxLength="500" />
+          <Property Name="Pin" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RefrenceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubAreaName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Dob" Type="datetime" />
+          <Property Name="Dow" Type="datetime" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="FieldStaffName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DivisionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdateBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdateOn" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CertificateId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DoctorProductReport_Mst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="ReportId" Type="bigint" />
+          <Property Name="GrouptypeID" Type="bigint" />
+          <Property Name="ProductId" Type="bigint" />
+          <Property Name="ProductCaseId" Type="bigint" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RxType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ValueType" Type="nvarchar" MaxLength="50" />
+          <Property Name="WeigtageType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="bigint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdateBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdateOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DoctorReport_Mst">
+          <Key>
+            <PropertyRef Name="DoctorReportId" />
+          </Key>
+          <Property Name="DoctorReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" />
+          <Property Name="DCRId" Type="bigint" />
+          <Property Name="ProductCaseId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RxType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="nvarchar" MaxLength="50" />
+          <Property Name="ValueType" Type="nvarchar" MaxLength="50" />
+          <Property Name="WeigtageType" Type="nvarchar" MaxLength="50" />
+          <Property Name="VisitSection" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiscussionPad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Medicine" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrescriptionText" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="MeetingTypeId" Type="int" />
+          <Property Name="ProductTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="DynamicMenuMaster">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="100" />
+          <Property Name="Action" Type="nvarchar" MaxLength="100" />
+          <Property Name="MainTier" Type="int" />
+          <Property Name="SubTier" Type="int" />
+          <Property Name="Iconname" Type="nvarchar" MaxLength="500" />
+          <Property Name="SortNo" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event_Mst">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventTypeID" Type="bigint" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="EventType_Mst">
+          <Key>
+            <PropertyRef Name="EventTypeID" />
+          </Key>
+          <Property Name="EventTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Expenser_Mst">
+          <Key>
+            <PropertyRef Name="ExpenserId" />
+          </Key>
+          <Property Name="ExpenserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExpenserName" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="ExpenserReport_Mst">
+          <Key>
+            <PropertyRef Name="ExpenserReportId" />
+          </Key>
+          <Property Name="ExpenserReportId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExpenserId" Type="bigint" />
+          <Property Name="ExpenserImage" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="bigint" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Group_Mst">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupTypeID" Type="bigint" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdateBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdateOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GroupAllocation_Mst">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AllocationID" Type="bigint" />
+          <Property Name="GroupTypeID" Type="bigint" />
+          <Property Name="GroupID" Type="bigint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="GroupToFieldUser_Mst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="GroupId" Type="bigint" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="GroupType_Mst">
+          <Key>
+            <PropertyRef Name="GrouptypeID" />
+          </Key>
+          <Property Name="GrouptypeID" Type="bigint" Nullable="false" />
+          <Property Name="GroupTypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LeaveMaster">
+          <Key>
+            <PropertyRef Name="LeaveId" />
+          </Key>
+          <Property Name="LeaveId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="RoleId" Type="bigint" />
+          <Property Name="LeaveType" Type="int" />
+          <Property Name="DateFrom" Type="datetime" />
+          <Property Name="DateTo" Type="datetime" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="500" />
+          <Property Name="LeaveStatus" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="LeaveStatusByVP" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LeaveType_Mst">
+          <Key>
+            <PropertyRef Name="LeaveTypeId" />
+          </Key>
+          <Property Name="LeaveTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveType" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="ManageBalloon">
+          <Key>
+            <PropertyRef Name="ManageBalloonID" />
+          </Key>
+          <Property Name="ManageBalloonID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterUserID" Type="bigint" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="SubUserID" Type="bigint" />
+          <Property Name="InstallationDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="MeetingType_mst">
+          <Key>
+            <PropertyRef Name="MeetingTypeId" />
+          </Key>
+          <Property Name="MeetingTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeetingType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdateBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdateOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="MultipleGroupAllocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AllocationID" Type="bigint" />
+          <Property Name="GroupTypeID" Type="bigint" />
+          <Property Name="GroupID" Type="bigint" />
+          <Property Name="ToAllocateID" Type="bigint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="NotificationManageMaster">
+          <Key>
+            <PropertyRef Name="NotificationManageID" />
+          </Key>
+          <Property Name="NotificationManageID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NotificationID" Type="bigint" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationMaster">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="NotificationTitle" Type="nvarchar" MaxLength="500" />
+          <Property Name="NotificationMessage" Type="nvarchar(max)" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product_Mst">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdateBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdateOn" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Productallocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductCaseId" Type="bigint" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="CaseID" Type="bigint" />
+          <Property Name="Jan" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Feb" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Mar" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Apr" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="May" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Jun" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="July" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Aug" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Sep" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Oct" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Nov" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Dec" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Year" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ProductCase_Mst">
+          <Key>
+            <PropertyRef Name="ProductCaseId" />
+          </Key>
+          <Property Name="ProductCaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="MeasureIn" Type="nvarchar" MaxLength="100" />
+          <Property Name="StrangthIn" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="PTS" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pack" Type="nvarchar" MaxLength="50" />
+          <Property Name="PTR" Type="nvarchar" MaxLength="50" />
+          <Property Name="MRP" Type="nvarchar" MaxLength="50" />
+          <Property Name="STDRate" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductTypeId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductType_Mst">
+          <Key>
+            <PropertyRef Name="ProductTypeId" />
+          </Key>
+          <Property Name="ProductTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductType" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Promotional_Mst">
+          <Key>
+            <PropertyRef Name="PromotionalId" />
+          </Key>
+          <Property Name="PromotionalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PromotionalName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="PromotionalReport_Mst">
+          <Key>
+            <PropertyRef Name="PromotionalReportId" />
+          </Key>
+          <Property Name="PromotionalReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PromotionalId" Type="int" />
+          <Property Name="AreaID" Type="int" />
+          <Property Name="WorkWithIds" Type="nvarchar" MaxLength="50" />
+          <Property Name="WorkWithUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubAreaId" Type="int" />
+          <Property Name="PromotionalImage" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Retailer_mst">
+          <Key>
+            <PropertyRef Name="ReatailerId" />
+          </Key>
+          <Property Name="ReatailerId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usertype" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="OfficePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Anniversary" Type="datetime" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+          <Property Name="GradeName" Type="int" />
+          <Property Name="Refrence" Type="nvarchar" MaxLength="100" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="100" />
+          <Property Name="RetailerCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdateBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdateOn" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="DivName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SubArea" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="RetailerReport_Mst">
+          <Key>
+            <PropertyRef Name="ReatailerReportId" />
+          </Key>
+          <Property Name="ReatailerReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReatailerId" Type="int" />
+          <Property Name="DCRId" Type="bigint" />
+          <Property Name="AreaId" Type="int" />
+          <Property Name="ProductCaseId" Type="bigint" />
+          <Property Name="ProductId" Type="bigint" />
+          <Property Name="SubAreaId" Type="int" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="DiscussionPad" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="MeasureIn" Type="nvarchar" MaxLength="100" />
+          <Property Name="StrangthIn" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="RxType_mst">
+          <Key>
+            <PropertyRef Name="RxTypeId" />
+          </Key>
+          <Property Name="RxTypeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RxType" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="SubUserMaster">
+          <Key>
+            <PropertyRef Name="SubUserID" />
+          </Key>
+          <Property Name="SubUserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterUserID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="char" MaxLength="10" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="Height" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLevel" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="TourAreaProgram_Mst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TourId" Type="bigint" />
+          <Property Name="AreaId" Type="bigint" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="100" />
+          <Property Name="TourAreaCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubAreaId" Type="bigint" />
+          <Property Name="SubAreaName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="TourProgram_Mst">
+          <Key>
+            <PropertyRef Name="TourID" />
+          </Key>
+          <Property Name="TourID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Day" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="AreaID" Type="bigint" />
+          <Property Name="SubareaID" Type="bigint" />
+          <Property Name="HQRS" Type="nvarchar(max)" />
+          <Property Name="ContactPoint" Type="nvarchar(max)" />
+          <Property Name="IsApproved" Type="nvarchar" MaxLength="150" />
+          <Property Name="ApprovedBy" Type="bigint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tracker_Mst">
+          <Key>
+            <PropertyRef Name="TrackID" />
+          </Key>
+          <Property Name="TrackID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="Lattitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User_Info">
+          <Key>
+            <PropertyRef Name="UserInfoId" />
+          </Key>
+          <Property Name="UserInfoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterUserID" Type="bigint" Nullable="false" />
+          <Property Name="SubUserID" Type="bigint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Weight" Type="nvarchar" MaxLength="50" />
+          <Property Name="BMI" Type="nvarchar" MaxLength="50" />
+          <Property Name="BodyFat" Type="nvarchar" MaxLength="50" />
+          <Property Name="BodyWater" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bone" Type="nvarchar" MaxLength="50" />
+          <Property Name="VisceralFat" Type="nvarchar" MaxLength="50" />
+          <Property Name="BMR" Type="nvarchar" MaxLength="50" />
+          <Property Name="MuscleMass" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Gender" Type="char" MaxLength="10" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="Height" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserRoleID" Type="bigint" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="AreaID" Type="bigint" />
+          <Property Name="SubAreaID" Type="bigint" />
+          <Property Name="City" Type="bigint" />
+          <Property Name="State" Type="bigint" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="DOW" Type="datetime" />
+          <Property Name="DOJ" Type="datetime" />
+          <Property Name="EmployeeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserPosition" Type="bigint" />
+          <Property Name="DirectorID" Type="bigint" />
+          <Property Name="HOID" Type="bigint" />
+          <Property Name="VPID" Type="bigint" />
+          <Property Name="NSMID" Type="bigint" />
+          <Property Name="ZSMID" Type="bigint" />
+          <Property Name="RSMID" Type="bigint" />
+          <Property Name="ASMID" Type="bigint" />
+          <Property Name="MRID" Type="bigint" />
+          <Property Name="DeviceID" Type="nvarchar" MaxLength="1000" />
+          <Property Name="InstanceID" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ExpensesLimit" Type="float" />
+          <Property Name="SalesTarget" Type="float" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdateOn" Type="datetime" />
+          <Property Name="UpdateBy" Type="bigint" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CaseName" Type="int" />
+          <Property Name="DCRBlocking" Type="int" />
+          <Property Name="ManualEmployeeCode" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleDisplayName" Type="nvarchar" MaxLength="200" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" />
+          <Property Name="MobileRole" Type="bit" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkType_mst">
+          <Key>
+            <PropertyRef Name="WorkTypeId" />
+          </Key>
+          <Property Name="WorkTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdateBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdateOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AllurionModelStoreContainer">
+          <EntitySet Name="Area_Mst" EntityType="Self.Area_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssignedLeave" EntityType="Self.AssignedLeave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuthorizeMaster" EntityType="Self.AuthorizeMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DCR_Mst" EntityType="Self.DCR_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor_Mst" EntityType="Self.Doctor_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorProductReport_Mst" EntityType="Self.DoctorProductReport_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorReport_Mst" EntityType="Self.DoctorReport_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DynamicMenuMaster" EntityType="Self.DynamicMenuMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event_Mst" EntityType="Self.Event_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventType_Mst" EntityType="Self.EventType_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Expenser_Mst" EntityType="Self.Expenser_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpenserReport_Mst" EntityType="Self.ExpenserReport_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group_Mst" EntityType="Self.Group_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupAllocation_Mst" EntityType="Self.GroupAllocation_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupToFieldUser_Mst" EntityType="Self.GroupToFieldUser_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupType_Mst" EntityType="Self.GroupType_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveMaster" EntityType="Self.LeaveMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveType_Mst" EntityType="Self.LeaveType_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManageBalloon" EntityType="Self.ManageBalloon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeetingType_mst" EntityType="Self.MeetingType_mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MultipleGroupAllocation" EntityType="Self.MultipleGroupAllocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotificationManageMaster" EntityType="Self.NotificationManageMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotificationMaster" EntityType="Self.NotificationMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Mst" EntityType="Self.Product_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productallocation" EntityType="Self.Productallocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCase_Mst" EntityType="Self.ProductCase_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductType_Mst" EntityType="Self.ProductType_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promotional_Mst" EntityType="Self.Promotional_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PromotionalReport_Mst" EntityType="Self.PromotionalReport_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Retailer_mst" EntityType="Self.Retailer_mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RetailerReport_Mst" EntityType="Self.RetailerReport_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RxType_mst" EntityType="Self.RxType_mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubUserMaster" EntityType="Self.SubUserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TourAreaProgram_Mst" EntityType="Self.TourAreaProgram_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TourProgram_Mst" EntityType="Self.TourProgram_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tracker_Mst" EntityType="Self.Tracker_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Info" EntityType="Self.User_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkType_mst" EntityType="Self.WorkType_mst" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AllurionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AllurionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Area_Mst" EntityType="AllurionModel.Area_Mst" />
+          <EntitySet Name="AssignedLeaves" EntityType="AllurionModel.AssignedLeave" />
+          <EntitySet Name="AuthorizeMasters" EntityType="AllurionModel.AuthorizeMaster" />
+          <EntitySet Name="DCR_Mst" EntityType="AllurionModel.DCR_Mst" />
+          <EntitySet Name="Doctor_Mst" EntityType="AllurionModel.Doctor_Mst" />
+          <EntitySet Name="DoctorProductReport_Mst" EntityType="AllurionModel.DoctorProductReport_Mst" />
+          <EntitySet Name="DoctorReport_Mst" EntityType="AllurionModel.DoctorReport_Mst" />
+          <EntitySet Name="DynamicMenuMasters" EntityType="AllurionModel.DynamicMenuMaster" />
+          <EntitySet Name="Event_Mst" EntityType="AllurionModel.Event_Mst" />
+          <EntitySet Name="EventType_Mst" EntityType="AllurionModel.EventType_Mst" />
+          <EntitySet Name="Expenser_Mst" EntityType="AllurionModel.Expenser_Mst" />
+          <EntitySet Name="ExpenserReport_Mst" EntityType="AllurionModel.ExpenserReport_Mst" />
+          <EntitySet Name="Group_Mst" EntityType="AllurionModel.Group_Mst" />
+          <EntitySet Name="GroupAllocation_Mst" EntityType="AllurionModel.GroupAllocation_Mst" />
+          <EntitySet Name="GroupToFieldUser_Mst" EntityType="AllurionModel.GroupToFieldUser_Mst" />
+          <EntitySet Name="GroupType_Mst" EntityType="AllurionModel.GroupType_Mst" />
+          <EntitySet Name="LeaveMasters" EntityType="AllurionModel.LeaveMaster" />
+          <EntitySet Name="LeaveType_Mst" EntityType="AllurionModel.LeaveType_Mst" />
+          <EntitySet Name="ManageBalloons" EntityType="AllurionModel.ManageBalloon" />
+          <EntitySet Name="MeetingType_mst" EntityType="AllurionModel.MeetingType_mst" />
+          <EntitySet Name="MultipleGroupAllocations" EntityType="AllurionModel.MultipleGroupAllocation" />
+          <EntitySet Name="NotificationManageMasters" EntityType="AllurionModel.NotificationManageMaster" />
+          <EntitySet Name="NotificationMasters" EntityType="AllurionModel.NotificationMaster" />
+          <EntitySet Name="Product_Mst" EntityType="AllurionModel.Product_Mst" />
+          <EntitySet Name="Productallocations" EntityType="AllurionModel.Productallocation" />
+          <EntitySet Name="ProductCase_Mst" EntityType="AllurionModel.ProductCase_Mst" />
+          <EntitySet Name="ProductType_Mst" EntityType="AllurionModel.ProductType_Mst" />
+          <EntitySet Name="Promotional_Mst" EntityType="AllurionModel.Promotional_Mst" />
+          <EntitySet Name="PromotionalReport_Mst" EntityType="AllurionModel.PromotionalReport_Mst" />
+          <EntitySet Name="Retailer_mst" EntityType="AllurionModel.Retailer_mst" />
+          <EntitySet Name="RetailerReport_Mst" EntityType="AllurionModel.RetailerReport_Mst" />
+          <EntitySet Name="RxType_mst" EntityType="AllurionModel.RxType_mst" />
+          <EntitySet Name="SubUserMasters" EntityType="AllurionModel.SubUserMaster" />
+          <EntitySet Name="TourAreaProgram_Mst" EntityType="AllurionModel.TourAreaProgram_Mst" />
+          <EntitySet Name="TourProgram_Mst" EntityType="AllurionModel.TourProgram_Mst" />
+          <EntitySet Name="Tracker_Mst" EntityType="AllurionModel.Tracker_Mst" />
+          <EntitySet Name="User_Info" EntityType="AllurionModel.User_Info" />
+          <EntitySet Name="UserMasters" EntityType="AllurionModel.UserMaster" />
+          <EntitySet Name="webpages_Membership" EntityType="AllurionModel.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="AllurionModel.webpages_OAuthMembership" />
+          <EntitySet Name="WorkType_mst" EntityType="AllurionModel.WorkType_mst" />
+          <EntitySet Name="Users" EntityType="AllurionModel.User" />
+          <EntitySet Name="webpages_Roles" EntityType="AllurionModel.webpages_Roles" />
+          <AssociationSet Name="webpages_UsersInRoles" Association="AllurionModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Area_Mst">
+          <Key>
+            <PropertyRef Name="AreaID" />
+          </Key>
+          <Property Name="AreaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AreaName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="SubAreaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AssignedLeave">
+          <Key>
+            <PropertyRef Name="AssignedLeaveId" />
+          </Key>
+          <Property Name="AssignedLeaveId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int64" />
+          <Property Name="NoOfLeaves" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="IsActive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AuthorizeMaster">
+          <Key>
+            <PropertyRef Name="AuthorizeID" />
+          </Key>
+          <Property Name="AuthorizeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="MenuID" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="DCR_Mst">
+          <Key>
+            <PropertyRef Name="DCRId" />
+          </Key>
+          <Property Name="DCRId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkTypeId" Type="Int32" />
+          <Property Name="WorkWithIds" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TourId" Type="Int64" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="SubAreaId" Type="Int32" />
+          <Property Name="AreaNote" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tourvariance" Type="Boolean" />
+          <Property Name="varianceAreaID" Type="Int32" />
+          <Property Name="varianceSubAreaID" Type="Int32" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TourPlanVariation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubmissionDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="WorkWithUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Doctor_Mst">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GradeName" Type="Int32" Nullable="false" />
+          <Property Name="Qualification" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Add1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Add2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Add3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Add4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Pin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RefrenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubAreaName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Dob" Type="DateTime" Precision="3" />
+          <Property Name="Dow" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FieldStaffName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DivisionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdateBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CertificateId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DoctorProductReport_Mst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="ReportId" Type="Int64" />
+          <Property Name="GrouptypeID" Type="Int64" />
+          <Property Name="ProductId" Type="Int64" />
+          <Property Name="ProductCaseId" Type="Int64" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RxType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ValueType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WeigtageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int64" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdateBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DoctorReport_Mst">
+          <Key>
+            <PropertyRef Name="DoctorReportId" />
+          </Key>
+          <Property Name="DoctorReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" />
+          <Property Name="DCRId" Type="Int64" />
+          <Property Name="ProductCaseId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RxType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ValueType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WeigtageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VisitSection" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiscussionPad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Medicine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrescriptionText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="MeetingTypeId" Type="Int32" />
+          <Property Name="ProductTypeId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DynamicMenuMaster">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MainTier" Type="Int32" />
+          <Property Name="SubTier" Type="Int32" />
+          <Property Name="Iconname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SortNo" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event_Mst">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventTypeID" Type="Int64" Nullable="false" />
+          <Property Name="EventName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="EventType_Mst">
+          <Key>
+            <PropertyRef Name="EventTypeID" />
+          </Key>
+          <Property Name="EventTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Expenser_Mst">
+          <Key>
+            <PropertyRef Name="ExpenserId" />
+          </Key>
+          <Property Name="ExpenserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpenserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ExpenserReport_Mst">
+          <Key>
+            <PropertyRef Name="ExpenserReportId" />
+          </Key>
+          <Property Name="ExpenserReportId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpenserId" Type="Int64" />
+          <Property Name="ExpenserImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int64" />
+          <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Group_Mst">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupTypeID" Type="Int64" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdateBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GroupAllocation_Mst">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AllocationID" Type="Int64" />
+          <Property Name="GroupTypeID" Type="Int64" />
+          <Property Name="GroupID" Type="Int64" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="GroupToFieldUser_Mst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="GroupId" Type="Int64" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="GroupType_Mst">
+          <Key>
+            <PropertyRef Name="GrouptypeID" />
+          </Key>
+          <Property Name="GrouptypeID" Type="Int64" Nullable="false" />
+          <Property Name="GroupTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="LeaveMaster">
+          <Key>
+            <PropertyRef Name="LeaveId" />
+          </Key>
+          <Property Name="LeaveId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="RoleId" Type="Int64" />
+          <Property Name="LeaveType" Type="Int32" />
+          <Property Name="DateFrom" Type="DateTime" Precision="3" />
+          <Property Name="DateTo" Type="DateTime" Precision="3" />
+          <Property Name="Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LeaveStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="LeaveStatusByVP" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LeaveType_Mst">
+          <Key>
+            <PropertyRef Name="LeaveTypeId" />
+          </Key>
+          <Property Name="LeaveTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ManageBalloon">
+          <Key>
+            <PropertyRef Name="ManageBalloonID" />
+          </Key>
+          <Property Name="ManageBalloonID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterUserID" Type="Int64" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="SubUserID" Type="Int64" />
+          <Property Name="InstallationDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MeetingType_mst">
+          <Key>
+            <PropertyRef Name="MeetingTypeId" />
+          </Key>
+          <Property Name="MeetingTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeetingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MultipleGroupAllocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AllocationID" Type="Int64" />
+          <Property Name="GroupTypeID" Type="Int64" />
+          <Property Name="GroupID" Type="Int64" />
+          <Property Name="ToAllocateID" Type="Int64" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="NotificationManageMaster">
+          <Key>
+            <PropertyRef Name="NotificationManageID" />
+          </Key>
+          <Property Name="NotificationManageID" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="NotificationID" Type="Int64" Nullable="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationMaster">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="NotificationTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NotificationMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product_Mst">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdateBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Productallocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductCaseId" Type="Int64" Nullable="false" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="CaseID" Type="Int64" />
+          <Property Name="Jan" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Feb" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Mar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Apr" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="May" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Jun" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="July" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Aug" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Sep" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Oct" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Nov" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dec" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductCase_Mst">
+          <Key>
+            <PropertyRef Name="ProductCaseId" />
+          </Key>
+          <Property Name="ProductCaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MeasureIn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StrangthIn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="PTS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pack" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PTR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MRP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STDRate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductTypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductType_Mst">
+          <Key>
+            <PropertyRef Name="ProductTypeId" />
+          </Key>
+          <Property Name="ProductTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Promotional_Mst">
+          <Key>
+            <PropertyRef Name="PromotionalId" />
+          </Key>
+          <Property Name="PromotionalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PromotionalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PromotionalReport_Mst">
+          <Key>
+            <PropertyRef Name="PromotionalReportId" />
+          </Key>
+          <Property Name="PromotionalReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PromotionalId" Type="Int32" />
+          <Property Name="AreaID" Type="Int32" />
+          <Property Name="WorkWithIds" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkWithUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubAreaId" Type="Int32" />
+          <Property Name="PromotionalImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Retailer_mst">
+          <Key>
+            <PropertyRef Name="ReatailerId" />
+          </Key>
+          <Property Name="ReatailerId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usertype" Type="Int32" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OfficePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Anniversary" Type="DateTime" Precision="3" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GradeName" Type="Int32" />
+          <Property Name="Refrence" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RetailerCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdateBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="DivName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubArea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RetailerReport_Mst">
+          <Key>
+            <PropertyRef Name="ReatailerReportId" />
+          </Key>
+          <Property Name="ReatailerReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReatailerId" Type="Int32" />
+          <Property Name="DCRId" Type="Int64" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="ProductCaseId" Type="Int64" />
+          <Property Name="ProductId" Type="Int64" />
+          <Property Name="SubAreaId" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="DiscussionPad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CaseName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MeasureIn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StrangthIn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductTypeId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RxType_mst">
+          <Key>
+            <PropertyRef Name="RxTypeId" />
+          </Key>
+          <Property Name="RxTypeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RxType" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="SubUserMaster">
+          <Key>
+            <PropertyRef Name="SubUserID" />
+          </Key>
+          <Property Name="SubUserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterUserID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Height" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLevel" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TourAreaProgram_Mst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TourId" Type="Int64" />
+          <Property Name="AreaId" Type="Int64" />
+          <Property Name="TourAreaCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubAreaId" Type="Int64" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="AreaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubAreaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TourProgram_Mst">
+          <Key>
+            <PropertyRef Name="TourID" />
+          </Key>
+          <Property Name="TourID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="AreaID" Type="Int64" />
+          <Property Name="SubareaID" Type="Int64" />
+          <Property Name="HQRS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPoint" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedBy" Type="Int64" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Tracker_Mst">
+          <Key>
+            <PropertyRef Name="TrackID" />
+          </Key>
+          <Property Name="TrackID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="Lattitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User_Info">
+          <Key>
+            <PropertyRef Name="UserInfoId" />
+          </Key>
+          <Property Name="UserInfoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterUserID" Type="Int64" Nullable="false" />
+          <Property Name="SubUserID" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BMI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BodyFat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BodyWater" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VisceralFat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BMR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MuscleMass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Height" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkType_mst">
+          <Key>
+            <PropertyRef Name="WorkTypeId" />
+          </Key>
+          <Property Name="WorkTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserRoleID" Type="Int64" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AreaID" Type="Int64" />
+          <Property Name="SubAreaID" Type="Int64" />
+          <Property Name="City" Type="Int64" />
+          <Property Name="State" Type="Int64" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="DOW" Type="DateTime" Precision="3" />
+          <Property Name="DOJ" Type="DateTime" Precision="3" />
+          <Property Name="EmployeeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserPosition" Type="Int64" />
+          <Property Name="DirectorID" Type="Int64" />
+          <Property Name="HOID" Type="Int64" />
+          <Property Name="VPID" Type="Int64" />
+          <Property Name="NSMID" Type="Int64" />
+          <Property Name="ZSMID" Type="Int64" />
+          <Property Name="RSMID" Type="Int64" />
+          <Property Name="ASMID" Type="Int64" />
+          <Property Name="MRID" Type="Int64" />
+          <Property Name="DeviceID" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="InstanceID" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ExpensesLimit" Type="Double" />
+          <Property Name="SalesTarget" Type="Double" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CaseName" Type="Int32" />
+          <Property Name="DCRBlocking" Type="Int32" />
+          <Property Name="ManualEmployeeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="webpages_Roles" Relationship="AllurionModel.webpages_UsersInRoles" FromRole="User" ToRole="webpages_Roles" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleDisplayName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="MobileRole" Type="Boolean" />
+          <NavigationProperty Name="Users" Relationship="AllurionModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="User" />
+        </EntityType>
+        <Association Name="webpages_UsersInRoles">
+          <End Type="AllurionModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+          <End Type="AllurionModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AllurionModelStoreContainer" CdmEntityContainer="AllurionEntities">
+          <EntitySetMapping Name="Area_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.Area_Mst">
+              <MappingFragment StoreEntitySet="Area_Mst">
+                <ScalarProperty Name="SubAreaName" ColumnName="SubAreaName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignedLeaves">
+            <EntityTypeMapping TypeName="AllurionModel.AssignedLeave">
+              <MappingFragment StoreEntitySet="AssignedLeave">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="NoOfLeaves" ColumnName="NoOfLeaves" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="AssignedLeaveId" ColumnName="AssignedLeaveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuthorizeMasters">
+            <EntityTypeMapping TypeName="AllurionModel.AuthorizeMaster">
+              <MappingFragment StoreEntitySet="AuthorizeMaster">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="AuthorizeID" ColumnName="AuthorizeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DCR_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.DCR_Mst">
+              <MappingFragment StoreEntitySet="DCR_Mst">
+                <ScalarProperty Name="WorkWithUserId" ColumnName="WorkWithUserId" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+                <ScalarProperty Name="TourPlanVariation" ColumnName="TourPlanVariation" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="varianceSubAreaID" ColumnName="varianceSubAreaID" />
+                <ScalarProperty Name="varianceAreaID" ColumnName="varianceAreaID" />
+                <ScalarProperty Name="Tourvariance" ColumnName="Tourvariance" />
+                <ScalarProperty Name="AreaNote" ColumnName="AreaNote" />
+                <ScalarProperty Name="SubAreaId" ColumnName="SubAreaId" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="WorkWithIds" ColumnName="WorkWithIds" />
+                <ScalarProperty Name="WorkTypeId" ColumnName="WorkTypeId" />
+                <ScalarProperty Name="DCRId" ColumnName="DCRId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctor_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.Doctor_Mst">
+              <MappingFragment StoreEntitySet="Doctor_Mst">
+                <ScalarProperty Name="CertificateId" ColumnName="CertificateId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="DoctorClass" ColumnName="DoctorClass" />
+                <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
+                <ScalarProperty Name="FieldStaffName" ColumnName="FieldStaffName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Dow" ColumnName="Dow" />
+                <ScalarProperty Name="Dob" ColumnName="Dob" />
+                <ScalarProperty Name="SubAreaName" ColumnName="SubAreaName" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="RefrenceNo" ColumnName="RefrenceNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="Add4" ColumnName="Add4" />
+                <ScalarProperty Name="Add3" ColumnName="Add3" />
+                <ScalarProperty Name="Add2" ColumnName="Add2" />
+                <ScalarProperty Name="Add1" ColumnName="Add1" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="DoctorCode" ColumnName="DoctorCode" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorProductReport_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.DoctorProductReport_Mst">
+              <MappingFragment StoreEntitySet="DoctorProductReport_Mst">
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="WeigtageType" ColumnName="WeigtageType" />
+                <ScalarProperty Name="ValueType" ColumnName="ValueType" />
+                <ScalarProperty Name="RxType" ColumnName="RxType" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductCaseId" ColumnName="ProductCaseId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="GrouptypeID" ColumnName="GrouptypeID" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorReport_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.DoctorReport_Mst">
+              <MappingFragment StoreEntitySet="DoctorReport_Mst">
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+                <ScalarProperty Name="MeetingTypeId" ColumnName="MeetingTypeId" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PrescriptionText" ColumnName="PrescriptionText" />
+                <ScalarProperty Name="Prescription" ColumnName="Prescription" />
+                <ScalarProperty Name="Medicine" ColumnName="Medicine" />
+                <ScalarProperty Name="DiscussionPad" ColumnName="DiscussionPad" />
+                <ScalarProperty Name="VisitSection" ColumnName="VisitSection" />
+                <ScalarProperty Name="WeigtageType" ColumnName="WeigtageType" />
+                <ScalarProperty Name="ValueType" ColumnName="ValueType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="RxType" ColumnName="RxType" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductCaseId" ColumnName="ProductCaseId" />
+                <ScalarProperty Name="DCRId" ColumnName="DCRId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="DoctorReportId" ColumnName="DoctorReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynamicMenuMasters">
+            <EntityTypeMapping TypeName="AllurionModel.DynamicMenuMaster">
+              <MappingFragment StoreEntitySet="DynamicMenuMaster">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SortNo" ColumnName="SortNo" />
+                <ScalarProperty Name="Iconname" ColumnName="Iconname" />
+                <ScalarProperty Name="SubTier" ColumnName="SubTier" />
+                <ScalarProperty Name="MainTier" ColumnName="MainTier" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.Event_Mst">
+              <MappingFragment StoreEntitySet="Event_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventTypeID" ColumnName="EventTypeID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventType_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.EventType_Mst">
+              <MappingFragment StoreEntitySet="EventType_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventTypeID" ColumnName="EventTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenser_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.Expenser_Mst">
+              <MappingFragment StoreEntitySet="Expenser_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ExpenserName" ColumnName="ExpenserName" />
+                <ScalarProperty Name="ExpenserId" ColumnName="ExpenserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenserReport_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.ExpenserReport_Mst">
+              <MappingFragment StoreEntitySet="ExpenserReport_Mst">
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ExpenserImage" ColumnName="ExpenserImage" />
+                <ScalarProperty Name="ExpenserId" ColumnName="ExpenserId" />
+                <ScalarProperty Name="ExpenserReportId" ColumnName="ExpenserReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.Group_Mst">
+              <MappingFragment StoreEntitySet="Group_Mst">
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupTypeID" ColumnName="GroupTypeID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupAllocation_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.GroupAllocation_Mst">
+              <MappingFragment StoreEntitySet="GroupAllocation_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GroupTypeID" ColumnName="GroupTypeID" />
+                <ScalarProperty Name="AllocationID" ColumnName="AllocationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupToFieldUser_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.GroupToFieldUser_Mst">
+              <MappingFragment StoreEntitySet="GroupToFieldUser_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupType_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.GroupType_Mst">
+              <MappingFragment StoreEntitySet="GroupType_Mst">
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GroupTypeName" ColumnName="GroupTypeName" />
+                <ScalarProperty Name="GrouptypeID" ColumnName="GrouptypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveMasters">
+            <EntityTypeMapping TypeName="AllurionModel.LeaveMaster">
+              <MappingFragment StoreEntitySet="LeaveMaster">
+                <ScalarProperty Name="LeaveStatusByVP" ColumnName="LeaveStatusByVP" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LeaveStatus" ColumnName="LeaveStatus" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LeaveId" ColumnName="LeaveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveType_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.LeaveType_Mst">
+              <MappingFragment StoreEntitySet="LeaveType_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManageBalloons">
+            <EntityTypeMapping TypeName="AllurionModel.ManageBalloon">
+              <MappingFragment StoreEntitySet="ManageBalloon">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="InstallationDate" ColumnName="InstallationDate" />
+                <ScalarProperty Name="SubUserID" ColumnName="SubUserID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MasterUserID" ColumnName="MasterUserID" />
+                <ScalarProperty Name="ManageBalloonID" ColumnName="ManageBalloonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeetingType_mst">
+            <EntityTypeMapping TypeName="AllurionModel.MeetingType_mst">
+              <MappingFragment StoreEntitySet="MeetingType_mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MeetingType" ColumnName="MeetingType" />
+                <ScalarProperty Name="MeetingTypeId" ColumnName="MeetingTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MultipleGroupAllocations">
+            <EntityTypeMapping TypeName="AllurionModel.MultipleGroupAllocation">
+              <MappingFragment StoreEntitySet="MultipleGroupAllocation">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ToAllocateID" ColumnName="ToAllocateID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GroupTypeID" ColumnName="GroupTypeID" />
+                <ScalarProperty Name="AllocationID" ColumnName="AllocationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationManageMasters">
+            <EntityTypeMapping TypeName="AllurionModel.NotificationManageMaster">
+              <MappingFragment StoreEntitySet="NotificationManageMaster">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NotificationManageID" ColumnName="NotificationManageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationMasters">
+            <EntityTypeMapping TypeName="AllurionModel.NotificationMaster">
+              <MappingFragment StoreEntitySet="NotificationMaster">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="NotificationMessage" ColumnName="NotificationMessage" />
+                <ScalarProperty Name="NotificationTitle" ColumnName="NotificationTitle" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.Product_Mst">
+              <MappingFragment StoreEntitySet="Product_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productallocations">
+            <EntityTypeMapping TypeName="AllurionModel.Productallocation">
+              <MappingFragment StoreEntitySet="Productallocation">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Dec" ColumnName="Dec" />
+                <ScalarProperty Name="Nov" ColumnName="Nov" />
+                <ScalarProperty Name="Oct" ColumnName="Oct" />
+                <ScalarProperty Name="Sep" ColumnName="Sep" />
+                <ScalarProperty Name="Aug" ColumnName="Aug" />
+                <ScalarProperty Name="July" ColumnName="July" />
+                <ScalarProperty Name="Jun" ColumnName="Jun" />
+                <ScalarProperty Name="May" ColumnName="May" />
+                <ScalarProperty Name="Apr" ColumnName="Apr" />
+                <ScalarProperty Name="Mar" ColumnName="Mar" />
+                <ScalarProperty Name="Feb" ColumnName="Feb" />
+                <ScalarProperty Name="Jan" ColumnName="Jan" />
+                <ScalarProperty Name="CaseID" ColumnName="CaseID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProductCaseId" ColumnName="ProductCaseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCase_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.ProductCase_Mst">
+              <MappingFragment StoreEntitySet="ProductCase_Mst">
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="STDRate" ColumnName="STDRate" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="PTR" ColumnName="PTR" />
+                <ScalarProperty Name="Pack" ColumnName="Pack" />
+                <ScalarProperty Name="PTS" ColumnName="PTS" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="StrangthIn" ColumnName="StrangthIn" />
+                <ScalarProperty Name="MeasureIn" ColumnName="MeasureIn" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductCaseId" ColumnName="ProductCaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductType_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.ProductType_Mst">
+              <MappingFragment StoreEntitySet="ProductType_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotional_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.Promotional_Mst">
+              <MappingFragment StoreEntitySet="Promotional_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PromotionalName" ColumnName="PromotionalName" />
+                <ScalarProperty Name="PromotionalId" ColumnName="PromotionalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PromotionalReport_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.PromotionalReport_Mst">
+              <MappingFragment StoreEntitySet="PromotionalReport_Mst">
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PromotionalImage" ColumnName="PromotionalImage" />
+                <ScalarProperty Name="SubAreaId" ColumnName="SubAreaId" />
+                <ScalarProperty Name="WorkWithUserId" ColumnName="WorkWithUserId" />
+                <ScalarProperty Name="WorkWithIds" ColumnName="WorkWithIds" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="PromotionalId" ColumnName="PromotionalId" />
+                <ScalarProperty Name="PromotionalReportId" ColumnName="PromotionalReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Retailer_mst">
+            <EntityTypeMapping TypeName="AllurionModel.Retailer_mst">
+              <MappingFragment StoreEntitySet="Retailer_mst">
+                <ScalarProperty Name="SubArea" ColumnName="SubArea" />
+                <ScalarProperty Name="DivName" ColumnName="DivName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="RetailerCode" ColumnName="RetailerCode" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Refrence" ColumnName="Refrence" />
+                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Anniversary" ColumnName="Anniversary" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="OfficePhone" ColumnName="OfficePhone" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Usertype" ColumnName="Usertype" />
+                <ScalarProperty Name="ReatailerId" ColumnName="ReatailerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RetailerReport_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.RetailerReport_Mst">
+              <MappingFragment StoreEntitySet="RetailerReport_Mst">
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+                <ScalarProperty Name="StrangthIn" ColumnName="StrangthIn" />
+                <ScalarProperty Name="MeasureIn" ColumnName="MeasureIn" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DiscussionPad" ColumnName="DiscussionPad" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="SubAreaId" ColumnName="SubAreaId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductCaseId" ColumnName="ProductCaseId" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="DCRId" ColumnName="DCRId" />
+                <ScalarProperty Name="ReatailerId" ColumnName="ReatailerId" />
+                <ScalarProperty Name="ReatailerReportId" ColumnName="ReatailerReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RxType_mst">
+            <EntityTypeMapping TypeName="AllurionModel.RxType_mst">
+              <MappingFragment StoreEntitySet="RxType_mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RxType" ColumnName="RxType" />
+                <ScalarProperty Name="RxTypeId" ColumnName="RxTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubUserMasters">
+            <EntityTypeMapping TypeName="AllurionModel.SubUserMaster">
+              <MappingFragment StoreEntitySet="SubUserMaster">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MasterUserID" ColumnName="MasterUserID" />
+                <ScalarProperty Name="SubUserID" ColumnName="SubUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TourAreaProgram_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.TourAreaProgram_Mst">
+              <MappingFragment StoreEntitySet="TourAreaProgram_Mst">
+                <ScalarProperty Name="SubAreaName" ColumnName="SubAreaName" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SubAreaId" ColumnName="SubAreaId" />
+                <ScalarProperty Name="TourAreaCode" ColumnName="TourAreaCode" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TourProgram_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.TourProgram_Mst">
+              <MappingFragment StoreEntitySet="TourProgram_Mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="ContactPoint" ColumnName="ContactPoint" />
+                <ScalarProperty Name="HQRS" ColumnName="HQRS" />
+                <ScalarProperty Name="SubareaID" ColumnName="SubareaID" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="TourID" ColumnName="TourID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tracker_Mst">
+            <EntityTypeMapping TypeName="AllurionModel.Tracker_Mst">
+              <MappingFragment StoreEntitySet="Tracker_Mst">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="Lattitude" ColumnName="Lattitude" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TrackID" ColumnName="TrackID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Info">
+            <EntityTypeMapping TypeName="AllurionModel.User_Info">
+              <MappingFragment StoreEntitySet="User_Info">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="MuscleMass" ColumnName="MuscleMass" />
+                <ScalarProperty Name="BMR" ColumnName="BMR" />
+                <ScalarProperty Name="VisceralFat" ColumnName="VisceralFat" />
+                <ScalarProperty Name="Bone" ColumnName="Bone" />
+                <ScalarProperty Name="BodyWater" ColumnName="BodyWater" />
+                <ScalarProperty Name="BodyFat" ColumnName="BodyFat" />
+                <ScalarProperty Name="BMI" ColumnName="BMI" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SubUserID" ColumnName="SubUserID" />
+                <ScalarProperty Name="MasterUserID" ColumnName="MasterUserID" />
+                <ScalarProperty Name="UserInfoId" ColumnName="UserInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="AllurionModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="AllurionModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="AllurionModel.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkType_mst">
+            <EntityTypeMapping TypeName="AllurionModel.WorkType_mst">
+              <MappingFragment StoreEntitySet="WorkType_mst">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="WorkType" ColumnName="WorkType" />
+                <ScalarProperty Name="WorkTypeId" ColumnName="WorkTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AllurionModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ManualEmployeeCode" ColumnName="ManualEmployeeCode" />
+                <ScalarProperty Name="DCRBlocking" ColumnName="DCRBlocking" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="SalesTarget" ColumnName="SalesTarget" />
+                <ScalarProperty Name="ExpensesLimit" ColumnName="ExpensesLimit" />
+                <ScalarProperty Name="InstanceID" ColumnName="InstanceID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="MRID" ColumnName="MRID" />
+                <ScalarProperty Name="ASMID" ColumnName="ASMID" />
+                <ScalarProperty Name="RSMID" ColumnName="RSMID" />
+                <ScalarProperty Name="ZSMID" ColumnName="ZSMID" />
+                <ScalarProperty Name="NSMID" ColumnName="NSMID" />
+                <ScalarProperty Name="VPID" ColumnName="VPID" />
+                <ScalarProperty Name="HOID" ColumnName="HOID" />
+                <ScalarProperty Name="DirectorID" ColumnName="DirectorID" />
+                <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="DOW" ColumnName="DOW" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="SubAreaID" ColumnName="SubAreaID" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="AllurionModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="MobileRole" ColumnName="MobileRole" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleDisplayName" ColumnName="RoleDisplayName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="AllurionModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,180 @@
+﻿@model Metizsoft.Data.Modal.webpages_Roles
+
+@{
+    ViewBag.Title = "ManageTarget";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Manage Target
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active"></i>Account</a></li>       
+    </ol>
+</section>
+<section class="content">
+    <div class="row" id="divlocation">
+
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Manage Target</h3>
+                </div>
+                @*@using (Html.BeginForm("RoleCreate", "Account", FormMethod.Post, new { }))
+                    {*@
+
+                <div class="box">
+                    <div class="box-body table-scrollable1">
+                        <div id="frmRole" class="form-horizontal">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label for="VehicleNo" class="col-sm-4 control-label">User Designation</label>
+                                    <div class="col-sm-8">
+                                        @Html.DropDownList("RoleId", new SelectList(ViewBag.RoleList, "RoleId", "RoleName"), "Select Designation", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="VehicleNo" class="col-sm-4 control-label">Head Quater</label>
+                                    <div class="col-sm-8">
+                                        @Html.DropDownList("AreaList", new SelectList(ViewBag.AreaList, "AreaID", "AreaName"), "Select Head Quater", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="VehicleNo" class="col-sm-4 control-label">Area Name</label>
+                                    <div class="col-sm-8">
+                                        @Html.DropDownList("SubAreaList", new SelectList(ViewBag.SubAreaList, "AreaID", "SubAreaName"), "Select Area", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Download Target sheet:</legend>
+                                    <div class="col-md-6">
+                                        <select name="CaseName" id="ddlRxtype" class="form-control" tabindex="1">
+                                            <option value="0" selected="">Select RxType</option>
+                                            <option value="1">Blaze</option>
+                                            <option value="2">Magnar</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-default Download" data-clickfrom="Download" data-id="18">Download</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                            @*<input type="file" class="dataFile btn btn-info" name="upload" style="display:none" />*@
+
+                            <div id="lstTarget" style="clear:both !important">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="hiddenclickfrom" />
+        <input type="hidden" id="hiddenid" />
+        <input type="hidden" id="chkismass" />
+    </div>
+</section>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        @*$(document).on('change', ".dataFile", function () {
+            debugger;
+            if ($(".dataFile").val() != "") {
+                var data = new FormData();
+                var uploadordownload = $("#hiddenclickfrom").val();
+                if (uploadordownload == "Upload") {
+                    var files = "";
+                    var UaserID = $("#hiddenid").val();
+                    data.append("UaserID", UaserID);
+                    if ($(".dataFile").val().length > 0) {
+                        files = $(".dataFile").get(0).files;
+                        data.append("File", files[0]);
+                    }
+                    //if (files == "") {
+                    //    alert("Please choose file for selected bar type.!!");
+                    //    return false;
+                    //}
+                    debugger;
+                    if ($("#chkismass").val() == "true") {
+                        $("#chkismass").val(false);
+                        data.append("ChkisMass", false);
+                    }
+                    else {
+                        $("#chkismass").val(true);
+                        data.append("ChkisMass", true);
+                    }
+                    data.append("UserId", UaserID);
+                    debugger;
+                    $.ajax({
+                        url: '@Url.Action("UploadExcelTarget")',
+                        type: 'POST',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        async: true,
+                        dataType: "json",
+                    }).done(function (result) {
+                        //location.reload();
+                       alert("Upload Success.")
+                    });
+                }
+            }
+        });*@
+    });
+
+    $('#RoleId,#AreaList,#SubAreaList').change(function () {
+        debugger;
+        var model = new Object();
+        model.UserRoleID = $("#RoleId").val();
+        model.AreaID =  $("#AreaList").val();
+        model.SubAreaID = $("#SubAreaList").val();
+        $.ajax({
+            url: '@Url.Action("ManageTargetList")',
+            type: 'POST',
+            data: { 'model': model }, 
+            cache: false,
+        }).done(function (result) {
+            debugger;
+            $('#lstTarget').html(result);
+        });
+    });
+
+    $(document).on('click', ".Download", function () {
+        var Rxtype = $("#ddlRxtype").val();
+        var url = '@Url.Action("DownloadExcelTarget", "Account", new { Rxtype = "ID" })'.replace("ID", Rxtype);
+        window.location.href = url.replace();
+    });
+
+    $('#btnsubmit').click(function () {
+        debugger;
+        var UserTypeID = $('#UserType').val();
+        if (UserTypeID == "") {
+            alert("Please select user type.!!");
+            return false;
+        }
+        var files = "";
+        if ($("#file").val().length > 0) {
+            files = $("#file").get(0).files;
+        }
+        if (files == "") {
+            alert("Please choose file for selected bar type.!!");
+            return false;
+        }
+        else {
+            //var msg = "Are you sure want to import file for " + $("#UserType option:selected").text();
+            //$('#lblmsg').text(msg);
+            //$("#responsive").removeClass("modal fade").addClass("modal fade modal-overflow in");
+            //$("#responsive").css("display", "block");
+
+        }
+    });
+
+</script>

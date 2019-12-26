@@ -1,0 +1,106 @@
+﻿@model List<Metizsoft.Data.ViewModal.PrecallResponse>
+
+@if (ViewBag.SelectType == 1)
+{
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">PreCallAnalysisReport List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Doctor Name</th>
+                    <th>Area Name</th>
+                    <th>SubArea Name</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td id="row" @item.DoctorId>
+                            @item.DoctorName
+                        </td>
+                        <td>
+                            @item.AreaNameDoctor
+                        </td>
+                        <td>
+                            @item.SubAreaNameDoctor
+                        </td>                       
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+</div>
+    
+    }
+else{
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">PreCallAnalysisReport List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Retailer Name</th>
+                    <th>Division</th>
+                    <th>Area Name</th>
+                    <th>SubArea Name</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td id="row" @item.ReatailerId>
+                            @item.FirstName
+                        </td>
+                        @if (@item.Usertype == "1")
+                        {
+                            <td>Blaze</td>
+                        }
+                        else
+                        {
+                             <td>Magnar</td>
+                        }                        
+                        <td>
+                            @item.AreaName
+                        </td>
+                        <td>
+                            @item.SubAreaName
+                        </td>
+
+                    </tr>
+
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+</div>
+    }
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+    </script>

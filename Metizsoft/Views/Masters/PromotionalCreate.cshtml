@@ -1,0 +1,114 @@
+﻿@model Metizsoft.Data.Modal.Promotional_Mst
+@{
+    ViewBag.Title = "PromotionalCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Promotional</h3>
+    </div>
+
+
+    @*<div class="box box-default" id="frmretailer">*@
+    <form class="form-horizontal" id="frmpromotional">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Promotional Type</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="PromotionalName" id="PromotionalName" placeholder="Promotional Name" required>
+                            </div>
+                            <input type="hidden" id="PromotionalId" name="PromotionalId" value="" />
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnAdd" class="btn btn-info">Add</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="lstPromotional">
+
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        loadhtml();
+    });
+
+    function loadhtml() {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("Promotionallist")',
+                type: 'GET',
+                cache: false,
+            }).done(function (result) {
+                $('#lstPromotional').html(result);
+            });
+        }
+
+    $("#btnAdd").click(function () {
+        if (!($('#frmpromotional').parsley().validate())) {
+
+            return;
+        }
+        debugger;
+        var datareq = new Object();
+        datareq.PromotionalId = $("#PromotionalId").val();
+        datareq.PromotionalName = $("#PromotionalName").val();
+
+
+        $.ajax({
+            url: '@Url.Action("PromotionalCreate")',
+            type: 'POST',
+            data: { 'objpromst': datareq },
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                debugger
+                if ($("#PromotionalId").val() == "") {
+                    $('div#sucessalert').html("Promotional created successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Promotional updated successfully.");
+                }
+                $("#btnAdd").text("Add");
+                showhidealert();
+                loadhtml();
+                clearform();
+            }
+        });
+    });
+
+    $("#btnCancel").click(function () {
+        debugger;
+        clearform();
+    });
+    function clearform() {
+        $("#frmpromotional").find("input").val("");
+
+    }
+
+
+</script>

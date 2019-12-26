@@ -1,0 +1,133 @@
+﻿@model List<Metizsoft.Data.ViewModal.FieldUserTargetViewModel>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">FieldUserTarget Report List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>UserName</th>                    
+                    <th>Head Quater</th>
+                    <th>Area</th>    
+                    <th>Product Name</th>
+                    <th>Division</th>
+                    <th>RxType</th>
+                    <th>PTS</th>
+                    <th>Pack</th>
+                    <th>Year</th>
+                    <th>jan</th>
+                    <th>Feb</th>
+                    <th>March</th>
+                    <th>Apr</th>
+                    <th>May</th>
+                    <th>June</th>
+                    <th>July</th>
+                    <th>Aug</th>
+                    <th>Sep</th>
+                    <th>Oct</th>
+                    <th>Nov</th>
+                    <th>Dec</th>
+                    <th>Manager</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td id="row" @item.ProductCaseId>
+                            @item.UserName
+                        </td>
+                        <td>
+                            @item.AreaName
+                        </td>
+                        <td>
+                            @item.SubAreaName
+                        </td>
+                        <td>
+                            @item.ProductName
+                        </td>
+                        @if (item.CaseName == 1)
+                        {
+                            <td>Blaze</td>
+                        }
+                        else if (item.CaseName == 2)
+                        {
+                            <td>Magnar</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                       <td>
+                           @item.Name
+                       </td>
+                        <td>
+                            @item.PTS
+                        </td>                       
+                        <td>
+                            @item.pack
+                        </td>
+                        <td>
+                            @item.Year
+                        </td>
+                        <td>
+                            @item.Jan
+                        </td>
+                        <td>
+                            @item.Feb
+                        </td>
+                        <td>
+                            @item.Mar
+                        </td>
+                        <td>
+                            @item.Apr
+                        </td>
+                        <td>
+                            @item.May
+                        </td>
+                        <td>
+                            @item.Jun
+                        </td>
+                        <td>
+                            @item.July
+                        </td>
+                        <td>
+                            @item.Aug
+                        </td>
+                        <td>
+                            @item.Sep
+                        </td>
+                        <td>
+                            @item.Oct
+                        </td>
+                        <td>
+                            @item.Nov
+                        </td>
+                        <td>
+                            @item.Dec
+                        </td>
+                        <td>
+                            @item.managerName
+                        </td>
+                    </tr>
+                }
+
+               
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        "scrollX": true
+    });
+</script>

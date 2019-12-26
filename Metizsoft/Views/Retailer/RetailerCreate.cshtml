@@ -1,0 +1,452 @@
+﻿@model Metizsoft.Data.Modal.Retailer_mst
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Retailer</h3>
+    </div>
+
+    @*<div class="box box-default" id="frmretailer">*@
+    <form class="form-horizontal" id="frmretailer">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="CustomerType" class="col-sm-4 control-label">Retailer Type</label>
+                            <div class="col-sm-8">
+                                <select name="Usertype" id="Usertype" class="form-control" tabindex="14" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="1">Chemist</option>
+                                    <option value="2">Stockist</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">First Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="FirstName" id="FirstName" required placeholder="First Name">
+                            </div>
+                            <input type="hidden" id="URetailerId" name="ReatailerId" value="" />
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Last Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="LastName" id="LastName" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Address</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Address" id="Address" placeholder="Address" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">City</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.City, new SelectList(ViewBag.AreaList, "AreaName", "AreaName"), "Select", new { @class = "form-control", @required = "true" })
+                                @*<input type="text" class="form-control" name="City" id="City" placeholder="City" required>*@
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">SubArea</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.SubArea, new SelectList(ViewBag.SubAreaList, "SubAreaName", "SubAreaName"), "Select", new { @class = "form-control", @required = "true" })
+                            </div>
+                        </div>
+                    </div>                      
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">State</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="State" id="State" placeholder="State" required>
+                            </div>
+                        </div>
+                    </div>                 
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Zip</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Zip" id="Zip" placeholder="Zip" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Office Phone</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="OfficePhone" id="OfficePhone" placeholder="Office Phone" required data-parsley-type="number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Mobile</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Mobile" id="Mobile" placeholder="Mobile" required data-parsley-type="number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" name="Email" id="Email" placeholder="Email" required>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+                @*<div class="col-md-12">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4 control-label">Dob</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Dob" id="Dob" placeholder="Date Of Birth" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4 control-label">Dow</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Dow" id="Dow" placeholder="Date Of Wedding" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Fax</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Fax" id="Fax" placeholder="Fax" required>
+                            </div>
+                        </div>
+                    </div>                 
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Grade Name</label>
+                            <div class="col-sm-8">
+                                <select name="GradeName" id="GradeName" class="form-control" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="1">VP</option>
+                                    <option value="2">VIP</option>
+                                    <option value="3">VVIP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Refrence Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Refrence" id="Refrence" placeholder="Refrence Name" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Short Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="ShortName" id="ShortName" placeholder="Short Name" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    @*<div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Retailer Code</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="RetailerCode" id="RetailerCode" placeholder="Retailer Code" required>
+                            </div>
+                        </div>
+                    </div>*@
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Contact Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="ContactName" id="ContactName" placeholder="ContactName" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="CaseName" class="col-sm-4 control-label">Division</label>
+                            <div class="col-sm-8">
+                                <select name="DivName" id="DivName" class="form-control" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="1">Blaze</option>
+                                    <option value="2">Magnar</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                                                         
+                </div>
+                <input type="hidden" id="RetailerCode" name="RetailerCode" value="" />
+            </div>
+        </div>
+
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnAdd" class="btn btn-info">Add</button>
+            </div>
+        </div>
+        <div class="box-footer ">
+            <label for="inputEmail3" class="col-sm-6 control-label"><h3>OR</h3></label>
+        </div>
+        <div class="box-footer ">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Download Template</label>
+                            <div class="col-sm-8">
+                                <button type="button" class="btn btn-default Download" data-clickfrom="Download" data-id="18">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Import Excel</label>
+                            <div class="col-sm-8">
+                                <input type="file" class="form-control dataFile " name="upload" style="display:block" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btnCancelFile" class="btn btn-default">Cancel</button>
+                @* <button type="button" id="btnUpload" class="btn btn-info">Upload</button>*@
+
+                <button type="button" class="btn btn-info" id="btnUpload" data-clickfrom="Download" data-id="18">Import</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="lstproduct">
+
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        var ReatailerId = window.location.search.split('=')[1];
+
+        //$("#hdnRetailerId").val(ReatailerId);
+        //if (ReatailerId != null) {
+        //    $("#FirstName").attr("disabled", "disabled");
+        //}
+
+        if (ReatailerId != null) {
+            $("#btnAdd").text("Update");
+            $.ajax({
+                url: '@Url.Action("EditRetailer")',
+                type: 'POST',
+                cache: false,
+                data: { 'ReatailerId': ReatailerId },
+            }).done(function (result) {
+                debugger;
+                $("#URetailerId").val(result.ReatailerId)
+                $("#Usertype").val(result.Usertype).trigger('change');
+                $("#FirstName").val(result.FirstName)
+                $("#LastName").val(result.LastName)
+                $("#Address").val(result.Address)
+                $("#State").val(result.State)
+                $("#City").val(result.City)                
+               // $("#City :selected").text(result.City)
+                $("#Zip").val(result.Zip)
+                $("#OfficePhone").val(result.OfficePhone)
+                $("#Mobile").val(result.Mobile)
+                $("#Email").val(result.Email)
+                $("#Fax").val(result.Fax)
+                $("#Dob").val(result.strDob)
+                $("#Dow").val(result.strAnniversary)
+                $("#ContactName").val(result.ContactName)
+                $("#GradeName").val(result.GradeName).change();
+                $("#Refrence").val(result.Refrence)
+                $("#ShortName").val(result.ShortName)
+                $("#RetailerCode").val(result.RetailerCode)
+                $("#DivName").val(result.DivNamein).trigger('change');                 
+                $("#SubArea").val(result.SubArea)
+            });
+            //$("#btnAdd").click(function () {
+            //    var url = "/Retailer/RetailerListAreaWise";
+            //    window.location.href = url;
+            //});           
+        }
+    });
+
+
+    function Clearform() {
+        debugger;
+        $("#frmretailer").find("input").val("");
+        $("#Usertype").val("").trigger("change");
+        $("#GradeName").val("").trigger("change");
+        $("#DivName").val("").trigger("change");
+        $("#City").val("").trigger("change");
+        $("#SubArea").val("").trigger("change");
+    }
+
+    $("#btnAdd").click(function () {
+        //$("#btnAdd").text("Add");
+        debugger;
+        if (!($('#frmretailer').parsley().validate()  )) {
+            return;
+        }
+        debugger;
+        var datareq = new Object();
+        datareq.ReatailerId = $("#URetailerId").val();
+        datareq.Usertype = $("#Usertype").val();
+        datareq.FirstName = $("#FirstName").val();
+        datareq.LastName = $("#LastName").val();
+        datareq.Address = $("#Address").val();
+        datareq.State = $("#State").val();        
+        datareq.City = $("#City").val();       
+        datareq.Zip = $("#Zip").val();
+        datareq.OfficePhone = $("#OfficePhone").val();
+        //datareq.Mobile = $("#Mobile").val();
+        datareq.Mobile = $("#Mobile").val();
+        //if (validatePhone(datareq.Mobile)) {
+        //    if (datareq.Mobile.length != 10) {
+        //        alert("Please enter valid mobile number! Only 10 Digit allow.");
+        //        $("#Mobile").focus();
+        //        return;
+        //    }
+        //}
+        //else {
+        //    alert("Invalid Mobile Number");
+        //    $("#Mobile").focus();
+        //    return;
+        //}
+        datareq.Email = $("#Email").val();        
+        datareq.Fax = $("#Fax").val();
+        datareq.DOB = $("#Dob").val();
+        datareq.Anniversary = $("#Dow").val();
+        datareq.ContactName = $("#ContactName").val();
+        datareq.GradeName = $("#GradeName").val();
+        datareq.Refrence = $("#Refrence").val(); 
+        datareq.ShortName = $("#ShortName").val();
+        datareq.RetailerCode = $("#RetailerCode").val();
+        datareq.DivName = $("#DivName").val();
+        datareq.SubArea = $("#SubArea").val();
+        debugger;
+        $.ajax({
+            url: '@Url.Action("RetailerCreate")',
+            type: 'POST',
+            data: { 'objRetail': datareq },
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                debugger;
+                if ($("#URetailerId").val() == "") {
+                    $('div#sucessalert').html("Retailer created successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Retailer updated successfully.");                    
+                }
+                showhidealert();
+                // loadhtml();
+                Clearform();
+            }            
+        });
+    });
+
+
+    $("#btnCancel").click(function () {
+        Clearform();
+    });
+
+    $(document).on('click', ".Download", function () {
+        // var Rxtype = $("#ddlRxtype").val();
+        var url = '@Url.Action("DownloadExcelTarget", "Retailer")';
+        window.location.href = url.replace();
+    });
+
+    //$(document).on('click', "#btnUpload", function () {
+    $("#btnUpload").click(function () {
+        debugger;
+
+        if ($(this).closest('div').find(".dataFile").val() != "") {
+            var data = new FormData();
+            var uploadordownload = "Upload";
+            if (uploadordownload == "Upload") {
+                var files = "";
+                //if ($(this).closest('div').find(".dataFile").val() != "") {
+                files = $(".dataFile").get(0).files;
+                //files = $(this).find(".dataFile").get(0).files;
+                data.append("File", files[0]);
+                //}
+                debugger;
+                $.ajax({
+                    url: '@Url.Action("UploadExcelTarget")',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    async: true,
+                    dataType: "Json",
+                }).done(function (result) {
+                    //location.reloa{}d();
+                    //alert(result);
+                    if (result) {
+                        alert(result);
+
+                    }
+                    else { alert(result); }
+
+                });
+                $(this).closest('td').find(".dataFile").val("");
+            }
+        }
+    });
+
+
+    $("#btnCancelFile").click(function () {
+        //debugger;
+        $(".dataFile").val("");
+    });
+
+
+</script>

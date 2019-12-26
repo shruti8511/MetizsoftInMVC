@@ -1,0 +1,85 @@
+﻿@model List<Metizsoft.Service.Models.RetailerMst_mst>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <div style="height:27px; width:100px;"> </div>
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li class="active">Retailer Filter</li>
+        </ol>   
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Retailer List</h3>
+                </div>
+                <div class="box">
+                    <div class="box-body table-scrollable1">
+                        <div id="frmRole" class="form-horizontal">
+                            <div class="col-md-12">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="HeadQuater" class="col-sm-4 control-label">City</label>
+                                        <div class="col-sm-8">
+                                            @Html.DropDownList("AreaList", new SelectList(ViewBag.AreaList, "AreaID", "AreaName"), "Select", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="Area" class="col-sm-4 control-label">SubArea</label>
+                                        <div class="col-sm-8">
+                                            @Html.DropDownList("SubAreaList", new SelectList(ViewBag.SubAreaList, "AreaID", "SubAreaName"), "Select", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" id="btnsearch" class="btn btn-info">Search</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                &nbsp;
+                            </div>
+
+                            <div id="lstRetailer" style="clear:both !important">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script>
+    $('#btnsearch').click(function () {
+        debugger;
+        var model = new Object();
+        model.City = $('#AreaList :selected').text();       
+        model.SubArea = $('#SubAreaList :selected').text();
+        if (model.SubArea == 'Select')
+        {
+            model.SubArea = null;
+        }
+        if (model.City == 'Select') {
+            model.City = null;
+        }
+        $.ajax({
+            url: '@Url.Action("RetailerlistArea")',
+            type: 'POST',
+            data: { 'model': model },
+            cache: false,
+        }).done(function (result) {
+            $('#lstRetailer').html(result);
+        });
+    });
+</script>

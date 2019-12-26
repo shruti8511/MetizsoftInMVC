@@ -1,0 +1,116 @@
+﻿@model Metizsoft.Data.Modal.EventType_Mst
+@{
+    ViewBag.Title = "EventTypeCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Event</h3>
+    </div>
+
+
+    @*<div class="box box-default" id="frmretailer">*@
+    <form class="form-horizontal" id="frmevent">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Event Type</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="EventName" id="EventName" placeholder="Event Name" required>
+                            </div>
+                            <input type="hidden" id="EventTypeID" name="EventTypeID" value="" />
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btncancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnAdd" class="btn btn-info">Add</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="lstevent">
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        loadhtml();
+    });
+
+    function loadhtml() {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("EventTypelist")',
+                type: 'GET',
+                cache: false,
+            }).done(function (result) {
+                $('#lstevent').html(result);
+            });
+        }
+
+    $("#btnAdd").click(function () {
+        if (!($('#frmevent').parsley().validate())) {
+
+            return;
+        }
+        debugger;
+        var datareq = new Object();
+        datareq.EventTypeID = $("#EventTypeID").val();
+        datareq.EventName = $("#EventName").val();
+      
+
+        $.ajax({
+            url: '@Url.Action("EventTypeCreate")',
+            type: 'POST',
+            data: { 'objeventtype': datareq },
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                debugger
+                if ($("#EventTypeID").val() == "") {
+                    $('div#sucessalert').html("Event created successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Event updated successfully.");
+                }
+                $("#btnAdd").text("Add");
+                showhidealert();
+                loadhtml();
+                clearform();
+            }
+        });
+    });
+
+
+    $("#btncancel").click(function () {
+        debugger;
+        clearform();
+    });
+    function clearform() {
+        $("#frmevent").find("input").val("");
+
+    }
+
+
+</script>

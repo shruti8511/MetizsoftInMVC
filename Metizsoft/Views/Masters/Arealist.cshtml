@@ -1,0 +1,100 @@
+﻿@model List<Metizsoft.Data.Modal.Area_Mst>
+
+
+<div class="box-body table-scrollable1">
+    <table id="ListDataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+
+                <th>Head Quater</th>
+                <th>Area </th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>PinCode</th>
+                <th class="nosort">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="row" @item.AreaID>
+                    <td>
+                        @item.AreaName
+                    </td>
+                    <td>
+                        @item.SubAreaName
+                    </td>
+                    <td>
+                        @item.City
+                    </td>
+                    <td>
+                        @item.State
+                    </td>
+                    <td>
+                        @item.Country
+                    </td>
+                    <td>
+                        @item.PinCode
+                    </td>
+
+                    <td>
+                        <a style="cursor:pointer;" class="btnedit" data-id="@item.AreaID"> Edit </a>
+                        <a style="cursor:pointer;" class="btndelete" data-id="@item.AreaID" data-active="@item.IsActive"> Delete </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+
+
+    $("#ListDataTable").on('click', '.btnedit', function () {
+        debugger;
+        $("#AreaID").val($(this).attr("data-id"));
+        $("#AreaName").val($(this).parent().parent().children()[0].innerText.trim());
+        $("#SubAreaName").val($(this).parent().parent().children()[1].innerText.trim());
+        $("#City").val($(this).parent().parent().children()[2].innerHTML.trim());
+        $("#State").val($(this).parent().parent().children()[3].innerHTML.trim());
+        $("#Country").val($(this).parent().parent().children()[4].innerHTML.trim());
+        $("#PinCode").val($(this).parent().parent().children()[5].innerHTML.trim());
+        $("#btnAdd").text("Update");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    });
+
+    $("#ListDataTable").on('click', '.btndelete', function () {
+        debugger;
+        if (confirm('Are you sure you wish to Delete this Area?')) {
+            var AreaID = $(this).attr("data-id");
+            var IsActive = $(this).attr("data-active");
+            $.ajax({
+                url: '@Url.Action("DeleteArea")',
+                type: 'POST',
+                data: { 'ID': AreaID, 'IsActive': IsActive },
+                cache: false,
+            }).done(function (result) {
+                debugger;
+                if (result == true) {
+                    alert("Area Deleted successfully.");
+                    location.reload();
+                }
+
+            });
+        }
+        else {
+
+        }
+    });
+
+</script>

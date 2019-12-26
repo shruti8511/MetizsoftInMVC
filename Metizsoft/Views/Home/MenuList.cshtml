@@ -1,0 +1,57 @@
+﻿@model Metizsoft.Model.DynamicMenuModel
+<ul class="sidebar-menu" data-widget="tree">
+    <li class="header">MAIN NAVIGATION</li>
+    @{
+        int row = 0;
+        foreach (var item in Model.MainTier)
+        {
+
+            <li class="@(row.ToString() == "0" ? "active" : "") @(item.SubTier.Count.ToString() == "0" ? "" : "treeview")" style="cursor:pointer;">
+
+                <a href="@Url.Action(item.Action.ToString(), item.Controller.ToString())">
+                    <i class="fa @item.Iconname"></i> <span> @item.DisplayName </span>
+                    @if (item.SubTier.Count > 0)
+                    {
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    }
+
+                </a>
+
+                @if (item.SubTier.Count > 0)
+                {
+                    <ul class="treeview-menu">
+                        @foreach (var item1 in item.SubTier.OrderBy(x => x.SortNo))
+                        {
+
+                            <li class="@(item1.ThirdTier.Count.ToString() == "0" ? "" : "treeview")" style="cursor:pointer;">
+                                <a href="@Url.Action(item1.Action.ToString(), item1.Controller.ToString())">
+                                    <i class="fa fa-circle-o"></i> @item1.DisplayName
+                                    @if (item1.ThirdTier.Count > 0)
+                                    {
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    }
+                                </a>
+
+                                @if (item1.ThirdTier.Count > 0)
+                                {
+                                    <ul class="treeview-menu">
+                                        @foreach (var item2 in item1.ThirdTier)
+                                        {
+                                            <li style="cursor:pointer;"><a href="@Url.Action(item2.Action.ToString(), item2.Controller.ToString())"><i class="fa fa-circle-o"></i> @item2.DisplayName</a></li>
+                                        }
+
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+                row++;
+        }
+    }
+</ul>

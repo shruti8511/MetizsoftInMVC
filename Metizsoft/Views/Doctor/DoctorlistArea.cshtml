@@ -1,0 +1,164 @@
+﻿@model List<Metizsoft.Service.Models.Doctor_MstModel>
+
+
+<div class="box-body table-scrollable1">
+    <table id="ListDataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="nosort">Action</th>
+                <th class="nosort">Doctor Code</th>
+                <th class="nosort">Doctor Name</th>
+                <th class="nosort">Grade Name</th>
+                <th class="nosort">Qualification</th>
+                <th class="nosort">Add1</th>
+                <th class="nosort">Add2</th>
+                <th class="nosort">Add3</th>
+                <th class="nosort">Add4</th>
+                <th class="nosort">Area</th>
+                <th class="nosort">Pin</th>
+                <th class="nosort">Phone No</th>
+                <th class="nosort">RefrenceNo</th>
+                <th class="nosort">Category Name</th>
+                <th class="nosort">Dob</th>
+                <th class="nosort">Dow</th>
+                <th class="nosort">Email</th>
+                <th class="nosort">Field StaffName</th>
+                <th class="nosort">Division Name</th>
+                <th class="nosort">Doctor Class</th>
+                <th class="nosort">Certificate Id</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="row" @item.DoctorId>
+                    <td>
+                        <a style="cursor:pointer;" class="btnedit" data-id="@item.DoctorId" data-uid="@item.GradeName">Edit</a>
+                        <a style="cursor:pointer;" class="btndelete" data-id="@item.DoctorId" data-uid="@item.GradeName" data-active="@item.IsActive">Delete</a>
+                        @*@Html.ActionLink("Delete", "DeleteDoctor",
+            new { id = item.DoctorId },
+            new { onclick = "return confirm('Are you sure you wish to delete this article?');" })*@
+
+                    </td>
+                    <td>
+                        @item.DoctorCode
+                    </td>
+                    <td>
+                        @item.DoctorName
+                    </td>
+                    @if (item.GradeName == 1)
+                    {
+                        <td> VP </td>
+                    }
+                    else if (item.GradeName == 2)
+                    {
+                        <td> VIP </td>
+                    }
+                    else
+                    {
+                        <td> VVIP </td>
+                    }
+                    @*<td>
+                            @item.GradeName
+                        </td>*@
+                    <td>
+                        @item.Qualification
+                    </td>
+                    <td>
+                        @item.Add1
+                    </td>
+                    <td>
+                        @item.Add2
+                    </td>
+                    <td>
+                        @item.Add3
+                    </td>
+                    <td>
+                        @item.Add4
+                    </td>
+                    <td>
+                        @item.SubAreaName
+                    </td>
+                    <td>
+                        @item.Pin
+                    </td>
+                    <td>
+                        @item.PhoneNo
+                    </td>
+                    <td>
+                        @item.RefrenceNo
+                    </td>
+                    <td>
+                        @item.CategoryName
+                    </td>
+                    <td>
+                        @item.strDob
+                    </td>
+                    <td>
+                        @item.strDow
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        @item.FieldStaffName
+                    </td>
+                    <td>
+                        @item.DivisionName
+                    </td>
+                    <td>
+                        @item.DoctorClass
+                    </td>
+                    <td>
+                        @item.CertificateId
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="Notfound" style="text-align:center; display:none;"><p>No Record Found</p></div>
+</div>
+
+<script>
+
+    $('#ListDataTable').dataTable({
+        "scrollX": true
+    });
+</script>
+<script>
+
+    $("#ListDataTable").on('click', '.btnedit', function () {        
+            debugger;
+            var DoctorId = $(this).attr("data-id");
+            var url = "/Doctor/DoctorCreate?Identity=" + DoctorId;
+            window.location.href = url;
+        });
+
+        $(document).on('click', '.btndelete', function () {
+            debugger;
+            if (confirm('Are you sure you wish to Delete this Doctor?')) {
+                var DoctorId = $(this).attr("data-id");
+                var IsActive = $(this).attr("data-active");
+                $.ajax({
+                    url: '@Url.Action("DeleteDoctor")',
+                    type: 'POST',
+                    data: { 'ID': DoctorId, 'IsActive': IsActive },
+                    cache: false,
+                }).done(function (result) {
+                    debugger;
+                    if (result == true) {
+                        alert("Doctor Deleted successfully.");
+                        location.reload();
+                    }
+
+                });
+            }
+            else {
+
+            }
+        });
+    
+</script>
+

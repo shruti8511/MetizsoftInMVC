@@ -1,0 +1,86 @@
+﻿@model List<Metizsoft.Service.Models.Doctor_MstModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content-header">
+    <div style="height:27px; width:100px;"> </div>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Doctor Filter</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Doctor List</h3>
+                </div>
+                <div class="box">
+                    <div class="box-body table-scrollable1">
+                        <div id="frmRole" class="form-horizontal">
+                            <div class="col-md-12">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="HeadQuater" class="col-sm-4 control-label">Add4</label>
+                                        <div class="col-sm-8">
+                                            @Html.DropDownList("AreaList", new SelectList(ViewBag.AreaList, "AreaID", "AreaName"), "Select", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="Area" class="col-sm-4 control-label">Area</label>
+                                        <div class="col-sm-8">
+                                            @Html.DropDownList("SubAreaList", new SelectList(ViewBag.SubAreaList, "AreaID", "SubAreaName"), "Select", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 pull-right">
+                                    <button type="button" id="btnsearch" class="btn btn-info">Search</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                &nbsp;
+                            </div>
+
+                            <div id="lstDoctor" style="clear:both !important">
+
+                            </div>
+                            </div>
+                        </div>                   
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script>
+    $('#btnsearch').click(function () {
+        debugger;
+        var model = new Object();
+        model.Add4 = $('#AreaList :selected').text();
+        model.SubAreaName = $('#SubAreaList :selected').text();
+        if (model.SubAreaName == 'Select') {
+            model.SubAreaName = null;
+        }
+        if (model.Add4 == 'Select') {
+            model.Add4 = null;
+        }
+        $.ajax({
+            url: '@Url.Action("DoctorlistArea")',
+            type: 'POST',
+            data: { 'model': model },
+            cache: false,
+        }).done(function (result) {
+            $('#lstDoctor').html(result);
+        });
+    });
+</script>

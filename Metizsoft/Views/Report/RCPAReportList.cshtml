@@ -1,0 +1,79 @@
+﻿@model List<Metizsoft.Data.ViewModal.RCPAResponse>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">RCPA Report List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+
+                    @*<th>DoctorName</th>*@
+                    <th>RetailerName</th>
+                    <th>Quantity</th>
+                    <th>ProductName</th>
+                    <th>CaseName</th>
+                    <th>Name</th>
+                    @*<th>VisitSection</th>*@
+                    <th>CreatedOn</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td id="row" @item.ReatailerReportId>
+                            @item.FullName
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.ProductName
+                        </td>
+                        @if (item.CaseName == 1)
+                        {
+                            <td>Blaze</td>
+                        }
+                        else if (item.CaseName == 2)
+                        {
+                            <td>Magnar</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td>
+                            @item.Name
+                        </td>
+                        @*<td>
+                                @item.VisitSection
+                            </td>*@
+                        <td>
+                            @item.Date.ToString("dd-MM-yyyy")
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+</script>
+

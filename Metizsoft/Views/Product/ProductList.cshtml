@@ -1,0 +1,122 @@
+﻿@model List<Metizsoft.Data.Modal.Product_Mst>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>
+        Product List
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Product</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                </div>
+                <div class="box-body table-scrollable1">
+                    <table id="ListDataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th class="">Product Name</th>
+                                <th class="nosort">Product Code</th>
+                                <th class="nosort">Active</th>
+                                <th class="nosort">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row" @item.ProductId>
+                                    <td>
+                                        @item.ProductName
+                                    </td>
+                                    <td>
+                                        @item.ProductCode
+                                    </td>
+                                    <td>
+                                        @item.Active
+                                    </td>
+                                    <td>
+                                        <a style="cursor:pointer;" class="btnedit" data-id="@item.ProductId" data-active="@item.Active">Edit</a>
+                                        <a style="cursor:pointer;" class="btndelete" data-id="@item.ProductId" data-active="@item.Active" data-isactive="@item.IsActive">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div id="Notfound" style="text-align:center; display:none;"><p>No Record Found</p></div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).on('ready', function () {
+
+        $("#ListDataTable").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': ['nosort'] /* 1st one, start by the right */
+
+            }]
+        });
+
+        //$('.columnToHide').hide();
+    });
+
+    $(document).on('click', ".btnedit", function () {
+        debugger;
+        var ProductId = $(this).attr("data-id");
+        var Active = $(this).attr("data-active");
+        var url = "/Product/ProductCreate?Identity=" + ProductId;
+        window.location.href = url;
+
+        //$("#ProductId").val($(this).attr("data-id"));
+        //$("#ProductName").val($(this).parent().parent().children()[0].innerHTML.trim());
+        //var value = $(this).parent().parent().children()[1].innerHTML.trim();
+        //if (value == 'True') {
+        //    $("#chkActive").prop('checked', true);
+        //}
+        //else {
+        //    $("#chkActive").prop('checked', false);
+        //}
+        //$("html, body").animate({ scrollTop: 0 }, "slow");
+    });
+
+    $(document).on('click', '.btndelete', function () {
+        debugger;
+        if (confirm('Are you sure you wish to Delete this Product?')) {
+            var ProductId = $(this).attr("data-id");
+            var IsActive = $(this).attr("data-isactive");
+            $.ajax({
+                url: '@Url.Action("DeleteProduct")',
+                type: 'POST',
+                data: { 'ID': ProductId, 'IsActive': IsActive },
+                cache: false,
+            }).done(function (result) {
+                debugger;
+                if (result == true) {
+                    alert("Product Deleted successfully.");
+                    location.reload();
+                }
+
+            });
+        }
+        else {
+
+        }
+    });
+</script>
+

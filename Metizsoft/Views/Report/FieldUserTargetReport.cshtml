@@ -1,0 +1,214 @@
+﻿@model Metizsoft.Data.ViewModal.FieldUserTargetViewModel
+@{
+    ViewBag.Title = "FieldUserTargetReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">FieldUser Target Report</h3>
+    </div>
+
+    <form class="form-horizontal" id="frmfielduser">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">From</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="txtfrom">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">To</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="txtTo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="Area" class="col-sm-4 control-label">User</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.UserId, new SelectList(ViewBag.User, "Id", "FullName"), "Select User", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="VehicleNo" class="col-sm-4 control-label">Product Name</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.ProductId, new SelectList(ViewBag.Product, "ProductId", "ProductName"), "Select Product", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="CaseName" class="col-sm-4 control-label">Division</label>
+                            <div class="col-sm-8">
+                                <select name="CaseName" id="CaseName" class="form-control">
+                                    <option value="" selected>Select</option>
+                                    <option value="1">Blaze</option>
+                                    <option value="2">Magnar</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">RxType</label>
+                            <div class="col-sm-8">
+                                @*<input name="Name" id="Name" type="hidden" value="" />*@
+                                @Html.DropDownList("NameID", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="Area" class="col-sm-4 control-label">Head Quater</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.AreaId, new SelectList(ViewBag.Area, "AreaId", "AreaName"), "Select Head Quater", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="Area" class="col-sm-4 control-label">Area</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.SubAreaId, new SelectList(ViewBag.SubArea, "AreaId", "SubAreaName"), "Select Area", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="User" class="col-sm-4 control-label">Manager<span class="red">*</span></label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.manager, new SelectList(ViewBag.Manager, "Id", "FullName"), "Select Manager", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btncancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnsearch" class="btn btn-info">Search</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="lstfielduser">
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#CaseName").change(function () {
+            debugger;
+            var RxType = $("#CaseName").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetNameByRxType")',
+                dataType: 'json',
+                data: { RxType: RxType },
+                success: function (data) {
+                    debugger;
+
+                    var district = "<select class='form-control'>";
+                    district = district + '<option value="">Select Name</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].RxTypeId + '>' + data[i].Name + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#NameID').html(district);
+                    $("#NameID").val($("#name").val());
+                    //$('#NameID').val();
+                }
+            });
+        });
+    });
+    function loadhtml() {
+        //debugger;
+        var model = new Object();
+        model.StartDate = $("#txtfrom").val();
+        model.EndDate = $("#txtTo").val();
+        model.UserId = $("#UserId").val();
+        model.ProductId = $("#ProductId").val();
+        model.CaseName = $("#CaseName").val();
+        model.NameID = $("#NameID").val();
+        model.AreaId = $("#AreaId").val();
+        model.SubAreaId = $("#SubAreaId").val();
+        model.manager = $("#manager").val();
+        model.managerName = $("#manager :selected").text(); // do not delete
+        $.ajax({
+            url: '@Url.Action("FieldUserTargetReportList")',
+            type: 'POST',
+            data: { 'model': model },
+            cache: false,
+        }).done(function (result) {
+            $('#lstfielduser').html(result);
+        });
+    }
+
+    $("#btnsearch").click(function () {
+        loadhtml();
+    });
+
+    $("#btncancel").click(function () {
+        clearform();
+    });
+
+    function clearform() {
+        $("#frmfielduser").find("input").val("");
+        $("#UserId").val("").trigger("change");
+        $("#ProductId").val("").trigger("change");
+        $("#CaseName").val("").trigger("change");
+        $("#NameID").val("").trigger("change");
+        $("#AreaId").val("").trigger("change");
+        $("#SubAreaId").val("").trigger("change");
+        $("#manager").val("").trigger("change");
+    }
+</script>
+
+
+
+
+
+
+

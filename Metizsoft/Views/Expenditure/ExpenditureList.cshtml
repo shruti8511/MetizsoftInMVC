@@ -1,0 +1,57 @@
+﻿@Model List<Metizsoft.Data.Modal.Expenser_Mst>
+
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="nosort">Expenser Name</th>
+                    @*<th class="nosort">Active</th>*@
+                    <th class="nosort"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.ExpenserName
+                        </td>
+                        @*<td>
+                                @item.IsActive
+                            </td>*@
+                        <td>
+                            <a style="cursor:pointer;" class="btnedit" data-id="@item.ExpenserId">Edit</a>
+                            @Html.ActionLink("Delete", "DeleteExpenditure",
+                              new { id = item.ExpenserId },
+                                    new { onclick = "return confirm('Are you sure you wish to delete this article?');" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+    <script>
+        $("#ListDataTable").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': ['nosort'] /* 1st one, start by the right */
+
+            }]
+        });
+
+        $(".btnedit").click(function () {
+            debugger;
+            $("#ExpenserId").val($(this).attr("data-id"));
+            $("#ExpenserName").val($(this).parent().parent().children()[0].innerHTML.trim());
+            //var value = $(this).parent().parent().children()[1].innerHTML.trim();
+            //if (value == 'True') {
+            //    $("#chkActive").prop('checked', true);
+            //}
+            //else {
+            //    $("#chkActive").prop('checked', false);
+            //}
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        });
+    </script>
+

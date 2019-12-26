@@ -1,0 +1,103 @@
+﻿@model List<Metizsoft.Data.ViewModal.ProductListResponse>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">Product Report List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ProductName</th>
+                    <th>ProductCode</th>
+                    <th>Division</th>
+                    <th>RxType</th>
+                    <th>MeasureIn</th>
+                    <th>StrangthIn</th>
+                    <th>PTS</th>
+                    <th>Product Type</th>
+                    <th>Pack</th>
+                    <th>PTR</th>
+                    <th>MRP</th>
+                    <th>STDRate</th>
+                    <th>BrandName</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td id="row" @item.ProductCaseId>
+                            @item.ProductName
+                        </td>
+                        <td>
+                            @item.ProductCode
+                        </td>
+                        @if (item.CaseName == 1)
+                        {
+                            <td>Blaze</td>
+                        }
+                        else if (item.CaseName == 2)
+                        {
+                            <td>Magnar</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.MeasureIn
+                        </td>
+
+                        <td>
+                            @item.StrangthIn
+                        </td>
+                        <td>
+                            @item.PTS
+                        </td>
+                        <td>
+                            @item.ProductType
+                        </td>
+                        <td>
+                            @item.Pack
+                        </td>
+                        <td>
+                            @item.PTR
+                        </td>
+                        <td>
+                            @item.MRP
+                        </td>
+                        <td>
+                            @item.STDRate
+                        </td>
+                        <td>
+                            @item.BrandName
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+</script>

@@ -1,0 +1,85 @@
+﻿@model List<Metizsoft.Data.ViewModal.ProductTargetViewModel>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">Product Target Report List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>                    
+                    <th>ProductName</th>
+                    <th>Division</th>
+                    <th>RxType</th>
+                    <th>PTS</th>
+                    <th>AreaName</th>                   
+                    <th>SubAreaName</th>
+                    <th>Date</th>
+                    <th>ProductGroup</th>
+                    <th>Pack</th>                                   
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td id="row" @item.ProductCaseId>
+                            @item.ProductName
+                        </td>                       
+                        @if (item.CaseName == 1)
+                        {
+                            <td>Blaze</td>
+                        }
+                        else if (item.CaseName == 2)
+                        {
+                            <td>Magnar</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                       <td>
+                           @item.Name
+                       </td>
+                        <td>
+                            @item.PTS
+                        </td>                        
+                        <td>
+                            @item.AreaName
+                        </td>
+                        <td>
+                            @item.SubAreaName
+                        </td>
+                        <td>
+                            @item.Date.ToString("MM/dd/yyyy")
+                        </td>
+                        <td>
+                            @item.ProductGroupName
+                        </td>
+                        <td>
+                            @item.Pack
+                        </td>
+                    </tr>
+                }
+
+               
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+</script>

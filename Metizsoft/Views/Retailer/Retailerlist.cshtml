@@ -1,0 +1,206 @@
+﻿@model List<Metizsoft.Service.Models.RetailerMst_mst>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Retailer List
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Retailer List</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                </div>
+                <div class="box-body table-scrollable1 lstproduct">
+                    <table id="ListDataTable" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                @*<th class="nosort"> retailer name</th>*@
+                                <th class="nosort">Action</th>
+                                <th class="nosort">User Type</th>
+                                <th class="nosort">First Name</th>
+                                <th class="nosort">Last Name</th>
+                                <th class="nosort">Address</th>
+                                <th class="nosort">SubArea</th>
+                                <th class="nosort">City</th>
+                                <th class="nosort">State</th>                                
+                                <th class="nosort">Zip</th>
+                                <th class="nosort">Office Phone</th>
+                                <th class="nosort">Mobile</th>
+                                <th class="nosort">Email</th>
+                                <th class="nosort">Division Name</th>
+                                <th class="nosort">Fax</th>
+                                <th class="nosort">Dob</th>
+                                <th class="nosort">Dow</th>
+                                <th class="nosort">ContactName</th>
+                                <th class="nosort">Refrence</th>
+                                <th class="nosort">GradeName</th>
+                                <th class="nosort">ShortName</th>
+                                <th class="nosort">RetailerCode</th>                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row" @item.ReatailerId>
+                                    <td>
+                                        <a style="cursor:pointer;" class="btnedit" data-id="@item.ReatailerId" data-uid="@item.Usertype">Edit</a>
+                                        <a style="cursor:pointer;" class="btndelete" data-id="@item.ReatailerId" data-uid="@item.Usertype" data-active="@item.IsActive">Delete</a>
+
+                                    </td>
+                                    @if (item.Usertype.ToString() == "1")
+                                    {
+                                        <td>Chemist</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Stockist</td>
+                                    }
+
+                                    <td>
+                                        @item.FirstName
+                                    </td>
+                                    <td>
+                                        @item.LastName
+                                    </td>
+                                    <td>
+                                        @item.Address
+                                    </td>
+                                    <td>
+                                        @item.SubArea
+                                    </td>
+                                    <td>
+                                        @item.City
+                                    </td>
+                                    <td>
+                                        @item.State
+                                    </td>                                    
+                                    <td>
+                                        @item.Zip
+                                    </td>
+                                    <td>
+                                        @item.OfficePhone
+                                    </td>
+                                    <td>
+                                        @item.Mobile
+                                    </td>
+                                    <td>
+                                        @item.Email
+                                    </td>
+                                    @*@if (item.DivName == 1)
+                                    {
+                                        <td> Blaze </td>
+                                    }
+                                    else if (item.DivName == 2)
+                                    {
+                                        <td> Magnar </td>
+                                    }                                   
+                                    else
+                                    {
+                                        <td> </td>
+                                    }*@
+                                    <td>
+                                        @item.DivName
+                                    </td>                                    
+                                    <td>
+                                        @item.Fax
+                                    </td>
+                                    <td>
+                                        @item.strDob
+                                    </td>
+                                    <td>
+                                        @item.strAnniversary
+                                    </td>
+                                    <td>
+                                        @item.ContactName
+                                    </td>
+                                    <td>
+                                        @item.Refrence
+                                    </td>
+                                    @if (item.GradeName == 1)
+                                    {
+                                        <td> VP </td>
+                                    }
+                                    else if (item.GradeName == 2)
+                                    {
+                                        <td> VIP </td>
+                                    }
+                                    else if (item.GradeName == 3)
+                                    {
+                                        <td> VVIP </td>
+                                    }
+                                    else
+                                    {
+                                        <td> </td> 
+                                    }
+                                    <td>
+                                        @item.ShortName
+                                    </td>
+                                    <td>
+                                        @item.RetailerCode
+                                    </td>
+                                    
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div id="Notfound" style="text-align:center; display:none;"><p>No Record Found</p></div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).on('ready', function () {
+        $("#ListDataTable").DataTable({
+            "scrollX": true
+        });
+
+    });
+
+    $(document).on('click', ".btnedit", function () {
+        debugger;
+        var RetailerId = $(this).attr("data-id");
+        var url = "/Retailer/RetailerCreate?Identity=" + RetailerId;
+        window.location.href = url;
+    });
+
+    $(document).on('click', '.btndelete', function () {
+        debugger;
+        if (confirm('Are you sure you wish to Delete this retailer?')) {
+            var RetailerId = $(this).attr("data-id");
+            var IsActive = $(this).attr("data-active");
+            $.ajax({
+                url: '@Url.Action("DeleteRetailer")',
+                type: 'POST',
+                data: { 'ID': RetailerId, 'IsActive': IsActive },
+                cache: false,
+            }).done(function (result) {
+                debugger;
+                if (result == true) {
+                    alert("Retailer Deleted successfully.");
+                    location.reload();
+                }
+
+            });
+        }
+        else {
+
+        }
+    }); 
+
+</script>

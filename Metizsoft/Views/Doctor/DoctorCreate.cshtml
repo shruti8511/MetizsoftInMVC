@@ -1,0 +1,437 @@
+﻿@model Metizsoft.Data.Modal.Doctor_Mst
+
+@{
+    ViewBag.Title = "DoctorCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Doctor</h3>
+    </div>
+    <form class="form-horizontal" id="frmdoctor">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @*<div class="col-md-5">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4 control-label">Doctor Code</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="DoctorCode" id="DoctorCode" placeholder="DoctorCode" >
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Doctor Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="DoctorName" id="DoctorName" placeholder="Doctor Name" required>
+                            </div>
+                            <input type="hidden" id="DoctorId" name="DoctorId" value="" />
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Certificate Id</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="CertificateId" id="CertificateId" placeholder="CertificateId" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Grade Name</label>
+                            <div class="col-sm-8">
+                                <select name="GradeName" id="GradeName" class="form-control" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="1">VP</option>
+                                    <option value="2">VIP</option>
+                                    <option value="3">VVIP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Qualification</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Qualification" id="Qualification" placeholder="Qualification" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Add1</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Add1" id="Add1" placeholder="Add1" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Add2</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Add2" id="Add2" placeholder="Add2" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Add3</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Add3" id="Add3" placeholder="Add3" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Add4</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.Add4, new SelectList(ViewBag.AreaList, "AreaName", "AreaName"), "Select", new { @class = "form-control", @required = "true" })
+                                @*<input type="text" class="form-control" name="Add4" id="Add4" placeholder="Add4" required>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Area</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.SubAreaName, new SelectList(ViewBag.SubAreaList, "SubAreaName", "SubAreaName"), "Select", new { @class = "form-control", @required = "true" })
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Phone No</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="PhoneNo" id="PhoneNo" placeholder="Phone No" required data-parsley-type="number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">RefrenceNo</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="RefrenceNo" id="RefrenceNo" placeholder="RefrenceNo" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Category Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="CategoryName" id="CategoryName" placeholder="Category Name" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Pin</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Pin" id="Pin" placeholder="Pin" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" name="Email" id="Email" placeholder="Email" required data-parsley-type="email">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    @*<div class="col-md-5">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4 control-label">Dow</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Dow" id="Dow" placeholder="Dow" required>
+                                </div>
+
+                            </div>
+                        </div>*@
+                    @*<div class="col-md-5">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4 control-label">Dob</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Dob" id="Dob" placeholder="Dob" required>
+                                </div>
+
+                            </div>
+                        </div>*@
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="CustomerType" class="col-sm-4 control-label">Field StaffName</label>
+                            <div class="col-sm-8">
+                                <select name="FieldStaffName" id="FieldStaffName" class="form-control" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="1">Chemist</option>
+                                    <option value="2">Stockist</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="CaseName" class="col-sm-4 control-label">Division</label>
+                            <div class="col-sm-8">
+                                <select name="DivisionName" id="DivisionName" class="form-control" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="1">Blaze</option>
+                                    <option value="2">Magnar</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Doctor Class</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="DoctorClass" id="DoctorClass" placeholder="Doctor Class" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="DoctorCode" name="DoctorCode" value=" " />
+            </div>
+        </div>
+
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnAdd" class="btn btn-info">Add</button>
+            </div>
+        </div>
+        <div class="box-footer ">
+            <label for="inputEmail3" class="col-sm-6 control-label"><h3>OR</h3></label>
+        </div>
+        <div class="box-footer ">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Download Template</label>
+                            <div class="col-sm-8">
+                                <button type="button" class="btn btn-default Download" data-clickfrom="Download" data-id="18">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Import Excel</label>
+                            <div class="col-sm-8">
+                                <input type="file" class="form-control dataFile " name="upload" style="display:block" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btnCancelFile" class="btn btn-default">Cancel</button>
+                @* <button type="button" id="btnUpload" class="btn btn-info">Upload</button>*@
+
+                <button type="button" class="btn btn-info" id="btnUpload" data-clickfrom="Download" data-id="18">Import</button>
+            </div>
+        </div>
+    </form>
+
+    <div id="lstDoctor">
+
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        var DoctorId = window.location.search.split('=')[1];
+        //$("#hdnDoctorId").val(DoctorId);
+        //if (DoctorId != null) {
+        //    $("#DoctorName").attr("disabled", "disabled");
+        //}
+        if (DoctorId != null) {
+            $("#btnAdd").text("Update");
+            $.ajax({
+                url: '@Url.Action("EditDoctor")',
+                type: 'POST',
+                cache: false,
+                data: { 'DoctorId': DoctorId },
+            }).done(function (result) {
+                debugger;
+                $("#DoctorId").val(result.DoctorId)
+                $("#DoctorCode").val(result.DoctorCode)
+                $("#DoctorName").val(result.DoctorName)
+                $("#GradeName").val(result.GradeName).change();
+                $("#Qualification").val(result.Qualification)
+                $("#Add1").val(result.Add1)
+                $("#Add2").val(result.Add2)
+                $("#Add3").val(result.Add3)
+                $("#Add4").val(result.Add4)
+                $("#Pin").val(result.Pin)
+                $("#PhoneNo").val(result.PhoneNo)
+                $("#RefrenceNo").val(result.RefrenceNo)
+                $("#CategoryName").val(result.CategoryName)
+                $("#SubAreaName").val(result.SubAreaName)
+                // $("#Dob").val(result.strDob)
+                // $("#Dow").val(result.strDow)
+                $("#Email").val(result.Email)
+                $("#FieldStaffName").val(result.FieldStaffName).change();
+                $("#DivisionName").val(result.DivisionName).change();
+                $("#DoctorClass").val(result.DoctorClass)
+                $("#CertificateId").val(result.CertificateId)
+
+            });
+            //$("#btnAdd").click(function () {
+            //    var url = "/Doctor/DoctorListAreaWise";
+            //    window.location.href = url;
+            //});
+        }
+
+    });
+
+
+    $("#btnAdd").click(function () {
+        debugger;
+        if (!($('#frmdoctor').parsley().validate())) {
+
+            return;
+        }
+        var datareq = new Object();
+        datareq.DoctorId = $("#DoctorId").val();
+        datareq.DoctorCode = $("#DoctorCode").val();
+        datareq.DoctorName = $("#DoctorName").val();
+        datareq.GradeName = $("#GradeName").val();
+        datareq.Qualification = $("#Qualification").val();
+        datareq.Add1 = $("#Add1").val();
+        datareq.Add2 = $("#Add2").val();
+        datareq.Add3 = $("#Add3").val();
+        datareq.Add4 = $("#Add4").val();
+        datareq.Pin = $("#Pin").val();
+        datareq.PhoneNo = $("#PhoneNo").val();
+        datareq.RefrenceNo = $("#RefrenceNo").val();
+        datareq.CategoryName = $("#CategoryName").val();
+        datareq.SubAreaName = $("#SubAreaName").val();
+        //datareq.Dob = $("#Dob").val();
+        //datareq.Dow = $("#Dow").val();
+        datareq.Email = $("#Email").val();
+        datareq.FieldStaffName = $("#FieldStaffName").val();
+        datareq.DivisionName = $("#DivisionName").val();
+        datareq.DoctorClass = $("#DoctorClass").val();
+        datareq.CertificateId = $("#CertificateId").val();
+
+        debugger;
+        $.ajax({
+            url: '@Url.Action("DoctorCreate")',
+            type: 'POST',
+            data: { 'ObjDoctor': datareq },
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                debugger
+                if ($("#DoctorId").val() == "") {
+                    $('div#sucessalert').html("Doctor created successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Doctor updated successfully.");
+                }
+                showhidealert();
+                //loadhtml();
+                clearform();
+            }
+        });
+    });
+
+    $("#btnCancel").click(function () {
+        //debugger;
+        clearform();
+    });
+    function clearform() {
+        $("#frmdoctor").find("input").val("");
+        $("#GradeName").val("").trigger("change");
+        $("#Add4").val("").trigger("change");
+        $("#SubAreaName").val("").trigger("change");
+        $("#FieldStaffName").val("").trigger("change");
+        $("#DivisionName").val("").trigger("change");
+    }
+
+    $(document).on('click', ".Download", function () {
+        // var Rxtype = $("#ddlRxtype").val();
+        var url = '@Url.Action("DownloadExcelTarget", "Doctor")';
+        window.location.href = url.replace();
+    });
+
+    $(document).on('click', "#btnUpload", function () {
+        debugger;
+
+        if ($(this).closest('div').find(".dataFile").val() != "") {
+            var data = new FormData();
+            var uploadordownload = "Upload";
+            if (uploadordownload == "Upload") {
+                var files = "";
+                //if ($(this).closest('div').find(".dataFile").val() != "") {
+                files = $(".dataFile").get(0).files;
+                //files = $(this).find(".dataFile").get(0).files;
+                data.append("File", files[0]);
+                //}
+                debugger;
+                $.ajax({
+                    url: '@Url.Action("UploadExcelTarget")',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    async: true,
+                    dataType: "json",
+                }).done(function (result) {
+                    //location.reloa{}d();
+                    //alert(result);
+                    if (result) {
+                        alert(result);
+
+                    }
+                    else { alert(result); }
+
+                });
+                $(this).closest('td').find(".dataFile").val("");
+            }
+        }
+    });
+
+
+    $("#btnCancelFile").click(function () {
+        //debugger;
+        $(".dataFile").val("");
+    });
+
+
+</script>

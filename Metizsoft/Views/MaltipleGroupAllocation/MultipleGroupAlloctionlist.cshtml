@@ -1,0 +1,116 @@
+﻿@model List<Metizsoft.Service.Models.MultipleGroup_MstModel>
+<table id="example2" class="table table-bordered table-hover dataTable no-footer" role="grid">
+    <thead>
+        <tr role="row">
+            <th class="sorting_disabled" rowspan="1" colspan="1">Group Type</th>
+            <th class="sorting_disabled" rowspan="1" colspan="1">User</th>
+
+
+            <th class="sorting_disabled" rowspan="1" colspan="1">UserName</th>
+            <th class="sorting_disabled" rowspan="1" colspan="1">Group Name</th>
+            <th class="sorting_disabled" rowspan="1" colspan="1">Created By</th>
+            @*<th class="sorting_disabled" rowspan="1" colspan="1">Created By</th>*@
+            <th class="sorting_disabled" rowspan="1" colspan="1">Update By</th>
+            <th class="text-center sorting_disabled" rowspan="1" colspan="1">Update Date</th>
+            <th class="text-center sorting_disabled" rowspan="1" colspan="1">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr role="row" class="odd">
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.GroupTypeName
+                    </td>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.GroupName
+                    </td>
+                    @*<td>
+                            @item.CreateUserName
+                        </td>*@
+                    <td>
+                        @item.CreateUserName
+                    </td>
+                    <td>
+                        @item.UpdateUserName
+                    </td>
+                    <td class="text-center">
+                        @item.UpdateOnstring
+                    </td>
+                    <td class="text-center">
+                        <span>
+                            <a id="lnkdelete" class="" data-groupid="@item.GroupID" data-id="@item.Id" data-grouptypeid="@item.GroupTypeID" data-alloctionid="@item.ToAllocateID" title="Delete"><i class="fa fa-trash"></i></a>
+                            |
+                            <a id="lnkedit" class="" data-groupid="@item.GroupID" data-id="@item.Id" data-grouptypeid="@item.GroupTypeID" data-alloctionid="@item.ToAllocateID" style="cursor:pointer" title="Active"><i class="fa fa-edit"></i></a>
+
+                        </span>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">
+                    No Record Found
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script>
+    $("#example2").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort']
+        }]
+    });
+    //$("#example2").DataTable();
+    $(document).on('click', "#lnkdelete", function () {
+        debugger;
+        if (confirm('Are you sure you wish to Delete this GroupAllocation?')) {
+            var GroupID = $(this).data('groupid');
+            var GroupTypeID = $(this).data('grouptypeid');
+            //var ID = $(this).data('id');
+            var AlloctionID = $(this).data('alloctionid');
+            $.ajax({
+                url: '@Url.Action("DeleteAlloctionGroup")',
+                type: 'POST',
+                data: { 'GroupID': GroupID, 'GroupTypeID': GroupTypeID, 'AlloctionID': AlloctionID },
+                cache: false,
+            }).done(function (result) {
+                if (result == true) {
+                    alert("Group Allocation Deleted successfully.");
+                    location.reload();
+                }               
+            });
+        }
+    })
+
+    $(document).on('click', "#lnkedit", function () {
+        debugger;
+       
+        var GroupID = $(this).data('groupid');
+        var GroupTypeID = $(this).data('grouptypeid');        
+        var AlloctionID = $(this).data('alloctionid');
+        var ID = $(this).data("id");
+
+        $("#ID").val(ID);
+        $("#hdnGrupdcId").val(AlloctionID);
+        $("#hdnGroupId").val(GroupID);
+        $("#ddlGroupType").val(GroupTypeID).trigger('change');
+        $("#ddlGroup").val(GroupID).trigger('change');
+        $("#ddlGroups").select2();
+        $("#btnSave").val("Update");
+    })
+</script>

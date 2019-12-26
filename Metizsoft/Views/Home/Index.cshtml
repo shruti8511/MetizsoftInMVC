@@ -1,0 +1,711 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+
+
+        <div class="col-lg-4 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3><label id="txtDCR" /></h3>
+                    <p>DCR Report</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-file"></i>
+                </div>
+                <a href="@Url.Action("DCRReport", "Report")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3><label id="txtDoctor" /></h3>
+                    <p>Doctor Report</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user-md"></i>
+                </div>
+                <a href="@Url.Action("DoctorReport", "Report")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3><label id="txtRetailer" /></h3>
+                    <p>Retailer Report</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
+                <a href="@Url.Action("RetailerReport", "Report")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+
+    <div class="row">
+        <section class="col-lg-5 connectedSortable">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Todays Sales</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <input type="hidden" id="hdnTarget" value="" />
+                    <input type="hidden" id="hdnAchieved" value="" />
+                    <canvas id="pieChart" class="pieChart" style="height:250px"></canvas>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </section>
+        <section class="col-lg-7 connectedSortable">
+
+
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Todays Leaves</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="col-lg-9">
+                        <input type="hidden" id="hdnReject" value="0" />
+                        <input type="hidden" id="hdnApprove" value="0" />
+                        <input type="hidden" id="hdnPending" value="0" />
+                        <canvas id="pieChart1" class="pieChart1" style="height:250px"></canvas>
+                        <!-- ./chart-responsive -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-lg-3">
+                        <ul class="chart-legend clearfix">
+                            <li>
+                                <i class="fa fa-circle-o text-green"></i>
+                                <label id="txtRejected" style="color: #00a65a" data-readonly="true" data-width="70" data-height="100" />
+                                Rejected
+
+                            </li>
+                            <li>
+                                <i class="fa fa-circle-o text-red "></i>
+                                <label id="txtPending" style="color: #f56954;" data-readonly="true" data-width="70" data-height="100" />
+                                Pending
+                            </li>
+                            <li>
+                                <i class="fa fa-circle-o text-aqua"></i>
+                                <label id="txtApproved" style="color: #00c0ef" data-readonly="true" data-width="70" data-height="100" />
+                                Approved
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.col -->
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+                <!-- /.footer -->
+            </div>
+
+        </section>
+
+        <!-- /.row -->
+    </div>
+
+    <div class="row">
+        <!-- Left col -->
+        <div class="col-md-8">
+            <!-- MAP & BOX PANE -->
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Visitors Report</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-9 col-sm-8">
+                            <div class="pad">
+                                <!-- Map will be created here -->
+                                <div id="world-map-markers" class="world-map-markers" style="height: 400px;"></div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-3 col-sm-4">
+                            <div class="pad box-pane-right bg-green" style="min-height: 280px">
+                                <div class="description-block margin-bottom">
+                                    <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
+                                    <h5 class="description-header">8390</h5>
+                                    <span class="description-text">Sample</span>
+                                </div>
+                                <!-- /.description-block -->
+                                <div class="description-block margin-bottom">
+                                    <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
+                                    <h5 class="description-header">30%</h5>
+                                    <span class="description-text">Product</span>
+                                </div>
+                                <!-- /.description-block -->
+                                <div class="description-block">
+                                    <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
+                                    <h5 class="description-header">70%</h5>
+                                    <span class="description-text">Gift</span>
+                                </div>
+                                <div class="description-block">
+                                    <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
+                                    <h5 class="description-header">70%</h5>
+                                    <span class="description-text">Promotional</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+            <!-- Info Boxes Style 2 -->
+            <div class="info-box bg-yellow">
+                <span class="info-box-icon" style="height:97px;"><i class="fa fa-user-md"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Doctors</span>
+                    <span class="info-box-number"><label id="txtDoctor1" /></span>
+                    <div class="progress">
+                        <div class="progress-bar" id="doctormonth" style="width: 50%"></div>
+                    </div>
+                    <span class="progress-description">
+                        <label id="txtDoctorMonthly1" />
+
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            <div class="info-box bg-green">
+                <span class="info-box-icon" style="height:97px;"><i class="ion-ios-chatbubble-outline"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">DCR</span>
+                    <span class="info-box-number"><label id="txtDCR1" /></span>
+                    <div class="progress">
+                        <div class="progress-bar" id="dcrmonth" style="width: 20%"></div>
+                    </div>
+                    <span class="progress-description">
+                        <label id="txtDCRMonthly1" />
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            <div class="info-box bg-red">
+                <span class="info-box-icon" style="height:97px;"><i class="fa fa-user"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Retailers</span>
+                    <span class="info-box-number"><label id="txtRetailer1" /></span>
+                    <div class="progress">
+                        <div class="progress-bar" id="retailermonth" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">
+                        <label id="txtRetailerMonthly1" />
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            <div class="info-box bg-aqua">
+                <span class="info-box-icon" style="height:97px;"><i class="fa fa-codepen"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Products</span>
+                    <span class="info-box-number"><label id="txtProduct1" /></span>
+                    <div class="progress">
+                        <div class="progress-bar" id="productmonth" style="width: 40%"></div>
+                    </div>
+                    <span class="progress-description">
+                        <label id="txtProductMonthly1" />
+
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+
+        </div>
+        <!-- /.col -->
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Monthly Recap Product Report</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-wrench"></i>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="text-center">
+                                <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                            </p>
+                            <div class="chart">
+                                <!-- Sales Chart Canvas -->
+                                <canvas id="salesChart" class="salesChart" style="height: 180px;"></canvas>
+                            </div>
+                            <!-- /.chart-responsive -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-4">
+                            <p class="text-center">
+                                <strong>Last Month Top Product</strong>
+                            </p>
+
+                            <!-- /.progress-group -->
+                            <div class="progress-group">
+                                <span class="progress-text"><label id="lblPraductName1" /></span>
+                                <span class="progress-number"><b><label id="lblPraductTotal1" /></b></span>
+                                <div class="progress sm" style="background-color:lightgrey">
+                                    <div id="bar1" class="progress-bar progress-bar-red"></div>
+                                </div>
+                            </div>
+                            <!-- /.progress-group -->
+                            <div class="progress-group">
+                                <span class="progress-text"><label id="lblPraductName2" /></span>
+                                <span class="progress-number"><b><label id="lblPraductTotal2" /></b></span>
+                                <div class="progress sm" style="background-color:lightgrey">
+                                    <div id="bar2" class="progress-bar progress-bar-green"></div>
+                                </div>
+                            </div>
+                            <!-- /.progress-group -->
+                            <div class="progress-group">
+                                <span class="progress-text"><label id="lblPraductName3" /></span>
+                                <span class="progress-number"><b><label id="lblPraductTotal3" /></b></span>
+                                <div class="progress sm" style="background-color:lightgrey">
+                                    <div id="bar3" class="progress-bar progress-bar-yellow"></div>
+                                </div>
+                            </div>
+                            <!-- /.progress-group -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- ./box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-6">
+                            <div class="description-block border-right">
+                                <h5 class="description-header">
+                                    <label id="lbltotaltarget" />
+                                </h5>
+                                <span class="description-text">Total Target</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 col-xs-6">
+                            <div class="description-block border-right">
+                                <h5 class="description-header"><label id="lbltotalachieve" /></h5>
+                                <span class="description-text">Total Achieve</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <!-- /.col -->
+                        <div class="col-sm-4 col-xs-6">
+                            <div class="description-block">
+                                <span class="description-percentage text-red"></i> <label id="lblTotalGoal" /></span>
+                                <br />   <span class="description-text">GOAL COMPLETIONS</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row (main row) -->
+</section>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="~/dist/js/demo.js"></script>
+<script src="~/bower_components/chart.js/Chart.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script>
+
+    $(document).on('ready', function () {
+        debugger;
+
+        var Total = 100;
+        $.ajax({
+            url: 'DashboardCount',
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+                debugger;
+                $('#txtDCR').text(data.DCR);
+                $('#txtDCR1').text(data.DCR);
+                $('#txtDCRMonthly1').text(data.DCRMonthly + ' In Current Month');
+                $("#dcrmonth").width(data.DCRMonthly);
+
+                $('#txtDoctor').text(data.Doctors);
+                $('#txtDoctor1').text(data.Doctors);
+                $('#txtDoctorMonthly1').text(data.DoctorsMonthly + ' In Current Month');
+                $("#doctormonth").width(data.DoctorsMonthly);
+
+                $('#txtRetailer').text(data.Retailer);
+                $('#txtRetailer1').text(data.Retailer);
+                $('#txtRetailerMonthly1').text(data.RetailerMonthly + ' In Current Month');
+                $("#retailermonth").width(data.RetailerMonthly);
+
+                $('#txtProduct1').text(data.Product);
+                $('#txtProductMonthly1').text(data.ProductMonthly + ' In Current Month');
+                $("#productmonth").width(data.ProductMonthly);
+
+
+                $('#txtApproved').text(data.ApprovedLeave + ' Approved');
+
+                $('#txtPending').text(data.PendingLeave + ' Pending');
+
+                $('#txtRejected').text(data.RejectedLeave + ' Rejected');
+                $('#hdnTarget').val(data.Target);
+                $('#hdnAchieved').val(data.Achieved);
+                $('#hdnReject').val(data.RejectedLeave);
+                $('#hdnPending').val(data.PendingLeave);
+                $('#hdnApprove').val(data.ApprovedLeave);
+
+                Total = data.TotalUsers;
+                $('.knob').trigger('configure', { "max": Total })
+                var target = $('#hdnTarget').val();
+                var achieved = $('#hdnAchieved').val();
+
+
+
+                var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+                var pieChart = new Chart(pieChartCanvas)
+                var PieData = [
+                  {
+                      value: achieved,
+                      color: '#f56954',
+                      highlight: '#f56954',
+                      label: 'Achieved'
+                  },
+                  {
+                      value: target,
+                      color: '#00a65a',
+                      highlight: '#00a65a',
+                      label: 'Target'
+                  }
+                ]
+                var pieOptions = {
+                    //Boolean - Whether we should show a stroke on each segment
+                    segmentShowStroke: true,
+                    //String - The colour of each segment stroke
+                    segmentStrokeColor: '#fff',
+                    //Number - The width of each segment stroke
+                    segmentStrokeWidth: 2,
+                    //Number - The percentage of the chart that we cut out of the middle
+                    percentageInnerCutout: 50, // This is 0 for Pie charts
+                    //Number - Amount of animation steps
+                    animationSteps: 100,
+                    //String - Animation easing effect
+                    animationEasing: 'easeOutBounce',
+                    //Boolean - Whether we animate the rotation of the Doughnut
+                    animateRotate: true,
+                    //Boolean - Whether we animate scaling the Doughnut from the centre
+                    animateScale: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+                    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+                }
+                //Create pie or douhnut chart
+                // You can switch between pie and douhnut using the method below.
+                pieChart.Doughnut(PieData, pieOptions)
+
+
+                var Pending = $('#hdnReject').val();
+                var reject = $('#hdnPending').val();
+                var approve = $('#hdnApprove').val();
+
+                var pieChartCanvas1 = $('#pieChart1').get(0).getContext('2d')
+                var pieChart1 = new Chart(pieChartCanvas1)
+                var PieData1 = [
+                  {
+                      value: Pending,
+                      color: '#00a65a',
+                      highlight: '#00a65a',
+                      label: 'reject'
+                  },
+                  {
+                      value: reject,
+                      color: '#f56954',
+                      highlight: '#f56954',
+                      label: 'Pending'
+                  },
+                   {
+                       value: approve,
+                       color: "#00c0ef",
+                       highlight: "#00c0ef",
+                       label: "approve",
+                   }
+                ]
+                var pieOptions1 = {
+                    //Boolean - Whether we should show a stroke on each segment
+                    segmentShowStroke: true,
+                    //String - The colour of each segment stroke
+                    segmentStrokeColor: '#fff',
+                    //Number - The width of each segment stroke
+                    segmentStrokeWidth: 2,
+                    //Number - The percentage of the chart that we cut out of the middle
+                    percentageInnerCutout: 50, // This is 0 for Pie charts
+                    //Number - Amount of animation steps
+                    animationSteps: 100,
+                    //String - Animation easing effect
+                    animationEasing: 'easeOutBounce',
+                    //Boolean - Whether we animate the rotation of the Doughnut
+                    animateRotate: true,
+                    //Boolean - Whether we animate scaling the Doughnut from the centre
+                    animateScale: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+                    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+                }
+                //Create pie or douhnut chart
+                // You can switch between pie and douhnut using the method below.
+                pieChart1.Doughnut(PieData1, pieOptions1)
+            },
+            error: function () {
+
+            }
+
+        });
+        debugger;
+        $.ajax({
+            url: 'DashboardProductCount',
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+                debugger;
+                var d = new Date();
+                var n = d.getMonth() + 1;
+
+                var result = GetMonthName(n);
+                var Months = '[';
+                for (i = 0; i < 12; i++) {
+                    Months += "'" + GetMonthName(n) + "' ,";
+                    if (n == 12) {
+                        n = 1;
+                    }
+                    else { n++; }
+                }
+                debugger;
+                data[0].ProductName
+                $('#lbltotaltarget').text(data[0].TotalTarget);
+                $('#lbltotalachieve').text(data[0].TotalAchieved);
+                $('#lblTotalGoal').text(data[0].Goal + "%");
+
+                var n1 = d.getMonth();
+
+                $('#lblPraductName1').text(data[(n1 * 1)].ProductName);
+                $('#lblPraductName2').text(data[(n1 * 2) - 1].ProductName);
+                $('#lblPraductName3').text(data[(n1 * 3) - 1].ProductName);
+                $('#lblPraductTotal1').text(data[(n1 * 1)].total);
+                $('#lblPraductTotal2').text(data[(n1 * 2) - 1].total);
+                $('#lblPraductTotal3').text(data[(n1 * 3) - 1].total);
+
+
+
+                $("#bar1").width(data[(n1 * 1)].total + '%');
+                $("#bar2").width(data[(n1 * 2) - 1].total + '%');
+                $("#bar3").width(data[(n1 * 3) - 1] + '%');
+
+                var AllMonth = Months.slice(0, -1) + ']';
+
+                var salesChartCanvas = $('#salesChart').get(0).getContext('2d');
+                // This will get the first returned node in the jQuery collection.
+                var salesChart = new Chart(salesChartCanvas);
+
+                var salesChartData = {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    datasets: [
+
+                       {
+                           label: data[0].ProductName,
+                           fillColor: 'rgb(210, 214, 222)',
+                           strokeColor: 'rgb(210, 214, 222)',
+                           pointColor: 'rgb(210, 214, 222)',
+                           pointStrokeColor: '#c1c7d1',
+                           pointHighlightFill: '#fff',
+                           pointHighlightStroke: 'rgb(220,220,220)',
+                           data: [data[0].total, data[3].total, data[6].total, data[9].total, data[12].total, data[15].total, data[18].total, data[21].total, data[24].total, data[27].total, data[30].total, data[33].total]
+                       },
+                        {
+                            label: data[4].ProductName,
+                            fillColor: 'rgb(105 ,105,105)',
+                            strokeColor: 'rgb(105 ,105,105)',
+                            pointColor: 'rgb(105 ,105,105)',
+                            pointStrokeColor: '#c1c7d1',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgb(220,220,220)',
+                            data: [data[1].total, data[4].total, data[7].total, data[10].total, data[13].total, data[16].total, data[19].total, data[22].total, data[25].total, data[28].total, data[31].total, 10]
+                           // data: [data[1].total, data[4].total, data[7].total, data[10].total, data[13].total, data[16].total, data[19].total, data[22].total, data[25].total, data[28].total, data[31].total, data[34].total]
+
+                        },
+                        {
+                            label: data[7].ProductName,
+                            fillColor: 'rgba(60,141,188,0.9)',
+                            strokeColor: 'rgba(60,141,188,0.8)',
+                            pointColor: '#3b8bba',
+                            pointStrokeColor: 'rgba(60,141,188,1)',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            data: [data[2].total, data[5].total, data[8].total, data[11].total, data[14].total, data[17].total, data[20].total, data[23].total, data[26].total, data[29].total, data[32].total, 0]
+                          //  data: [data[2].total, data[5].total, data[8].total, data[11].total, data[14].total, data[17].total, data[20].total, data[23].total, data[26].total, data[29].total, data[32].total, data[35].total]
+
+                        }
+                    ]
+                };
+
+                var salesChartOptions = {
+                    // Boolean - If we should show the scale at all
+                    showScale: true,
+                    // Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    // String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    // Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    // Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    // Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    // Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    // Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    // Boolean - Whether to show a dot for each point
+                    pointDot: false,
+                    // Number - Radius of each point dot in pixels
+                    pointDotRadius: 4,
+                    // Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    // Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    // Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    // Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    // Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    // String - A legend template
+                    legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].lineColor%>\'></span><%=datasets[i].label%></li><%}%></ul>',
+                    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: true,
+                    // Boolean - whether to make the chart responsive to window resizing
+                    responsive: true
+                };
+
+                // Create the line chart
+                salesChart.Line(salesChartData, salesChartOptions);
+
+
+            },
+            error: function () {
+
+            }
+
+        });
+
+        function GetMonthName(NUM) {
+            if (NUM == 1) {
+                return 'Jan'
+            }
+            else if (NUM == 2) {
+                return 'Feb'
+            }
+            else if (NUM == 3) {
+                return 'Mar'
+            }
+            else if (NUM == 4) {
+                return 'Apr'
+            }
+            else if (NUM == 5) {
+                return 'May'
+            }
+            else if (NUM == 6) {
+                return 'Jun'
+            }
+            else if (NUM == 7) {
+                return 'Jul'
+            }
+            else if (NUM == 8) {
+                return 'Aug'
+            }
+            else if (NUM == 9) {
+                return 'Sep'
+            }
+            else if (NUM == 10) {
+                return 'Oct'
+            }
+            else if (NUM == 11) {
+                return 'Nov'
+            }
+            else {
+                return 'Dec'
+            }
+            // The function returns the product of p1 and p2
+        }
+
+    });
+
+</script>

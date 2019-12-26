@@ -1,0 +1,341 @@
+﻿@model List<Metizsoft.Data.ViewModal.TourPlanResponse>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#UnApprovedUser" data-toggle="tab">UnApproved TourPlan</a></li>
+                    <li><a href="#ApprovedUser" data-toggle="tab">Approved TourPlan</a></li>
+                    <li><a href="#RejectedUser" data-toggle="tab">Rejected TourPlan</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="UnApprovedUser">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                            </div>
+
+                            <div class="box-body table-scrollable1 lstofcategory lstcategory">
+                                <table id="ListofuserDatatable" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td colspan="8" align="right">
+                                                <button type="button" id="btnCheckapprove" class="btn btn-info">Approve</button>
+                                                <button type="button" id="btnCheckreject" class="btn btn-info">Reject</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center sorting_disabled">Select</th>
+                                            <th class="nosort">UserName</th>
+                                            <th class="nosort">Day</th>
+                                            <th class="nosort">Date</th>
+                                            <th class="">AreaName</th>
+                                            <th class="">SubAreaName</th>                                           
+                                            <th class="text-center sorting_disabled">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            if (item.IsApproved == "Pending")
+                                            {
+                                                <tr>
+                                                    <input name="TourId" class="hdnId" type="hidden" value="@item.TourID" />
+                                                    <td align="center">
+                                                        <input type="checkbox" id="chkselect" />
+                                                    </td>
+                                                    <td @item.TourID>
+                                                        @item.UserName
+                                                    </td>
+
+                                                    <td>
+                                                        @item.Day
+                                                    </td>
+
+                                                    <td>
+                                                        @item.Date.ToString("dd-MM-yyyy")
+                                                    </td>
+
+                                                    <td>
+                                                        @item.AreaName
+                                                    </td>
+
+                                                    <td>
+                                                        @item.SubAreaName
+                                                    </td>
+                                                    <td align="center">
+                                                        <a style="cursor:pointer;" title="Approve" class="btnApprove" data-id="@item.TourID"> Approve </a>|
+                                                        <a style="cursor:pointer;" title="Reject" class="btnReject" data-id="@item.TourID"> Reject </a>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Notfound" style="text-align:center; display:none;"><p>No Record Found</p></div>
+                    </div>
+
+                    <div class="tab-pane" id="ApprovedUser">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                            </div>
+                            <div class="box-body table-scrollable1 lstofcategory">
+                                <table id="ListofuserDatatable1" class="table table-bordered table-hover">
+                                    <thead>                                       
+                                        <tr>
+                                            <th class="nosort">UserName</th>
+                                            <th class="nosort">Day</th>
+                                            <th class="nosort">Date</th>
+                                            <th class="">AreaName</th>
+                                            <th class="">SubAreaName</th>                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            if (item.IsApproved == "Approved")
+                                            {
+                                                <tr>
+                                                    <td  @item.TourID>
+                                                        @item.UserName
+                                                    </td>
+
+                                                    <td>
+                                                        @item.Day
+                                                    </td>
+
+                                                    <td>
+                                                        @item.Date.ToString("dd-MM-yyyy")
+                                                    </td>
+
+                                                    <td>
+                                                        @item.AreaName
+                                                    </td>
+
+                                                    <td>
+                                                        @item.SubAreaName
+                                                    </td>                                             
+                                               </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Notfound" style="text-align:center; display:none;"><p>No Record Found</p></div>
+
+                    </div>
+
+                    <div class="tab-pane" id="RejectedUser">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                            </div>
+                            <div class="box-body table-scrollable1 lstofcategory">
+                                <table id="ListofuserDatatable2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="nosort">UserName</th>
+                                            <th class="nosort">Day</th>
+                                            <th class="nosort">Date</th>
+                                            <th class="">AreaName</th>
+                                            <th class="">SubAreaName</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            if (item.IsApproved == "Rejected")
+                                            {
+                                                <tr>
+                                                    <td @item.TourID>
+                                                        @item.UserName
+                                                    </td>
+
+                                                    <td>
+                                                        @item.Day
+                                                    </td>
+
+                                                    <td>
+                                                        @item.Date.ToString("dd-MM-yyyy")
+                                                    </td>
+
+                                                    <td>
+                                                        @item.AreaName
+                                                    </td>
+
+                                                    <td>
+                                                        @item.SubAreaName
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Notfound" style="text-align:center; display:none;"><p>No Record Found</p></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#ListofuserDatatable").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': ['nosort']
+            }]
+        });
+
+        $("#ListofuserDatatable1").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': ['nosort']
+            }]
+        });
+
+        $("#ListofuserDatatable2").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': ['nosort']
+            }]
+        });
+    });
+      
+
+    $(".btnApprove").click(function () {
+        if (confirm('Are you sure you wish to approve this employee tour?')) {
+            debugger;
+            var data = new Object();            
+            data.TourID = $(this).data("id");            
+            data.IsApproved = "Approved";
+            $.ajax({
+                url: '@Url.Action("ApproveMR")',
+                type: 'POST',
+                cache: false,
+                data: data,
+            }).done(function (result) {
+                if (result == true) {
+                    alert("Tour approved successfully.");
+                    location.reload();
+                }                
+            });
+        }
+    });
+
+    $(".btnReject").click(function () {
+        if (confirm('Are you sure you wish to reject this employee tour?')) {
+            debugger;
+            var data = new Object();                       
+            data.TourID = $(this).data("id");            
+            data.IsApproved = "Rejected";
+            $.ajax({
+                url: '@Url.Action("RejectMR")',
+                type: 'POST',
+                cache: false,
+                data: data,
+            }).done(function (result) {
+                if (result == true) {
+                    alert("Tour Rejected successfully.");
+                    location.reload();
+                }                
+            });
+        }
+    });  
+
+    $("#btnCheckapprove").click(function () {
+        if (confirm('Are you sure you wish to approve this employee tour?')) {
+            var lstCheckapprove = [];
+            $("#ListofuserDatatable").children('tbody').children('tr:visible').each(function (index, row) {
+                debugger;
+                var IsCheck = $(row).find("input[type=checkbox]")[0];
+                if ($(IsCheck).is(':checked')) {
+                    var dataCheckapprove = new Object();
+                    var UserId = '@Session["UserID"]';
+                    dataCheckapprove.TourID = $(row).find("input[type=hidden]")[0].value;
+                    dataCheckapprove.IsApproved = "Approved";
+                    dataCheckapprove.ApprovedBy = UserId;
+                    lstCheckapprove.push(dataCheckapprove);
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("UpdateAllTourApprove")',
+                type: 'POST',
+                data: { 'data': lstCheckapprove },
+                cache: false,
+            }).done(function (result) {
+                if (result == true) {                    
+                    alert("Tour approve successfully.");
+                    location.reload();
+                }
+                clearform()
+            });
+        }
+        else {
+            clearform()
+        }
+    });
+
+    $("#btnCheckreject").click(function () {
+        if (confirm('Are you sure you wish to reject this employee tour?')) {
+            var lstCheckapprove = [];
+            $("#ListofuserDatatable").children('tbody').children('tr:visible').each(function (index, row) {
+                debugger;
+                var IsCheck = $(row).find("input[type=checkbox]")[0];
+                if ($(IsCheck).is(':checked')) {
+                    var dataCheckapprove = new Object();
+                    var UserId = '@Session["UserID"]';
+                    dataCheckapprove.TourID = $(row).find("input[type=hidden]")[0].value;
+                    dataCheckapprove.IsApproved = "Rejected";
+                    dataCheckapprove.ApprovedBy = UserId;
+                    lstCheckapprove.push(dataCheckapprove);
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("UpdateAllTourRejected")',
+                type: 'POST',
+                data: { 'data': lstCheckapprove },
+                cache: false,
+            }).done(function (result) {
+                if (result == true) {
+                    alert("Tour rejected successfully.");
+                    location.reload();
+                }
+                clearform()
+            });
+        }
+        else {
+            clearform()
+        }
+    });
+
+
+    function clearform() {
+        debugger;
+        $('input[type=checkbox]').prop('checked', false);       
+    }
+
+</script>
+
+

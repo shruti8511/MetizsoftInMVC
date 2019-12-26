@@ -1,0 +1,149 @@
+﻿@model Metizsoft.Data.Modal.Area_Mst
+@{
+    ViewBag.Title = "AreaCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Area</h3>
+    </div>
+
+    <form id="frmArea" class="form-horizontal">
+        <div class="box-body">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input name="AreaID" id="AreaID" type="hidden" value="" />
+                    <label for="Name" class="col-sm-4 control-label">Head Quater</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="Name" maxlength="100" id="AreaName" placeholder="Head Quater" tabindex="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Country" class="col-sm-4 control-label">Country</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="Country" id="Country" placeholder="Country" tabindex="3" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="City" class="col-sm-4 control-label">City </label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="City" id="City" placeholder="City" tabindex="5" required>
+                    </div>
+                </div>                          
+
+            </div>
+
+
+            @*<div class="col-md-1">
+                </div>*@
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="State" class="col-sm-4 control-label">Area Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="SubAreaName" id="SubAreaName" placeholder="Area Name" tabindex="2" required>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="State" class="col-sm-4 control-label">State</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="State" id="State" placeholder="State" tabindex="4" required>
+                    </div>
+                </div>
+                               
+
+                <div class="form-group">
+                    <label for="PinCode" class="col-sm-4 control-label">Pin Code</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="PinCode" id="PinCode" placeholder="Pin Code" tabindex="6" required>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="CancelArea" class="btn btn-default" tabindex="8">Cancel</button>
+                <button type="button" id="btnAdd" class="btn btn-info" tabindex="7">Add</button>
+            </div>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+
+    <div id="lstArea">
+
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+        $(document).ready(function () {
+            loadhtml();
+        });
+
+        function loadhtml() {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("Arealist")',
+                type: 'GET',
+                cache: false,
+            }).done(function (result) {
+                $('#lstArea').html(result);
+            });
+        }
+    $(document).on('click', "#btnAdd", function () {
+        if (!($('#frmArea').parsley().validate())) {
+
+            return;
+        }
+        debugger;
+            var datareq = new Object();
+            datareq.AreaID = $("#AreaID").val();
+            datareq.AreaName = $("#AreaName").val();
+            datareq.SubAreaName = $("#SubAreaName").val();
+            datareq.City = $("#City").val();
+            datareq.State = $("#State").val();
+            datareq.Country = $("#Country").val();
+            datareq.PinCode = $("#PinCode").val();
+            datareq.IsDelete =false;
+           
+
+            $.ajax({
+                url: '@Url.Action("AreaCreate")',
+                type: 'POST',
+                data: { 'objarea': datareq },
+                cache: false,
+            }).done(function (result) {
+                if (result == true) {
+                    debugger;
+                    if ($("#AreaID").val() == "") {
+                        $('div#sucessalert').html("Area created successfully.");
+                    }
+                    else {
+                        $('div#sucessalert').html("Area updated successfully.");
+                    }
+                    $("#btnAdd").text("Add");
+                    showhidealert();
+                    loadhtml();
+                    clearform();
+                }
+            });
+    });
+
+    $("#CancelArea").click(function () {
+        debugger;
+        clearform();
+    });
+        function clearform() {
+            $("#frmArea").find("input").val("");
+
+        }
+
+
+</script>

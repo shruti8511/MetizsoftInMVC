@@ -1,0 +1,75 @@
+﻿@model List<Metizsoft.Data.Modal.Event_Mst>
+
+
+<div class="box-body table-scrollable1">
+    <table id="ListDataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Description</th>                
+                <th class="nosort">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="row" @item.EventID>
+                    <td>
+                        @item.EventName
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        <a style="cursor:pointer;" class="btnedit" data-id="@item.EventID" data-pid="@item.EventTypeID" data-qid="@item.EventName">Edit</a>
+                        <a style="cursor:pointer;" class="btndelete" data-id="@item.EventID" data-pid="@item.EventTypeID" data-qid="@item.EventName" data-active="@item.IsActive">Delete</a>
+                     
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+
+    $("#ListDataTable").on('click', '.btnedit', function () {
+        $("#EventID").val($(this).attr("data-id"));
+        $("#EventTypeID").val($(this).attr("data-pid")).trigger("change");
+        $("#EventName").val($(this).attr("data-qid")).trigger("change");
+        $("#Description").val($(this).parent().parent().children()[1].innerHTML.trim());
+        $("#btnsavecase").text("Update");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+    });
+
+    $("#ListDataTable").on('click', '.btndelete', function () {
+        debugger;
+        if (confirm('Are you sure you wish to Delete this Event?')) {
+            var EventID = $(this).attr("data-id");
+            var IsActive = $(this).attr("data-active");
+            $.ajax({
+                url: '@Url.Action("DeleteEvent")',
+                type: 'POST',
+                data: { 'ID': EventID, 'IsActive': IsActive },
+                cache: false,
+            }).done(function (result) {
+                debugger;
+                if (result == true) {
+                    alert("Event Deleted successfully.");
+                    location.reload();
+                }
+
+            });
+        }
+        else {
+
+        }
+    });
+</script>

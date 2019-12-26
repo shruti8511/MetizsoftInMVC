@@ -1,0 +1,146 @@
+﻿@model Metizsoft.Model.Role
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Role
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Role</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row" id="divlocation">
+
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Role</h3>
+                </div>
+                @*@using (Html.BeginForm("RoleCreate", "Account", FormMethod.Post, new { }))
+                    {*@
+                <form id="frmRole" class="form-horizontal">
+
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Role <span class="red">*</span></label>
+                                <div class="col-sm-6">
+                                    <input id="hdnroleid" type="hidden" value="0" />
+                                    @Html.HiddenFor(m => m.RoleId)
+                                    @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control", required = "required" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer ">
+                        <div class="pull-right">
+                            <button type="button" id="btncancel" class="btn btn-default">Cancel</button>
+                            <button type="button" id="btnsave" class="btn btn-info">Save</button>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+                @*}*@
+
+            </div>
+        </div>
+    </div>
+    <div id="RoleList">
+    </div>
+
+</section>
+
+<script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        FillAll();
+
+        $("#RoleName").focus();
+    });
+
+    function FillAll() {
+
+        $.ajax({
+            url: '@Url.Action("RoleList")',
+            type: 'GET',
+            cache: false,
+            data: {},
+        }).done(function (result) {
+            $('#RoleList').html(result);
+        });
+    }
+
+
+    $('#btncancel').click(function () {
+        ClearForm();
+    });
+
+    function ClearForm() {
+        $("#RoleId").val('0');
+        $("#RoleName").val('');
+        $("#RoleName").focus();
+    }
+
+    $('#btnsave').click(function () {
+        if (!($('#frmRole').parsley().validate())) {
+
+            return;
+        }
+        var RoleId = $("#RoleId").val();
+        if (RoleId == "" || RoleId == null) {
+            RoleId = "0";
+        }
+
+        var RoleName = $("#RoleName").val();
+        $.ajax({
+
+            url: '/Account/RoleCreate',
+            type: "post",
+            datatype: "json",
+            data: { RoleId: RoleId, RoleName: RoleName },
+            datatype: "json",
+            async: false,
+            success: function (data) {
+                debugger;
+                //if (data == true) {
+                //    if ($("#RoleId").val() == "")
+                //    {
+                //        $('div#sucessalert').html("Role saved successfully.");
+                //    }
+                //    else
+                //    {
+                //        $('div#sucessalert').html("Role updated Successfully.");
+
+                //    }
+                //    FillAll();
+                //    showhidealert();
+                //    ClearForm();
+                //}
+                if (data == true) {
+                    $('div#sucessalert').html("Role saved successfully.");
+                    FillAll();
+                    showhidealert();
+                    ClearForm();
+                }
+                else {
+                    $('div#erroralert').html("Role already exists! try with unique role name.");
+                    showhideerroralert();
+                }
+            },
+            error: function (response) {
+                $('div#erroralert').html("Role saved failed.");
+                showhideerroralert();
+            }
+
+        });
+    });
+</script>

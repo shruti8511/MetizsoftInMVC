@@ -1,0 +1,101 @@
+﻿@model List<Metizsoft.Data.ViewModal.FieldUserViewModel>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">FieldUser Report List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Employee Code</th>
+                    <th>UserName</th>
+                    <th>designation</th>
+                    <th>Head Quater</th>
+                    <th>Add1</th>                  
+                    <th>PinCode</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th style="width:70px !important">DOB</th>
+                    <th style="width:70px !important">DOW</th>
+                    <th style="width:70px !important">DOJ</th>
+                    <th>Manager</th>
+                    <th>Reporting To</th>
+                    <th>Division</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td id="row" @item.Id>
+                            @item.EmployeeCode
+                        </td>
+                        <td>
+                            @item.UserName
+                        </td>
+                        <td>
+                            @item.Desigantion
+                        </td>
+                        <td>
+                            @item.AreaName
+                        </td>
+                        <td>
+                            @item.Add1
+                        </td>                        
+                        <td>
+                            @item.Pin
+                        </td>
+                        <td>
+                            @item.MobileNumber
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.DOBNull
+                        </td>
+                        <td>
+                            @item.DOWNull
+                        </td>
+                        <td>
+                            @item.DOJNull
+                        </td>
+                        <td>
+                            @item.managerName
+                        </td>
+                        <td>
+                            @item.ReportingName
+                        </td>
+                        @if (item.CaseName == 1)
+                        {
+                            <td>Blaze</td>
+                        }
+                        else if (item.CaseName == 2)
+                        {
+                            <td>Magnar</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        "scrollX": true
+    });
+</script>

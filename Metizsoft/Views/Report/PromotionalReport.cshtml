@@ -1,0 +1,157 @@
+﻿@model Metizsoft.Data.ViewModal.PromotionalResponse
+
+@{
+    ViewBag.Title = "PromotionalReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Promotional</h3>
+    </div>
+
+    <form class="form-horizontal" id="frmPromotional">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">From</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="txtfrom" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">To</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="txtTo" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="VehicleNo" class="col-sm-4 control-label">Promotional Type</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.PromotionalId, new SelectList(ViewBag.Promotional, "PromotionalId", "PromotionalName"), "Select Promotional Name", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="VehicleNo" class="col-sm-4 control-label">Head Quater</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.AreaId, new SelectList(ViewBag.Area, "AreaID", "AreaName"), "Select Head Quater", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+              
+                    </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="VehicleNo" class="col-sm-4 control-label">User Name</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.UserId, new SelectList(ViewBag.User, "Id", "FullName"), "Select User Name", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="AssignedDate" class="col-sm-4 control-label">Date</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right datepicker" id="Date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="User" class="col-sm-4 control-label">Manager</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => m.manager, new SelectList(ViewBag.Manager, "Id", "FullName"), "Select Manager", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+  
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btncancel"class="btn btn-default">Cancel</button>
+                <button type="button" id="btnsearch" class="btn btn-info">Search</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="lstPromotional">
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    function loadhtml() {
+
+        debugger;
+        var model = new Object();
+        model.StartDate = $("#txtfrom").val();
+        model.EndDate = $("#txtTo").val();
+        model.PromotionalId = $("#PromotionalId").val();
+        model.AreaId = $("#AreaId").val();
+        model.UserId = $("#UserId").val();
+        model.Date = $("#Date").val();
+        model.manager = $("#manager").val();
+        model.managerName = $("#manager :selected").text(); // do not delete
+        $.ajax({
+            url: '@Url.Action("PromotionalReportList")',
+            type: 'POST',
+            data: { 'model': model },
+            cache: false,
+        }).done(function (result) {
+            $('#lstPromotional').html(result);
+        });
+    }
+
+    $("#btnsearch").click(function () {
+        loadhtml();
+    });
+
+    $("#btncancel").click(function () {
+        clearform();
+    });
+
+    function clearform() {
+        $("#frmPromotional").find("input").val("");
+        $("#PromotionalId").val("").trigger("change");
+        $("#AreaId").val("").trigger("change");
+        $("#UserId").val("").trigger("change");
+        $("#manager").val("").trigger("change");
+                
+    }
+    
+</script>

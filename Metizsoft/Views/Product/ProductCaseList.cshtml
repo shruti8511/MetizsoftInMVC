@@ -1,0 +1,157 @@
+﻿@model List<Metizsoft.Data.Modal.ProductCase_Mst>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Product Case List
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">ProductCaseList</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                </div>
+                <div class="box-body table-scrollable1">
+                    <table id="ListDataTable" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="nosort">Action</th>
+                                <th class="nosort">Product Name</th>
+                                <th class="nosort">Division</th>
+                                <th class="nosort">Rx Type</th>
+                                <th class="nosort">PTS</th>
+                                <th class="nosort">MesureIn</th>
+                                <th class="nosort">StrengthIn</th>
+                                <th class="nosort">Pack</th>
+                                <th class="nosort">PTR</th>
+                                <th class="nosort">MRP</th>
+                                <th class="nosort">STR Rate</th>
+                                <th class="nosort">Brand Name</th>
+                                <th class="nosort">ProductType</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row" @item.ProductCaseId>
+                                    <td class="text-center">
+                                        <a style="cursor:pointer;" class="btnedit" data-id="@item.ProductCaseId" data-pid="@item.ProductId" data-qid="@item.CaseName" data-name="@item.Name">Edit</a>
+                                        <a style="cursor:pointer;" class="btndelete" data-id="@item.ProductCaseId" data-pid="@item.ProductId" data-qid="@item.CaseName" data-name="@item.Name" data-active="@item.IsActive">Delete</a>
+                                    </td>
+                                    <td>
+                                        @item.ProductName
+                                    </td>
+                                    @if (item.CaseName == "1")
+                                    {
+                                        <td> Blaze </td>
+                                    }
+                                    else
+                                    {
+                                        <td> Magnar </td>
+                                    }
+
+                                    <td>
+                                        @item.Name
+                                    </td>
+                                    <td>
+                                        @item.PTS
+                                    </td>
+                                    <td>
+                                        @item.MeasureIn
+                                    </td>
+                                    <td>
+                                        @item.StrangthIn
+                                    </td>
+                                    <td>
+                                        @item.Pack
+                                    </td>
+                                    <td>
+                                        @item.PTR
+                                    </td>
+                                    <td>
+                                        @item.MRP
+                                    </td>
+                                    <td>
+                                        @item.STDRate
+                                    </td>
+                                    <td>
+                                        @item.BrandName
+                                    </td>
+                                    <td>
+                                        @item.ProductTypeId
+                                    </td>
+                                   
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div id="Notfound" style="text-align:center; display:none;"><p>No Record Found</p></div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).on('ready', function () {
+        $("#ListDataTable").DataTable({
+            "scrollX": true,
+            
+        });
+    });
+    $(document).on('click', ".btnedit", function () {
+        debugger;
+        var ProductCaseId = $(this).attr("data-id");
+        var url = "/Product/ProductCaseCreate?Identity=" + ProductCaseId;
+        window.location.href = url;
+
+        //$("#ProductCaseId").val($(this).attr("data-id"));
+        //$("#ProductName").val($(this).attr("data-pid")).trigger("change");
+        //$("#CaseName").val($(this).attr("data-qid")).trigger("change");
+        //$("#CaseSize").val($(this).parent().parent().children()[2].innerHTML.trim());
+        //$("#RatePerNo").val($(this).parent().parent().children()[3].innerHTML.trim());
+        //$("#RatePerLTKG").val($(this).parent().parent().children()[4].innerHTML.trim());
+        //$("#CaseValue").val($(this).parent().parent().children()[5].innerHTML.trim());
+        //$("#MRPPerNo").val($(this).parent().parent().children()[6].innerHTML.trim());
+        ////$("btnsaveproduct").val("Update")
+        //$("html, body").animate({ scrollTop: 0 }, "slow");
+    });
+
+    $(document).on('click', '.btndelete', function () {
+        debugger;
+        if (confirm('Are you sure you wish to Delete this ProductCase?')) {
+            var ProductCaseId = $(this).attr("data-id");
+            var IsActive = $(this).attr("data-active");
+            $.ajax({
+                url: '@Url.Action("DeleteProductCase")',
+                type: 'POST',
+                data: { 'ID': ProductCaseId, 'IsActive': IsActive },
+                cache: false,
+            }).done(function (result) {
+                debugger;
+                if (result == true) {
+                    alert("ProductCase Deleted successfully.");
+                    location.reload();
+                }
+
+            });
+        }
+        else {
+
+        }
+    });
+</script>
+

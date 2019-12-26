@@ -1,0 +1,73 @@
+﻿@model List<Metizsoft.Data.Modal.Promotional_Mst>
+
+<div class="box-body table-scrollable1">
+    <table id="ListDataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+
+                <th>Promotional Name</th>
+                <th class="nosort">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="row" @item.PromotionalId>
+                    <td>
+                        @item.PromotionalName
+                    </td>
+
+                    <td>
+                        <a style="cursor:pointer;" class="btnedit" data-id="@item.PromotionalId"> Edit </a>
+                        <a style="cursor:pointer;" class="btndelete" data-id="@item.PromotionalId" data-active="@item.IsActive"> Delete </a>
+                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+
+    $("#ListDataTable").on('click', '.btnedit', function () {
+        debugger;
+        $("#PromotionalId").val($(this).attr("data-id"));
+        $("#PromotionalName").val($(this).parent().parent().children()[0].innerText.trim());
+        $("#btnAdd").text("Update");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    });
+
+    $("#ListDataTable").on('click', '.btndelete', function () {
+        debugger;
+        if (confirm('Are you sure you wish to Delete this Promotional?')) {
+            var PromotionalId = $(this).attr("data-id");
+            var IsActive = $(this).attr("data-active");
+            $.ajax({
+                url: '@Url.Action("DeletePromotional")',
+                type: 'POST',
+                data: { 'ID': PromotionalId, 'IsActive': IsActive },
+                cache: false,
+            }).done(function (result) {
+                debugger;
+                if (result == true) {
+                    alert("Promotinal Deleted successfully.");
+                    location.reload();
+                }
+
+            });
+        }
+        else {
+
+        }
+    });
+</script>

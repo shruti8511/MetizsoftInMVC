@@ -1,0 +1,266 @@
+﻿@model Metizsoft.Data.Modal.ProductCase_Mst
+
+@{
+    ViewBag.Title = "ProductCaseCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Manage Product Case</h3>
+    </div>
+
+    <form id="frmProductCase" class="form-horizontal">
+        <div class="box-body">
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Product Name</label>
+                        <div class="col-sm-8">
+                            <input name="ProductCaseId" id="ProductCaseId" type="hidden" value="" />
+                            @Html.DropDownListFor(m => m.ProductId, new SelectList(ViewBag.Product, "ProductId", "ProductName"), "Select Product", new { @class = "form-control", @required = "true" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Division</label>
+                        <div class="col-sm-8">
+                            <select name="CaseName" id="CaseName" class="form-control" required>
+                                <option value="" selected>Select</option>
+                                <option value="1">Blaze</option>
+                                <option value="2">Magnar</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Rx Type</label>
+                        <div class="col-sm-8">
+                            @*<input name="Name" id="Name" type="hidden" value="" />*@
+                            @Html.DropDownList("NameID", new SelectList(string.Empty, "Value", "Text"), "Select ", new { @class = "form-control", @required = "true" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">PTS</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="PTS" id="PTS" placeholder="PTS" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">MeasureIn</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="MeasureIn" id="MeasureIn" placeholder="Measure In" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">StrangthIn</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="StrangthIn" id="StrangthIn" placeholder="Strangth In" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">Pack</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="Pack" id="Pack" placeholder="Pack" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">PTR</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="PTR" id="PTR" placeholder="PTR" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">MRP</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="MRP" id="MRP" placeholder="MRP" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">STD Rate</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="STDRate" id="STDRate" placeholder="STDRate" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">BrandName</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="BrandName" id="BrandName" placeholder="BrandName" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Product Type</label>
+                        <div class="col-sm-8">
+                            <input name="ProductType" id="ProductType" type="hidden" value="" />
+                            @Html.DropDownListFor(m => m.ProductTypeId, new SelectList(ViewBag.ProductType, "ProductTypeId", "ProductType"), "Select ProductType", new { @class = "form-control", @required = "true" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.box-body -->
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="CancelProductCase" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnsavecase" class="btn btn-info">Add</button>
+            </div>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+    <input type="hidden" id="name" value="0" />
+
+    <div id="lstProductcase">
+
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        var ProductCaseId = window.location.search.split('=')[1];
+
+        $("#CaseName").change(function () {            
+            var RxType = $("#CaseName").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetNameByRxType")',
+                dataType: 'json',
+                data: { RxType: RxType },
+                success: function (data) {
+                    debugger;
+
+                    var district = "<select class='form-control'>";
+                    district = district + '<option value="0">Select </option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].RxTypeId + '>' + data[i].Name + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#NameID').html(district);
+                    $("#NameID").val($("#name").val());
+                    //$('#NameID').val();
+                }
+            });
+        });
+
+        // $("#hdnRetailerId").val(ProductCaseId);
+        //if (ReatailerId != null) {
+        //    $("#FirstName").attr("disabled", "disabled");
+        //}
+        if (ProductCaseId != null) {
+            $("#btnsavecase").text("Update");
+            $.ajax({
+                url: '@Url.Action("EditProductCase")',
+                type: 'POST',
+                cache: false,
+                data: { 'ProductCaseId': ProductCaseId },
+            }).done(function (result) {               
+                $("#ProductCaseId").val(result.ProductCaseId)
+                $("#name").val(result.Name)
+                $("#ProductId").val(result.ProductId)
+                $("#CaseName").val(result.CaseName).trigger('change');
+                $("#PTS").val(result.PTS)
+                $("#MeasureIn").val(result.MeasureIn)
+                $("#StrangthIn").val(result.StrangthIn)
+                $("#Pack").val(result.Pack)
+                $("#PTR").val(result.PTR);
+                $("#MRP").val(result.MRP);
+                $("#STDRate").val(result.STDRate);
+                $("#BrandName").val(result.BrandName);
+                $("#ProductTypeId").val(result.ProductTypeId)
+            });           
+        }
+
+    });
+
+    $("#btnsavecase").click(function () {
+        if (!($('#frmProductCase').parsley().validate())) {
+
+            return;
+        }
+        var datareq = new Object();
+        debugger;
+        datareq.ProductCaseId = $("#ProductCaseId").val();
+        datareq.ProductId = $("#ProductId").val();
+        datareq.ProductName = $("#ProductId").find("option:selected").text();
+        datareq.CaseName = $("#CaseName").val();
+        datareq.Name = $("#NameID").val();
+        datareq.PTS = $("#PTS").val();
+        datareq.MeasureIn = $("#MeasureIn").val();
+        datareq.StrangthIn = $("#StrangthIn").val();
+        datareq.Pack = $("#Pack").val();
+        datareq.PTR = $("#PTR").val();
+        datareq.MRP = $("#MRP").val();
+        datareq.STDRate = $("#STDRate").val();
+        datareq.BrandName = $("#BrandName").val();
+        datareq.ProductTypeId = $("#ProductTypeId").val();
+
+        $.ajax({
+            url: '@Url.Action("ProductCaseCreate")',
+            type: 'POST',
+            data: { 'objProductcase': datareq },
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                debugger;
+                if ($("#ProductCaseId").val() == "") {
+                    $('div#sucessalert').html("Product case created successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Product case updated successfully.");
+                    showhidealert();
+                    var url = "/Product/ProductCaseList";
+                    window.location.href = url;
+                    
+                }
+                showhidealert();
+                //loadhtml();
+                clearform();
+            }
+        });
+    });
+
+    $("#CancelProductCase").click(function () {
+        clearform();
+    });
+
+    function clearform() {
+        $("#frmProductCase").find("input").val("");
+        $("#ProductId").val("").trigger("change");
+        $("#CaseName").val("").trigger("change");
+        $("#NameID").val("").trigger("change");
+        $("#ProductTypeId").val("").trigger("change");
+    }
+</script>

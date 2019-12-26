@@ -1,0 +1,239 @@
+﻿@model Metizsoft.Service.GroupToFieldUserModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Group To Field User Allocation
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Group To FieldUser Allocation</li>
+    </ol>
+    
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Group To FieldUser</h3>
+                </div>
+                <form id="form1">
+                    <div class="form-horizontal">
+                        <div class="box-body">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="UserPosition" class="col-sm-4 control-label">User Position<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="Id" name="Id" value="" />
+                                        @Html.DropDownList("RoleId", new SelectList(@ViewBag.RoleName, "RoleId", "RoleName"), "Select UserPosition", new { @class = "form-control", @tabindex = "1", @required = "true" })
+                                        <span id="" style="color:Red;visibility:hidden;">Select User.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="UserName" class="col-sm-4 control-label">User Name<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="hdnusername" value="0" />
+                                        @Html.DropDownList("ddlUser", new SelectList(string.Empty, "Value", "Text"), "Select Name", new { @class = "form-control", @tabindex = "2", @required = "true" })
+                                        <span id="" style="color:Red;visibility:hidden;">Select User.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="GroupType" class="col-sm-4 control-label">Group Type<span class="red">*</span></label>
+                                    <input type="hidden" id="hdnGruptypeId" value="0" /> 
+                                    <div class="col-sm-8">
+                                        <select id="ddlGroupType" class="form-control" required>
+                                            <option value="">Select GroupType</option>
+                                            <option value="1" data-usertype="1">Doctor</option>
+                                            <option value="2" data-usertype="2">Retailer</option>
+                                        </select>
+                                        <span id="" style="color:Red;visibility:hidden;">Select User.</span>
+                                    </div>
+                                    </div>
+                                @*<div class="form-group">
+                                    <label for="GroupType" class="col-sm-4 control-label">Group Type<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="hdnGruptypeId" value="0" />
+                                        @Html.DropDownList("ddlGroupType", new SelectList(@ViewBag.UserGroup, "GrouptypeID", "GroupTypeName"), "Select GroupType", new { @class = "form-control", @tabindex = "3", @required = "true" })
+                                       <span id="" style="color:Red;visibility:hidden;">Select User.</span>
+                                    </div>
+                                </div>*@
+                                <div class="form-group">
+                                    <label for="GroupName" class="col-sm-4 control-label">Group Name<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="hdnGrupId" value="0" />
+                                        @Html.DropDownList("ddlGroups", new SelectList(string.Empty, "Value", "Text"), "Select Group", new { @class = "form-control", @tabindex = "4", @required = "true" })
+                                        <span id="" style="color:Red;visibility:hidden;">Select User.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
+                            <button type="button" id="btnSave" class="btn btn-info pull-right">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box-body table-scrollable1">
+                                <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+                                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                                            <div class="col-sm-12">
+                                                <div id="lstgroup">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {       
+        loadhtml();
+
+        $('#RoleId').change(function () {
+            debugger;
+            var RoleId = $("#RoleId").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetUserNameByPosition")',
+                dataType: 'json',
+                data: { RoleId: RoleId },
+                success: function (data) {
+                    debugger;
+                    var district = "<select class='form-control'>";
+                    district = district + '<option value="0">Select Name</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].Id + '>' + data[i].UserName + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#ddlUser').html(district);
+                    $("#ddlUser").val($("#hdnusername").val());
+                }
+            });
+        });
+
+
+        $("#ddlGroupType").on('change', function () {
+            debugger;
+            var grouptype = $("#ddlGroupType").val();
+            $('#ddlGroups option').remove();           
+            
+            //$('#lstrecordsLestside option').remove();
+
+            $.ajax({
+                url: '@Url.Action("GroupNameByTypeID")',
+                type: 'POST',
+                data: { 'GroupID': grouptype },
+                cache: false,
+            }).done(function (result) {
+                debugger;
+                if (result != null) {
+                    $('#ddlGroups').append($("<option></option>")                       
+                      .attr("value", 0)
+                      .text("Select Group Name","selected")
+                      .attr("data-ddlGroups", 0));
+                    $(result.lstGroup).each(function (i, value) {
+                        $('#ddlGroups').append($("<option></option>")
+                        .attr("value", value.GroupID)
+                        .text(value.GroupName));
+                        //.attr("data-lstrecordsLestside", value.GroupID));
+                    })
+                }
+                //loadhtml(grouptype);
+                $('#ddlGroups').val($("#hdnGrupId").val());                
+            });
+        });
+    });
+
+
+    $("#btnSave").on('click', function () {
+        if (!($('#form1').parsley().validate())) {
+
+            return;
+        }
+        debugger;
+        var datareq = new Object();
+        datareq.Id = $("#Id").val();
+        datareq.UserPosition = $("#RoleId").val();
+        datareq.UserId = $("#ddlUser").val();
+        datareq.GroupID = $("#ddlGroups").val();
+        datareq.GroupTypeID = $("#ddlGroupType").val();
+
+        $.ajax({
+            url: '@Url.Action("SaveGroupToFieldUser")',
+            type: 'POST',
+            data: { 'objgroup': datareq },
+            cache: false,
+        }).done(function (result) {
+            debugger;
+            if (result == true) {
+                debugger;
+                if ($("#Id").val() == "") {
+                    $('div#sucessalert').html("Save GroupToFieldUser successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Upadate GroupToFieldUser successfully.");
+                }
+                showhidealert();
+                clearform();
+                location.reload();
+            }
+        });
+    });
+
+    function loadhtml() {
+        debugger;
+        $.ajax({
+            url: '@Url.Action("GroupToFieldUserlist")',
+            type: 'POST',
+            contentType: 'html',
+            cache: false,
+        }).done(function (result) {
+            debugger;
+            $('#lstgroup').html(result);
+        });
+    }
+
+    $("#btnCancel").click(function () {
+        clearform();
+    });
+
+    function clearform() {
+        debugger;
+        $("#form1").find("input").val("");        
+        $("#ddlGroups").val(0).trigger("change");
+        $("#RoleId").val("").trigger("change");
+        $("#ddlUser").val("0").trigger("change");        
+        $("#ddlGroupType").val("");
+      
+    }
+
+</script>
+

@@ -1,0 +1,122 @@
+﻿@model List<Metizsoft.Data.ViewModal.DoctorListResponse>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">Doctor List Report</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Doctor Code</th>
+                    <th>Doctor Name</th>
+                    <th>CategoryName</th>
+                    <th>GradeName</th>
+                    <th>VisitSection</th>
+                    <th>Address1</th>
+                    <th>Address2</th>
+                    <th>Head Quater</th>
+                    <th>Area </th>
+                    <th>PhoneNo</th>
+                    <th>Certificate Id</th>
+                    <th>Division</th>
+                    <th>GroupName</th>
+                    <th>GroupCode</th>
+                    <th>Dob</th>
+                    <th>Dow</th>
+                    <th>Email</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td id="row" @item.DoctorReportId>
+                            @item.DoctorCode
+                        </td>
+                        <td>
+                            @item.DoctorName
+                        </td>
+                        <td>
+                            @item.CategoryName
+                        </td>
+                        @if (item.GradeName == 1)
+                        {
+                            <td> VP </td>
+                        }
+                        else if (item.GradeName == 2)
+                        {
+                            <td> VIP </td>
+                        }
+                        else
+                        {
+                            <td> VVIP </td>
+                        }
+                        <td>
+                            @item.VisitSection
+                        </td>
+                        <td>
+                            @item.Add1
+                        </td>
+                        <td>
+                            @item.Add2
+                        </td>
+                        <td>
+                            @item.AreaName
+                        </td>
+                        <td>
+                            @item.SubAreaName
+                        </td>
+                        <td>
+                            @item.PhoneNo
+                        </td>
+                        <td>
+                            @item.CertificateId
+                        </td>
+                        @if (item.CaseName == 1)
+                        {
+                            <td>Blaze</td>
+                        }
+                        else if (item.CaseName == 2)
+                        {
+                            <td>Magnar</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td>
+                            @item.GroupName
+                        </td>
+                        <td>
+                            @item.GroupCode
+                        </td>
+                        <td>
+                            @item.DobNull
+                        </td>
+                        <td>
+                            @item.DowNull
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        "scrollX": true
+    });
+</script>

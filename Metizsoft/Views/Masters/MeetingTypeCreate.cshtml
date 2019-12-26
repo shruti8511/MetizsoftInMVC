@@ -1,0 +1,111 @@
+﻿@model Metizsoft.Data.Modal.MeetingType_mst
+@{
+    ViewBag.Title = "MeetingTypeCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Meeting Type</h3>
+    </div>
+
+
+    @*<div class="box box-default" id="frmretailer">*@
+    <form class="form-horizontal" id="frmretailer">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+
+
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">Meeting Type</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="MeetingType" id="MeetingType" placeholder="Meeting Type" required>
+                            </div>
+                            <input type="hidden" id="MeetingTypeId" name="MeetingTypeId" value="" />
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="box-footer ">
+            <div class="pull-right">
+                <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnAdd" class="btn btn-info">Add</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="lstMeetingType">
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+        $(document).ready(function () {
+            loadhtml();
+        });
+
+        function loadhtml() {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("MeetingTypelist")',
+                type: 'GET',
+                cache: false,
+            }).done(function (result) {
+                $('#lstMeetingType').html(result);
+            });
+        }
+
+    $("#btnAdd").click(function () {
+        if (!($('#frmretailer').parsley().validate())) {
+
+            return;
+        }
+        debugger;
+            var datareq = new Object();
+            datareq.MeetingTypeId = $("#MeetingTypeId").val();
+            datareq.MeetingType = $("#MeetingType").val();
+
+            $.ajax({
+                url: '@Url.Action("MeetingTypeCreate")',
+                type: 'POST',
+                data: { 'objMeetingtype': datareq },
+                cache: false,
+            }).done(function (result) {
+                if (result == true) {
+                    debugger
+                    if ($("#MeetingTypeId").val() == "") {
+                        $('div#sucessalert').html("Meeting Type created successfully.");
+                    }
+                    else {
+                        $('div#sucessalert').html("Meeting Type updated successfully.");
+                    }
+                    $("#btnAdd").text("Add");
+                    showhidealert();
+                    loadhtml();
+                    clearform();
+                }
+            });
+        });
+    $("#btnCancel").click(function () {
+        debugger;
+        clearform();
+    });
+        function clearform() {
+            $("#frmretailer").find("input").val("");
+
+        }
+</script>

@@ -1,0 +1,67 @@
+﻿@model List<Metizsoft.Data.ViewModal.PromotionalResponse>
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3 class="box-title">Promotional Report List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-scrollable1">
+        <table id="ListDataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>                   
+                    <th>User Name</th>
+                    <th>PromotionalName</th>
+                    <th>Date</th>
+                    <th class="nosort">PromotionalImage</th>
+                    <th>Head Quater</th>
+                    <th>Manager</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td id="row" @item.PromotionalReportId>
+                            @item.CreatedBy
+                        </td>
+
+                        <td>
+                            @item.PromotionalName
+                        </td>
+
+                        <td>
+                            @item.Date.ToString("dd-MM-yyyy")
+                        </td>
+                        <td>
+                            @item.PromotionalImage
+                        </td>
+
+                        <td>
+                            @item.AreaName
+                        </td>
+                        <td>
+                            @item.managerName
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+</div>
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+
+        }]
+    });
+</script>

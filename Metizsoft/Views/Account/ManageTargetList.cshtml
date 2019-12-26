@@ -1,0 +1,190 @@
+﻿@model List<Metizsoft.Model.Target>
+<div class="box-body table-scrollable1 lstofcategory">
+    <table id="ListDataTable" class="table table-bordered table-bordered">
+        <thead>
+            <tr>
+                @*<td colspan="6" align="right">
+                    <button type="button" id="btnupdatetarget" class="btn btn-info btnupdatetarget">Update Target</button>
+                </td>*@
+            </tr>
+            <tr>
+                <th class="">FirstName</th>
+                <th class="nosort">LastName</th>
+                <th class="nosort">Head Quater</th>
+                <th class="nosort">Area</th>
+                <th class="nosort">City</th>
+                <th class="nosort">State</th>
+                <th class="nosort">Sales Target</th>
+                @*<th class="nosort">Check</th>*@
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td id="row" @item.Id>
+                        @item.FirstName
+                    </td>
+                    <td>
+                        @item.LastName
+                    </td>
+                    <td>
+                        @item.AreaName
+                    </td>
+                    <td>
+                        @item.SubAreaName
+                    </td>
+                    <td>
+                        @item.City
+                    </td>
+                    <td>
+                        @item.State
+                    </td>
+                    <td class="col-md-6">
+                        <input name="Id" class="hdnId" type="hidden" value="@item.Id" />
+                        <input type="file" class="dataFile  col-md-5" name="upload" style="display:block" />
+
+                        @*<input id="SalesTarget" type="text" class="form-control" name="SalesTarget" style="width:100px" value="@item.SalesTarget" />*@
+                        <button type="button" class="btn btn-default settarget" data-clickfrom="Upload" data-id="@item.Id" disabled>Upload</button>
+
+                        <div class="col-md-4">
+                            <input id="ChkSpeciality" class="chkorderby speci" type="checkbox" value="Seciality">
+                            <label>Blaze</label>
+
+                            <input id="ChkMass" class="chkorderby mass" type="checkbox" value="Mass">
+                            <label>Magnar</label>
+                        </div>
+                    </td>
+                    @*<td>
+                        <input type="checkbox" id="chkselect" class="chkselect" />
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+<script>
+    $("#ListDataTable").DataTable({
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort'] /* 1st one, start by the right */
+        }]
+    });
+</script>
+
+<script>  
+    $(".btnupdatetarget").click(function () {
+        debugger;
+        var lstTarget = [];
+        var dataTarget = new Object();
+
+        $('#ListDataTable').children('tbody').children('tr:visible').each(function (index, row) {
+            debugger;
+            var IsCheck = $(row).find(".chkselect")[0];
+            if ($(IsCheck).is(':checked')) {
+               // var dataTarget = new Object();
+                dataTarget.Id = $(row).find("input[type=hidden]")[0].value;
+                dataTarget.SalesTarget = $(row).find("input")[2].value;
+                lstTarget.push(dataTarget);
+                            
+            }
+        });
+            $.ajax({
+                url: '@Url.Action("UpadateTarget")',
+                type: 'POST',
+                data: { 'data': lstTarget },
+                cache: false,
+            }).done(function (result) {
+                if (result == true) {
+                    $('div#sucessalert').html("Target updated successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Something Went Wrong");
+                }
+                showhidealert();
+               // loadhtml();
+                clearform();
+            });
+            
+        });
+   
+
+    $('input.chkorderby').on('change', function () {
+        debugger;
+        $('input.chkorderby').not(this).prop('checked', false);
+        $(this).closest('td').find('.settarget').prop("disabled", false);
+    });
+
+    $('.settarget').click(function () {
+        debugger;
+        $("#hiddenclickfrom").val($(this).data('clickfrom'));
+        $("#hiddenid").val($(this).data('id'));
+        if ($($(this).closest('td').find('.speci')).prop('checked') == true || $($(this).closest('td').find('.mass')).prop('checked') == true) {
+        }
+        else {
+            return alert("Please select Rx Type.");
+        }
+        if ($($(this).closest('td').find('.speci')).prop('checked') == true) {
+            $("#chkismass").val(false);
+        }
+        else {
+            $("#chkismass").val(true);
+        }
+        debugger;
+        if ($(this).closest('td').find(".dataFile").val() != "") {
+            var data = new FormData();
+            var uploadordownload = $("#hiddenclickfrom").val();
+            if (uploadordownload == "Upload") {
+                var files = "";
+                var UaserID = $("#hiddenid").val();
+                data.append("UaserID", UaserID);
+                if ($(this).closest('td').find(".dataFile").val().length > 0) {
+                    files = $(this).closest('td').find(".dataFile").get(0).files;
+                    data.append("File", files[0]);
+                }
+                //if (files == "") {
+                //    alert("Please choose file for selected bar type.!!");
+                //    return false;
+                //}
+                debugger;
+                if ($("#chkismass").val() == "true") {
+                    $("#chkismass").val(false);
+                    data.append("ChkisMass", false);
+                }
+                else {
+                    $("#chkismass").val(true);
+                    data.append("ChkisMass", true);
+                }
+                data.append("UserId", UaserID);
+                debugger;
+                $.ajax({
+                    url: '@Url.Action("UploadExcelTarget")',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    async: true,
+                    dataType: "json",
+                }).done(function (result) {
+                    //location.reloa{}d();
+                    if (result) {
+                        alert("Target Upload Success.");
+
+                    }
+                    else { alert(result); }
+
+                });
+                $(this).closest('td').find(".dataFile").val("");
+            }
+        }
+        clearfoam();       
+    });
+
+    function clearfoam() {
+        $("#ChkSpeciality").prop('checked', false);
+        $("#ChkMass").prop('checked', false);
+    }
+</script>

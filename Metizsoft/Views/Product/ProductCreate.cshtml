@@ -1,0 +1,135 @@
+﻿@model Metizsoft.Data.Modal.Product_Mst
+
+@{
+    ViewBag.Title = "ProductCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Manage Product</h3>
+    </div>
+
+    <form class="form-horizontal" id="frmProduct">
+        <div class="box-body">
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Product Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="ProductName" id="ProductName" placeholder="Product Name" required>
+                        </div>
+                        <input type="hidden" id="ProductId" name="ProductId" value="" />
+                        <input type="hidden" id="ProductCode" name="ProductCode" value="" />
+                    </div>
+                </div>
+                @*<div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Product Code</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="ProductCode" id="ProductCode" placeholder="Product Code" required>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-4 control-label">Active</label>
+                        <div class="col-sm-8">
+                            <input type="checkbox" class="" name="Active" id="chkActive">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.box-body -->
+        <div class="box-footer ">
+            <div class="pull-right">
+
+                <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
+                <button type="button" id="btnsaveproduct" class="btn btn-info">Add</button>
+                @*<input type="button" value="save" id="btnsaveproduct" class="btn btn-info" />*@
+            </div>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+
+    <div id="lstproduct">
+
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        var ProductId = window.location.search.split('=')[1];
+        //$("#hdnProductId").val(ProductId);
+
+        if (ProductId != null) {
+            $("#btnsaveproduct").text("Update");
+            $.ajax({
+                url: '@Url.Action("EditProduct")',
+                type: 'POST',
+                cache: false,
+                data: { 'ProductId': ProductId },
+            }).done(function (result) {
+                debugger;
+                $("#ProductId").val(result.ProductId)
+                $("#ProductName").val(result.ProductName)
+                $("#ProductCode").val(result.ProductCode)
+                $('#chkActive').prop('checked', result.Active);
+            });
+            $("#btnsaveproduct").click(function () {
+                var url = "/Product/ProductList";
+                window.location.href = url;
+            });
+        }
+
+    });
+
+    $("#btnsaveproduct").click(function () {
+        if (!($('#frmProduct').parsley().validate())) {
+
+            return;
+        }
+        var datareq = new Object();
+        datareq.ProductId = $("#ProductId").val();
+        datareq.ProductName = $("#ProductName").val();
+        datareq.ProductCode = $("#ProductCode").val();
+        datareq.Active = $('#chkActive').is(":checked");
+        debugger;
+        $.ajax({
+            url: '@Url.Action("ProductCreate")',
+            type: 'POST',
+            data: { 'ObjProduct': datareq },
+            cache: false,
+        }).done(function (result) {
+            if (result == true) {
+                debugger;
+                if ($("#ProductId").val() == "") {
+                    $('div#sucessalert').html("Product created successfully.");
+                }
+                else {
+                    $('div#sucessalert').html("Product updated successfully.");
+                }
+                showhidealert();
+                //loadhtml();
+                clearform();
+            }
+        });
+    });
+
+    $("#btnCancel").click(function () {
+        debugger;
+        clearform();
+    });
+
+    function clearform() {
+        $("#frmProduct").find("input").val("");
+        $("#chkActive").prop('checked', false);
+    }
+</script>
+

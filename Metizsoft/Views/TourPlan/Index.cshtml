@@ -1,0 +1,86 @@
+﻿@model Metizsoft.Data.ViewModal.TourPlanResponse
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Manage Tour Plan</h3>
+    </div>
+    <form id="frmtourplan" class="form-horizontal">
+        <div class="box-body">
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="StartDate" class="col-sm-4 control-label">Start</label>
+                        <div class="col-sm-8">
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right datepicker" id="txtfrom">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="EndDate" class="col-sm-4 control-label">End</label>
+                        <div class="col-sm-8">
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right datepicker" id="txtTo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="MR" class="col-sm-4 control-label">Employee<span class="red">*</span></label>
+                        <div class="col-sm-8">                            
+                            @Html.DropDownListFor(m => m.UserId, new SelectList(ViewBag.Employee, "Id", "FullName"), "Select Employee", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>               
+           </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer ">
+            <div class="pull-right">               
+                <button type="button" id="btnsearch" class="btn btn-info">Search</button>
+            </div>
+        </div>       
+    </form>
+    <div id="lstTour">
+
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script> 
+
+   $('#btnsearch').click(function () {
+        debugger;
+        var model = new Object();
+        model.StartDate = $("#txtfrom").val();
+        model.EndDate = $("#txtTo").val();
+        model.UserId = $("#UserId").val();
+        $.ajax({
+            url: '@Url.Action("TourPlanList")',
+            type: 'POST',
+            data: { 'model': model },
+            cache: false,
+        }).done(function (result) {
+            debugger;
+            $('#lstTour').html(result);
+        });
+    });
+
+
+</script>
